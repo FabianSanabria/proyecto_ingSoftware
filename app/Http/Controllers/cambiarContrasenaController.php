@@ -6,8 +6,6 @@ use App\Rules\validarPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use UxWeb\SweetAlert\SweetAlert;
-use App\Providers\SweetAlertServiceProvider;
 
 class cambiarContrasenaController extends Controller
 
@@ -56,7 +54,7 @@ class cambiarContrasenaController extends Controller
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
        // alert()->success('Contraseña actualizada con éxito')->persistent('Cerrar');
-        SweetAlert::success('Contraseña actualizada con éxito')->persistent('Cerrar');
+        //SweetAlert::success('Contraseña actualizada con éxito')->persistent('Cerrar'); no funciono :(
         return redirect()->route('home')->with('msg',"password actualizada");
 
 

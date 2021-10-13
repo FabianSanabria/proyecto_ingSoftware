@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@include('sweet::alert')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -11,7 +10,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('change.password') }}">
                         @csrf
-                        <script src="{{ asset('js/app.js') }}"></script>
+
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña antigua') }}</label>
