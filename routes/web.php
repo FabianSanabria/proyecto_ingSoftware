@@ -19,5 +19,6 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::view('/cambiarContrasena', 'cambiarContrasena');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('cambiarContrasena', 'App\Http\Controllers\cambiarContrasenaController@index');
+Route::post('cambiarContrasena', 'App\Http\Controllers\cambiarContrasenaController@store')->name('change.password');
