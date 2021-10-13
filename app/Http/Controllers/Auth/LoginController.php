@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -40,5 +41,30 @@ class LoginController extends Controller
     public function username()
     {
         return 'rut';
+    }
+    /**
+     * Autentificacion del usuario.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->status == 0) {
+
+            $message = 'Usted no está autorizado para acceder al sistema. Contacte al administrador';
+
+            // Desloguea al usuario.
+            $this->logout($request);
+
+            // Devuelve al usuario al formulario de logueo.
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+
+                    $this->username() => $message,//enviamos mensaje
+                ]);
+        }
     }
 }
