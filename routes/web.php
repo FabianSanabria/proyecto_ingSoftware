@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\CarreraController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,5 +19,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::view('/cambiarContrasena', 'cambiarContrasena');
+
+Route::resource('/carrera', CarreraController::class,['middleware'=>'auth']);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
