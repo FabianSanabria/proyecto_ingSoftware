@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarreraController;
+use App\Http\Controllers\modificarEstadoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -21,10 +22,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/carrera', CarreraController::class,['middleware'=>'auth']);
+Route::resource('modificarEstado',modificarEstadoController::class,['middleware' => 'auth']);
+
 Route::get('cambiarContrasena', 'App\Http\Controllers\cambiarContrasenaController@index');
 Route::post('cambiarContrasena', 'App\Http\Controllers\cambiarContrasenaController@store')->name('change.password');
 Route::get('/usuario','App\Http\Controllers\administrarUsuarioController@index');
 Route::get('/crearUsuario','App\Http\Controllers\crearUsuarioController@index');
 Route::post('crearUsuario', 'App\Http\Controllers\crearUsuarioController@crearUsuario')->name('crear.Usuario');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/modificarEstado', 'App\Http\Controllers\modificarEstadoController@index');
+Route::get('/DeshabilitarUsuarioController', [App\Http\Controllers\DeshabilitarUsuarioController::class, 'deshabilitarUsuario'])->name('cambiarEstado');
 
