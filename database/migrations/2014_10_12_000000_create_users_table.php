@@ -24,6 +24,9 @@ class CreateUsersTable extends Migration
             $table->integer('rol');  //Usuario = 0 ; Jefe de Carrera = 1 ; Administrador = 2
             $table->rememberToken();
             $table->timestamps();
+
+            $table->unsignedBigInteger('carrera_id')->nullable();
+            $table->foreign('carrera_id')->references('id')->on('carreras');
         });
     }
 
