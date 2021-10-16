@@ -27,9 +27,17 @@ class crearUsuarioController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index()
+    public function index(Request $request)
 
     {
+        if ($request->search == null) {
+            $user = User::simplePaginate(5);
+            return view('/listausuario')->with('usuarios',$user);
+        }else {
+            $user = User::where('rut', $request->search)->simplePaginate(1);
+            return view('/listausuario')->with('usuarios',$user);
+        }
+
         $carreras = DB::table('carreras')->get();
         $totalCarreras = DB::table('carreras')->count();
         //dd($totalCarreras);

@@ -27,4 +27,5 @@ Route::get('/usuario','App\Http\Controllers\administrarUsuarioController@index')
 Route::get('/crearUsuario','App\Http\Controllers\crearUsuarioController@index');
 Route::post('crearUsuario', 'App\Http\Controllers\crearUsuarioController@crearUsuario')->name('crear.Usuario');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/listausuario', 'App\Http\Controllers\listausuarioController@index');
+Route::post('/listausuario', 'App\Http\Controllers\listausuarioController@index2')->name('usuario.edit');
