@@ -21,6 +21,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/carrera', CarreraController::class,['middleware'=>'auth']);
-
+Route::get('cambiarContrasena', 'App\Http\Controllers\cambiarContrasenaController@index');
+Route::post('cambiarContrasena', 'App\Http\Controllers\cambiarContrasenaController@store')->name('change.password');
+Route::get('/usuario','App\Http\Controllers\administrarUsuarioController@index');
+Route::get('/crearUsuario','App\Http\Controllers\crearUsuarioController@index');
+Route::post('crearUsuario', 'App\Http\Controllers\crearUsuarioController@crearUsuario')->name('crear.Usuario');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
