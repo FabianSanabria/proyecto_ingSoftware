@@ -95,6 +95,7 @@
 
                                 <select name="rolSelect" id= "rolSelect"aria-describedby="validationServer04Feedback" required>
                                     <option selected disabled value="Rol">Rol</option>
+                                    <option value="Administrador">Administrador</option>
                                     <option value="Estudiante">Estudiante</option>
                                     <option value="Jefe de Carrera">Jefe de Carrera</option>
                                 </select>
