@@ -34,10 +34,10 @@
             <i class="fas fa-graduation-cap fa-10x text-center"style ="color:dodgerblue"></i>
             <div class="card-body">
                 <h5 class="card-title text-center">Habilitar / Desabilitar</h5>
-                <small class="text-muted">.</small>
+                <small class="text-muted">Permite habilitar o deshabilitar usuarios.</small>
             </div>
             <div class="card-footer">
-                <a href="/carrera" class="btn btn-info btn-block">IR</a>
+                <a href="/modificarEstado" class="btn btn-info btn-block">IR</a>
             </div>
         </div>
         <div class="card">

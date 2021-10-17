@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarreraController;
+use App\Http\Controllers\modificarEstadoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -21,6 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/carrera', CarreraController::class,['middleware'=>'auth']);
+Route::resource('modificarEstado',modificarEstadoController::class,['middleware' => 'auth']);
 
 Route::get('cambiarContrasena', 'App\Http\Controllers\cambiarContrasenaController@index');
 Route::post('cambiarContrasena', 'App\Http\Controllers\cambiarContrasenaController@store')->name('change.password');
@@ -33,6 +35,8 @@ Route::post('crearUsuario', 'App\Http\Controllers\crearUsuarioController@crearUs
 Route::get('/buscarEstudiante','App\Http\Controllers\buscarEstudianteController@index');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/modificarEstado', 'App\Http\Controllers\modificarEstadoController@index');
+Route::get('/DeshabilitarUsuarioController', [App\Http\Controllers\DeshabilitarUsuarioController::class, 'deshabilitarUsuario'])->name('cambiarEstado');
 
 Route::get('/lista-usuarios-editar','App\Http\Controllers\listaUsuarioController@index');
 Route::get('/lista-usuarios-editar/editar','App\Http\Controllers\listaUsuarioController@editar')->name('editarUsuario');
