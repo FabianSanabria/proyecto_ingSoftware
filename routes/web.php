@@ -34,3 +34,5 @@ Route::get('/buscarEstudiante','App\Http\Controllers\buscarEstudianteController@
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/lista-usuarios-editar','App\Http\Controllers\listaUsuarioController@index');
+Route::get('/lista-usuarios-editar/editar','App\Http\Controllers\listaUsuarioController@editar')->name('editarUsuario');

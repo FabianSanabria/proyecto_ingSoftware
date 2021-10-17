@@ -27,7 +27,7 @@
                 <small class="text-muted">Permite modificar datos de los usuarios.</small>
             </div>
             <div class="card-footer">
-                <a href="/carrera" class="btn btn-info btn-block">IR</a>
+                <a href="/lista-usuarios-editar" class="btn btn-info btn-block">IR</a>
             </div>
         </div>
         <div class="card">
