@@ -40,8 +40,13 @@ class crearUsuarioController extends Controller
     {
 
         $request->validate([
+<<<<<< administrarUsuario
+            'rut' => ['required', 'string','unique:users','regex:/^[1-9][0-9]*$/'],
+            'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
+======
             'rut' => ['required', 'string','unique:users', new ValidarRut()],
             'name' => ['required', 'string', 'max:255','regex:/^[A-z]+$/'],
+>>>>>> main
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'rol' =>['required','regex:(Estudiante|Jefe de Carrera|Administrador)'],
 
@@ -63,16 +68,20 @@ class crearUsuarioController extends Controller
             $rolNum = 2;
 
         }
+        $carrera = $request->carrera;
         $rut = $request->rut;
+
         $password = substr($rut,0,6);
         User::create([
 
+            'carrera_id' => $carrera,
             'name' => $request->name,
             'email' => $request->email,
             'rut' => $request->rut,
             'status' => true,
             'password' => Hash::make($password),
             'rol' => $rolNum,
+
         ]);
 
         return redirect('/usuario')->with('success','Usuario creado con exito');

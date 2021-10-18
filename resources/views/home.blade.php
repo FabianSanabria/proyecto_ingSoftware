@@ -6,7 +6,7 @@
         @if (Auth::user()->rol == 2)
         <div class ="card-deck">
             <div class="card">
-                <i class="fas fa-users fa-10x text-center" style ="color:dodgerblue"></i>
+                <i class="fas fa-users fa-10x text-center" style="color: #003057;"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Administrar usuarios</h5>
                     <small class="text-muted">Permite o crear/editar/deshabilitar usuarios del sistema.</small>
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="card">
-                <i class="fas fa-graduation-cap fa-10x text-center"style ="color:dodgerblue"></i>
+                <i class="fas fa-graduation-cap fa-10x text-center"style="color: #003057;"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Administrar Carreras</h5>
                     <small class="text-muted">Permite crear y/o editar carreras en el sistema.</small>
@@ -30,7 +30,7 @@
         @if (Auth::user()->rol == 1)
         <div class ="card-deck">
             <div class="card">
-                <i class="fas fa-users fa-10x text-center" style ="color:dodgerblue"></i>
+                <i class="fas fa-users fa-10x text-center" style="background-color: #003057;"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Buscar Estudiante</h5>
                     <small class="text-muted">Despliega informacion del estudiante a partir del Rut.</small>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="card">
-                <i class="fas fa-graduation-cap fa-10x text-center"style ="color:dodgerblue"></i>
+                <i class="fas fa-graduation-cap fa-10x text-center"style="background-color: #003057;" ></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">A</h5>
                     <small class="text-muted">En proceso.</small>

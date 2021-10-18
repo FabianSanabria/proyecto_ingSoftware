@@ -56,7 +56,7 @@
 
                             <div class="col-md-6">
 
-                                <select name="Carrera" id ="Carrera" class="form-control">
+                                <select name="carrera" id ="carrera" class="form-control">
 
                                     @if ($totalCarreras == 0)
 
@@ -65,7 +65,7 @@
 
                                     @else
                                     @foreach($carreras as $carrera)
-                                        <option value="{{$carrera->nombre}}">{{$carrera->nombre}}</option>
+                                        <option value="{{$carrera->id}}">{{$carrera->nombre}}</option>
                                     @endforeach
 
                                     @endif
