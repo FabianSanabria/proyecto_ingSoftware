@@ -29,6 +29,7 @@
                 <td>{{$usuario->email}}</td>
                 <td>{{$usuario->rol}}</td>
 
+                <td><a class="btn btn-info" href={{ route('reestablecerCont', ['id' => $usuario]) }}>Reestablecer Contraseña</a></td>
                 @if ($usuario->status === 1)
                     <td><a class="btn btn-warning" href={{ route('cambiarEstado', ['id' => $usuario]) }}>deshabilitar</a></td>
                 @else

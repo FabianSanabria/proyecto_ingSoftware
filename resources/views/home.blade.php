@@ -27,5 +27,29 @@
             </div>
         </div>
         @endif
+        @if (Auth::user()->rol == 1)
+        <div class ="card-deck">
+            <div class="card">
+                <i class="fas fa-users fa-10x text-center" style ="color:dodgerblue"></i>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Buscar Estudiante</h5>
+                    <small class="text-muted">Despliega informacion del estudiante a partir del Rut.</small>
+                </div>
+                <div class="card-footer">
+                    <a href="/buscarEstudiante" class="btn btn-info btn-block">IR</a>
+                </div>
+            </div>
+            <div class="card">
+                <i class="fas fa-graduation-cap fa-10x text-center"style ="color:dodgerblue"></i>
+                <div class="card-body">
+                    <h5 class="card-title text-center">A</h5>
+                    <small class="text-muted">En proceso.</small>
+                </div>
+                <div class="card-footer">
+                    <a href="/carrera" class="btn btn-info btn-block">IR</a>
+                </div>
+            </div>
+        </div>
+        @endif
 </div>
 @endsection

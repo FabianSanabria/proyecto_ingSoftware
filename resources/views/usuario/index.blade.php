@@ -27,27 +27,17 @@
                 <small class="text-muted">Permite modificar datos de los usuarios.</small>
             </div>
             <div class="card-footer">
-                <a href="/carrera" class="btn btn-info btn-block">IR</a>
+                <a href="/lista-usuarios-editar" class="btn btn-info btn-block">IR</a>
             </div>
         </div>
         <div class="card">
             <i class="fas fa-graduation-cap fa-10x text-center"style ="color:dodgerblue"></i>
             <div class="card-body">
-                <h5 class="card-title text-center">Habilitar / Desabilitar</h5>
-                <small class="text-muted">Permite habilitar o deshabilitar usuarios.</small>
+                <h5 class="card-title text-center">Gestión de usuarios.</h5>
+                <small class="text-muted">Permite habilitar o deshabilitar usuarios. Y Reestablecer contraseñas.</small>
             </div>
             <div class="card-footer">
                 <a href="/modificarEstado" class="btn btn-info btn-block">IR</a>
-            </div>
-        </div>
-        <div class="card">
-            <i class="fas fa-graduation-cap fa-10x text-center"style ="color:dodgerblue"></i>
-            <div class="card-body">
-                <h5 class="card-title text-center">Reiniciar Clave</h5>
-                <small class="text-muted">Permite reiniciar clave de usuario a clave.</small>
-            </div>
-            <div class="card-footer">
-                <a href="/carrera" class="btn btn-info btn-block">IR</a>
             </div>
         </div>
     </div>
