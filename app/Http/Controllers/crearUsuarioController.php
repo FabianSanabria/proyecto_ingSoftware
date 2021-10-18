@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Rules\ValidarRut;
 use Illuminate\Support\Facades\Hash;
 class crearUsuarioController extends Controller
 {
@@ -39,8 +40,13 @@ class crearUsuarioController extends Controller
     {
 
         $request->validate([
+<<<<<< administrarUsuario
             'rut' => ['required', 'string','unique:users','regex:/^[1-9][0-9]*$/'],
             'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
+======
+            'rut' => ['required', 'string','unique:users', new ValidarRut()],
+            'name' => ['required', 'string', 'max:255','regex:/^[A-z]+$/'],
+>>>>>> main
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'rol' =>['required','regex:(Estudiante|Jefe de Carrera|Administrador)'],
 
