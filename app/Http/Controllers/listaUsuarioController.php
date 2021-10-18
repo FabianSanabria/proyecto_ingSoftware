@@ -37,8 +37,6 @@ class listaUsuarioController extends Controller
 
         $usuario = $usuario = User::findOrFail($request->id);
 
-
-
         $usuario->name = $request->nombre;
         $usuario->email = $request->email;
         $usuario->rol = $request->rol;
