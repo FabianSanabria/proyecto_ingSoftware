@@ -25,7 +25,8 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->rol}}</td>
-                <td><a class="btn btn-primary" href={{ route('editarUsuario', ['rut' => $user]) }}>editar</a></td>
+                <td><a class="btn btn-warning" href={{ route('editarUsuario', ['id' => $user]) }}>editar</a></td>
+
             </tr>
             @endforeach
         </tbody>

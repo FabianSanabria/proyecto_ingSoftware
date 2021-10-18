@@ -85,6 +85,7 @@ class CarreraController extends Controller
      */
     public function update(Request $request, Carrera $carrera)
     {
+
         $request->validate(['codigo' => 'regex:/^[0-9]+$/']);
         $request->validate(['nombre' => 'regex:/^[A-z]+$/']);
         $carrera->nombre = $request->nombre;

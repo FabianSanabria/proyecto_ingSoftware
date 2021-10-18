@@ -62,16 +62,20 @@ class crearUsuarioController extends Controller
             $rolNum = 2;
 
         }
+        $carrera = $request->carrera;
         $rut = $request->rut;
+
         $password = substr($rut,0,6);
         User::create([
 
+            'carrera_id' => $carrera,
             'name' => $request->name,
             'email' => $request->email,
             'rut' => $request->rut,
             'status' => true,
             'password' => Hash::make($password),
             'rol' => $rolNum,
+
         ]);
 
         return redirect('/usuario')->with('success','Usuario creado con exito');
