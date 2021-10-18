@@ -35,8 +35,11 @@ Route::post('crearUsuario', 'App\Http\Controllers\crearUsuarioController@crearUs
 Route::get('/buscarEstudiante','App\Http\Controllers\buscarEstudianteController@index');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/modificarEstado', 'App\Http\Controllers\modificarEstadoController@index');
 Route::get('/DeshabilitarUsuarioController', [App\Http\Controllers\DeshabilitarUsuarioController::class, 'deshabilitarUsuario'])->name('cambiarEstado');
+
+Route::get('/RestablecerContraseñaController', [App\Http\Controllers\ReestablecerContraseñaController::class, 'reestablecerContraseña'])->name('reestablecerCont');
 
 Route::get('/lista-usuarios-editar','App\Http\Controllers\listaUsuarioController@index');
 Route::get('/lista-usuarios-editar/editar','App\Http\Controllers\listaUsuarioController@editar')->name('editarUsuario');
