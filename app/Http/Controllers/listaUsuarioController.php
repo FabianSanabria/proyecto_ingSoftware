@@ -28,11 +28,13 @@ class listaUsuarioController extends Controller
     public function update(Request $request)
     {
 
-       // $request->validate(['codigo' => 'regex:/^[0-9]+$/']);
-        //$request->validate(['nombre' => 'regex:/^[A-z]+$/']); agregar carrera a usuario y validar y actualizar datos
-        $request->validate(['nombre' =>'required', 'string', 'max:255']);
+        $request->validate([
 
-        $request->validate(['email' => 'required', 'string', 'email', 'max:255', 'unique:users']);
+            'nombre' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+
+        ]);
+
         $usuario = $usuario = User::findOrFail($request->id);
 
 

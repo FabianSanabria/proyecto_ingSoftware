@@ -40,7 +40,7 @@ class crearUsuarioController extends Controller
 
         $request->validate([
             'rut' => ['required', 'string','unique:users','regex:/^[1-9][0-9]*$/'],
-            'name' => ['required', 'string', 'max:255','regex:/^[A-z]+$/'],
+            'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'rol' =>['required','regex:(Estudiante|Jefe de Carrera|Administrador)'],
 

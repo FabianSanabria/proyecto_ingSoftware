@@ -96,7 +96,7 @@
                                     @endif
 
                                     @if( $usuario->rol == 1)
-                                    <option selected value="Jefe de Carrera">Jefe de Carrera</option>
+                                    <option selected value="1">Jefe de Carrera</option>
 
                                     @else
                                     <option value="1">Jefe de Carrera</option>
