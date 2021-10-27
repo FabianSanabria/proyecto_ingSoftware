@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container">
     <div class="row mb-3">
         <div class="col col-2">
@@ -30,7 +29,7 @@
             <tr>
                 <th scope="row">{{$carrera->codigo}}</th>
                 <td>{{$carrera->nombre}}</td>
-                <td><a class="btn btn-primary" href={{ route('carrera.edit', [$carrera]) }}>editar</a></td>
+                <td><a class="btn btn-primary" href={{ route('carrera.edit', [$carrera]) }}>Editar</a></td>
             </tr>
             @endforeach
         </tbody>

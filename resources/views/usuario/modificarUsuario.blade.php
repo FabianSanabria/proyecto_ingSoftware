@@ -10,7 +10,7 @@
                 <i class="fas fa-chalkboard-teacher"></i>
             </div>
             <div class="col-lg-12 login-title">
-                EDITAR CARRERA
+                EDITAR USUARIO
             </div>
 
             <div class="col-lg-12 login-form">

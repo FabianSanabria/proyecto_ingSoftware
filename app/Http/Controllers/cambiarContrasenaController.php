@@ -55,7 +55,8 @@ class cambiarContrasenaController extends Controller
 
        // alert()->success('Contraseña actualizada con éxito')->persistent('Cerrar');
         //SweetAlert::success('Contraseña actualizada con éxito')->persistent('Cerrar'); no funciono :(
-        return redirect()->route('home')->with('msg',"password actualizada");
+
+        return redirect()->route('home')->with('message','Cambios hechos!');
 
 
     }

@@ -15,6 +15,7 @@
                 <th style="width: 25%" scope="col">Nombre</th>
                 <th style="width: 25%" scope="col">Email</th>
                 <th style="width: 20%" scope="col">Rol</th>
+                <th style="width: 20%" scope="col">Status</th>
                 <th style="width: 20%" scope="col" colspan="3">Accion</th>
             </tr>
         </thead>
@@ -24,8 +25,19 @@
                 <th scope="row">{{$user->rut}}</th>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
-                <td>{{$user->rol}}</td>
-                <td><a class="btn btn-warning" href={{ route('editarUsuario', ['id' => $user]) }}>editar</a></td>
+                @if($user->rol==2)
+                <td>Administrador</td>
+                @elseif($user->rol == 1)
+                <td>Jefe de carrera</td>
+                @else
+                <td>Estudiante</td>
+                @endif
+                @if($user->status == 1)
+                <td>Habilitado</td>
+                @else
+                <td>Deshabilitado</td>
+                @endif
+                <td><a class="btn btn-warning" href={{ route('editarUsuario', ['id' => $user]) }}>Editar</a></td>
 
             </tr>
             @endforeach

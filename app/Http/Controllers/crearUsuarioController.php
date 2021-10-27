@@ -84,7 +84,7 @@ class crearUsuarioController extends Controller
 
         ]);
 
-        return redirect('/usuario')->with('success','Usuario creado con exito');
+        return redirect('/usuario')->with('message');
     }
 
 
