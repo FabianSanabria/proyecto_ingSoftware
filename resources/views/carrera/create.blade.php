@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if (session('message'))
+<script>
+    Swal.fire({
+    icon: 'success',
+    title: 'Bien!',
+    text: 'La carrera se ha creado!',
+    })
+</script>
+@endif
 @if (Auth::user()->rol == 2)
 <div class="container">
     <div class="row">

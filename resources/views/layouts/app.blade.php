@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 <body>
     <div id="app" >
@@ -64,6 +63,12 @@
                             @endif
                         @else
                         <li class="nav-item dropdown">
+                            @if (Route::has('home'))
+                            <li class="nav-item" style="color:white">
+                            <i class=" fas fa-home fa-1x text-center" alt=""></i>
+                            <a class="navbar-brand" style="color:white" href="{{ route('home') }}">{{ __('Inicio') }}</a>
+                            </li>
+                            @endif
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color:white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>

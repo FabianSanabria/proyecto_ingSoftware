@@ -1,6 +1,14 @@
 @extends('layouts.app')
-
 @section('content')
+@if (session('message'))
+<script>
+    Swal.fire({
+    icon: 'success',
+    title: 'Bien!',
+    text: 'La contraseña se ha actualizado!',
+    })
+</script>
+@endif
 <div class="container">
     <div class="row justify-content-center">
         @if (Auth::user()->rol == 2)
