@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\modificarEstadoController;
+use App\Http\Controllers\solicitudAlumnoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -22,8 +23,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('/carrera', CarreraController::class,['middleware'=>'auth']);
-Route::resource('modificarEstado',modificarEstadoController::class,['middleware' => 'auth']);
 
+Route::resource('modificarEstado',modificarEstadoController::class,['middleware' => 'auth']);
 Route::get('cambiarContrasena', 'App\Http\Controllers\cambiarContrasenaController@index');
 Route::post('cambiarContrasena', 'App\Http\Controllers\cambiarContrasenaController@store')->name('change.password');
 
@@ -38,7 +39,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/modificarEstado', 'App\Http\Controllers\modificarEstadoController@index');
 Route::get('/DeshabilitarUsuarioController', [App\Http\Controllers\DeshabilitarUsuarioController::class, 'deshabilitarUsuario'])->name('cambiarEstado');
-Route::get('/lista-usuarios-editar','App\Http\Controllers\listaUsuarioController@index');
-Route::get('/lista-usuarios-editar/editar','App\Http\Controllers\listaUsuarioController@editar')->name('editarUsuario');
-Route::put('/lista-usuarios-editar/editar','App\Http\Controllers\listaUsuarioController@update')->name('actualizar.datos');
+Route::get('/lista-usuarios-editar','App\Http\Controllers\editarUsuarioController@index');
+Route::get('/lista-usuarios-editar/editar','App\Http\Controllers\editarUsuarioController@editar')->name('editarUsuario');
+Route::put('/lista-usuarios-editar/editar','App\Http\Controllers\editarUsuarioController@update')->name('actualizar.datos');
 Route::get('/RestablecerContraseñaController', [App\Http\Controllers\ReestablecerContraseñaController::class, 'reestablecerContraseña'])->name('reestablecerCont');
+Route::resource('/solicitud-alumno', solicitudAlumnoController::class,['middleware'=>'auth']);
+Route::post('/solicitud-alumno/create','App\Http\Controllers\solicitudAlumnoController@Solicitud')->name('tipoSolicitud');

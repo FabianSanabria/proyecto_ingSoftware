@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-
+use App\Rules\validarEmail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
-
-class listaUsuarioController extends Controller
+class editarUsuarioController extends Controller
 {
     //
     public function index()
@@ -31,7 +31,7 @@ class listaUsuarioController extends Controller
         $request->validate([
 
             'nombre' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string',new validarEmail(), 'max:255', Rule::unique('users')->ignore($request->id)],
 
         ]);
 

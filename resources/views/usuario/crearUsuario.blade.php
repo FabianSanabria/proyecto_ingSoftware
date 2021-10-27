@@ -55,8 +55,8 @@
                         <div class="form-group row">
 
                             <div class="col-md-6">
-
-                                <select name="carrera" id ="carrera" class="form-control">
+                                <label for="carrera" class="col-md-4 col-form-label text-md-right" style="position: absolute; right: 135px;">Carrera</label>
+                                <select name="carrera" id ="carrera" class="form-control" style="position: relative; left: 270px; border:1px solid #ccc; padding: 3px;border-radius: 10px;">
 
                                     @if ($totalCarreras == 0)
 
@@ -81,9 +81,9 @@
                         <div class="form-group row">
 
                             <div class="col-md-6">
-
-                                <select name="rol" id= "rol"aria-describedby="validationServer04Feedback" required>
-                                    <option selected disabled value="Rol">Rol</option>
+                                <label for="rol" class="col-md-4 col-form-label text-md-right" style="position: absolute; right: 135px; top:4px">Rol</label>
+                                <select name="rol" id= "rol" style="position: relative; left: 270px;border:1px solid #ccc; padding: 3px;border-radius: 10px;top: 8px "aria-describedby="validationServer04Feedback" required >
+                                    <option selected disabled value="Rol">Seleccione Rol</option>
                                     <option value="Estudiante">Estudiante</option>
                                     <option value="Jefe de Carrera">Jefe de Carrera</option>
                                 </select>

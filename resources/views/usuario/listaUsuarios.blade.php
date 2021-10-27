@@ -20,6 +20,7 @@
         </thead>
         <tbody>
             @foreach ($usuarios as $user)
+            @if ($user->rol != 2)
             <tr>
                 <th scope="row">{{$user->rut}}</th>
                 <td>{{$user->name}}</td>
@@ -28,6 +29,7 @@
                 <td><a class="btn btn-warning" href={{ route('editarUsuario', ['id' => $user]) }}>editar</a></td>
 
             </tr>
+            @endif
             @endforeach
         </tbody>
     </table>

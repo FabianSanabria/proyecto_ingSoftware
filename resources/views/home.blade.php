@@ -51,5 +51,29 @@
             </div>
         </div>
         @endif
+        @if (Auth::user()->rol == 0)
+        <div class ="card-deck">
+            <div class="card">
+                <i class="fas fa-users fa-10x text-center" style="background-color: #003057;"></i>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Generar solicitud</h5>
+                    <small class="text-muted">Permite la creacion de solicitud especial al Jefe de Carrera.</small>
+                </div>
+                <div class="card-footer">
+                    <a href="/solicitud-alumno" class="btn btn-info btn-block">IR</a>
+                </div>
+            </div>
+            <div class="card">
+                <i class="fas fa-graduation-cap fa-10x text-center"style="background-color: #003057;" ></i>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Editar o anular solicitud</h5>
+                    <small class="text-muted">Permite editar o anular una solicitud ya creada.</small>
+                </div>
+                <div class="card-footer">
+                    <a href="/solicitud-alumno/edit" class="btn btn-info btn-block">IR</a>
+                </div>
+            </div>
+        </div>
+        @endif
 </div>
 @endsection

@@ -10,7 +10,7 @@
                 <i class="fas fa-chalkboard-teacher"></i>
             </div>
             <div class="col-lg-12 login-title">
-                EDITAR CARRERA
+                EDITAR USUARIO
             </div>
 
             <div class="col-lg-12 login-form">
@@ -55,7 +55,7 @@
                         <div class="form-group row">
 
                             <div class="col-md-6">
-
+                                <label class="form-control-label">CARRERA</label>
                                 <select name="carrera" id ="carrera" class="form-control">
 
                                     @foreach ($carreras as $carrera)
@@ -83,17 +83,8 @@
                         <div class="form-group row">
 
                             <div class="col-md-6">
-
+                                <label class="form-control-label">ROL</label>
                                 <select name="rol" id ="rol" class="form-control">
-
-
-                                    @if( $usuario->rol == 2)
-                                    <option selected value="2">Administrador</option>
-
-                                    @else
-                                    <option value="2">Administrador</option>
-
-                                    @endif
 
                                     @if( $usuario->rol == 1)
                                     <option selected value="1">Jefe de Carrera</option>
