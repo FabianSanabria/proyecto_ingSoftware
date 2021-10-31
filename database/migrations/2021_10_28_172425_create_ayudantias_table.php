@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCarrerasTable extends Migration
+class CreateAyudantiasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateCarrerasTable extends Migration
      */
     public function up()
     {
-        Schema::create('carreras', function (Blueprint $table) {
+        Schema::create('ayudantias', function (Blueprint $table) {
             $table->id();
-            $table->string("codigo");
-            $table->string("nombre");
+            $table->float('nota_aprobacion');
+            $table->integer('cant_ayudantias');
             $table->timestamps();
+            $table->unsignedBigInteger('solicitud_id');
+            $table->foreign('solicitud_id')->references('id')->on('solicituds');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateCarrerasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carreras');
+        Schema::dropIfExists('ayudantias');
     }
 }

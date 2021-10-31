@@ -11,10 +11,17 @@ class Carrera extends Model
 
     protected $fillable = [
        'nombre',
-       'codigo'
+       'codigo',
+       'jefe_carrera_id',
     ];
 
-    public function users(){
-        return $this->hasMany(User::class);
+    public function estudiantes(){
+        return $this->hasMany(Estudiante::class);
+    }
+    public function jefedecarrera(){
+        return $this->hasOne(JefedeCarrera::class);
+    }
+    public function solicitudes() {
+        return $this->hasMany(Solicitud::class);
     }
 }

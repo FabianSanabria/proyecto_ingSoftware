@@ -3,14 +3,15 @@
 @if (Auth::user()->rol == 0)
 <div class="container">
 
+
         @if ($solicitud == 0)
             <div class="col-md-8">
                 <div class="card">
 
                     <div class="card-body">
-                        <form method="PUT" action="{{ route('solicitud-alumno.create',['solicitud'=>$solicitud]) }}">
+                        <form id="formulario" method="POST" action="{{ route('solicitudAlumno.create') }}">
                             @csrf
-
+                            @method('PUT')
                             <div class="form-group row">
                                 <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
 
@@ -40,12 +41,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese nombre de la asignatura') }}</label>
+                                <label for="nombreAsignatura" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese nombre de la asignatura') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="nombreAsignatura" type="text" class="form-control @error('nombreAsignatura') is-invalid @enderror" name="nombreAsignatura" value="{{ old('nombreAsignatura') }}" required autocomplete="nombreAsignatura" autofocus>
 
-                                    @error('name')
+                                    @error('nombreAsignatura')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -54,10 +55,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="motivo" class="col-md-4 col-form-label text-md-right">{{ __('Explique en detalle el porque de la solicitud de sobrecupo') }}</label>
+                                <label for="detalle" class="col-md-4 col-form-label text-md-right">{{ __('Explique en detalle el porque de la solicitud de sobrecupo') }}</label>
 
                                 <div class="col-md-6">
-                                        <textarea name="motivo" id="motivo" style= " width: 100%;
+                                        <textarea name="detalle" id="detalle" style= " width: 100%;
                                         height: 150px;
                                         padding: 12px 20px;
                                         box-sizing: border-box;
@@ -66,7 +67,7 @@
                                         background-color: #f8f8f8;
                                         font-size: 16px;
                                         resize: none;"></textarea>
-                                    @error('motivo')
+                                    @error('detalle')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -82,6 +83,11 @@
                                     </button>
                                 </div>
                             </div>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                           </ul>
 
 
                         </form>
@@ -94,9 +100,9 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form method="PUT" action="{{ route('solicitud-alumno.create',['solicitud'=>$solicitud]) }}">
+                        <form id="formulario" method="POST" action="{{ route('solicitudAlumno.create') }}">
                             @csrf
-
+                            @method('PUT')
                             <div class="form-group row">
                                 <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
 
@@ -125,13 +131,14 @@
                                 </div>
                             </div>
 
+
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese nombre de la asignatura') }}</label>
+                                <label for="nombreAsignatura" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese nombre de la asignatura') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="nombreAsignatura" type="text" class="form-control @error('nombreAsignatura') is-invalid @enderror" name="nombreAsignatura" value="{{ old('nombreAsignatura') }}" required autocomplete="nombreAsignatura" autofocus>
 
-                                    @error('name')
+                                    @error('nombreAsignatura')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -140,10 +147,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="motivo" class="col-md-4 col-form-label text-md-right">{{ __('Explique en detalle el porque de la solicitud de cambio de paralelo') }}</label>
+                                <label for="detalle" class="col-md-4 col-form-label text-md-right">{{ __('Explique en detalle el porque de la solicitud de cambio de paralelo') }}</label>
 
                                 <div class="col-md-6">
-                                        <textarea name="motivo" id="motivo" style= " width: 100%;
+                                        <textarea name="detalle" id="detalle" style= " width: 100%;
                                         height: 150px;
                                         padding: 12px 20px;
                                         box-sizing: border-box;
@@ -152,7 +159,7 @@
                                         background-color: #f8f8f8;
                                         font-size: 16px;
                                         resize: none;"></textarea>
-                                    @error('motivo')
+                                    @error('detalle')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -180,9 +187,9 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form method="PUT" action="{{ route('solicitud-alumno.create',['solicitud'=>$solicitud]) }}">
+                        <form id="formulario" method="POST" action="{{ route('solicitudAlumno.create') }}">
                             @csrf
-
+                            @method('PUT')
                             <div class="form-group row">
                                 <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
 
@@ -211,12 +218,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese nombre de la asignatura') }}</label>
+                                <label for="nombreAsignatura" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese nombre de la asignatura') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="nombreAsignatura" type="text" class="form-control @error('nombreAsignatura') is-invalid @enderror" name="nombreAsignatura" value="{{ old('nombreAsignatura') }}" required autocomplete="nombreAsignatura" autofocus>
 
-                                    @error('name')
+                                    @error('nombreAsignatura')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -225,10 +232,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="motivo" class="col-md-4 col-form-label text-md-right">{{ __('Explique en detalle el porque de la solicitud de eliminacion de asignatura') }}</label>
+                                <label for="detalle" class="col-md-4 col-form-label text-md-right">{{ __('Explique en detalle el porque de la solicitud de eliminación de asignatura') }}</label>
 
                                 <div class="col-md-6">
-                                        <textarea name="motivo" id="motivo" style= " width: 100%;
+                                        <textarea name="detalle" id="detalle" style= " width: 100%;
                                         height: 150px;
                                         padding: 12px 20px;
                                         box-sizing: border-box;
@@ -237,7 +244,7 @@
                                         background-color: #f8f8f8;
                                         font-size: 16px;
                                         resize: none;"></textarea>
-                                    @error('motivo')
+                                    @error('detalle')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -265,9 +272,9 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form method="PUT" action="{{ route('solicitud-alumno.create',['solicitud'=>$solicitud]) }}">
+                        <form id="formulario" method="POST" action="{{ route('solicitudAlumno.create') }}">
                             @csrf
-
+                            @method('PUT')
                             <div class="form-group row">
                                 <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
 
@@ -296,12 +303,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese nombre de la asignatura') }}</label>
+                                <label for="nombreAsignatura" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese nombre de la asignatura') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="nombreAsignatura" type="text" class="form-control @error('nombreAsignatura') is-invalid @enderror" name="nombreAsignatura" value="{{ old('nombreAsignatura') }}" required autocomplete="nombreAsignatura" autofocus>
 
-                                    @error('name')
+                                    @error('nombreAsignatura')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -310,10 +317,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="motivo" class="col-md-4 col-form-label text-md-right">{{ __('Explique en detalle el porque de la solicitud de inscripcion de la asignatura') }}</label>
+                                <label for="detalle" class="col-md-4 col-form-label text-md-right">{{ __('Explique en detalle el porque de la inscripción de asignatura') }}</label>
 
                                 <div class="col-md-6">
-                                        <textarea name="motivo" id="motivo" style= " width: 100%;
+                                        <textarea name="detalle" id="detalle" style= " width: 100%;
                                         height: 150px;
                                         padding: 12px 20px;
                                         box-sizing: border-box;
@@ -322,7 +329,7 @@
                                         background-color: #f8f8f8;
                                         font-size: 16px;
                                         resize: none;"></textarea>
-                                    @error('motivo')
+                                    @error('detalle')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -350,9 +357,9 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form method="PUT" action="{{ route('solicitud-alumno.create',['solicitud'=>$solicitud]) }}">
+                        <form id="formulario" method="POST" action="{{ route('solicitudAlumno.create') }}">
                             @csrf
-
+                            @method('PUT')
                             <div class="form-group row">
                                 <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
 
@@ -408,10 +415,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="motivo" class="col-md-4 col-form-label text-md-right">{{ __('¿Por qué desea ser ayudante de la asignatura?') }}</label>
+                                <label for="detalle" class="col-md-4 col-form-label text-md-right">{{ __('¿Por qué desea ser ayudante de la asignatura?') }}</label>
 
                                 <div class="col-md-6">
-                                        <textarea name="motivo" id="motivo" style= " width: 100%;
+                                        <textarea name="detalle" id="detalle" style= " width: 100%;
                                         height: 150px;
                                         padding: 12px 20px;
                                         box-sizing: border-box;
@@ -420,7 +427,7 @@
                                         background-color: #f8f8f8;
                                         font-size: 16px;
                                         resize: none;"></textarea>
-                                    @error('motivo')
+                                    @error('detalle')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -448,9 +455,9 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form method="PUT" action="{{ route('solicitud-alumno.create',['solicitud'=>$solicitud]) }}">
+                        <form id="formulario" method="POST" enctype='multipart/form-data'action="{{ route('solicitudAlumno.create') }}">
                             @csrf
-
+                            @method('PUT')
                             <div class="form-group row">
                                 <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
 
@@ -468,13 +475,13 @@
                                 <div class="col-md-6">
                                     <label for="facilidadAcademica" class="col-md-8 col-form-label text-md-right">Tipo de solicitud</label>
                                     <select name="facilidadAcademica" id= "facilidadAcademica"style="position: relative;left:260px; bottom: 30px;border:1px solid #ccc; padding: 3px;border-radius: 10px;"aria-describedby="validationServer04Feedback" required >
-                                    <option selected value="LicMedCertMed">Licencia Médica o Certificado Médico</option>
-                                        <option value="InasistenciaFM"> Inasistencia por Fuerza Mayor</option>
-                                        <option value="RepresentacionUniv">Representación de la Universidad</option>
-                                        <option value="InasistenciaxMotFamOPers"> Inasistencia a clases por motivos familiares o personales</option>
+                                    <option selected value="0">Licencia Médica o Certificado Médico</option>
+                                        <option value="1"> Inasistencia por Fuerza Mayor</option>
+                                        <option value="2">Representación de la Universidad</option>
+                                        <option value="3"> Inasistencia a clases por motivos familiares o personales</option>
                                     </select>
                                     <div id="validationServer04Feedback" class="invalid-feedback">
-                                        @error('tipoSolicitud')
+                                        @error('facilidadAcademica')
                                             <strong>{{ $message }}</strong>
                                         @enderror
                                     </div>
@@ -509,10 +516,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="motivo" class="col-md-4 col-form-label text-md-right">{{ __('Explique en detalle el porque de la solicitud') }}</label>
+                                <label for="detalle" class="col-md-4 col-form-label text-md-right">{{ __('Explique en detalle el porque de la solicitud') }}</label>
 
                                 <div class="col-md-6">
-                                        <textarea name="motivo" id="motivo" style= " width: 100%;
+                                        <textarea name="detalle" id="detalle" style= " width: 100%;
                                         height: 150px;
                                         padding: 12px 20px;
                                         box-sizing: border-box;
@@ -521,7 +528,7 @@
                                         background-color: #f8f8f8;
                                         font-size: 16px;
                                         resize: none;"></textarea>
-                                    @error('motivo')
+                                    @error('detalle')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -529,6 +536,26 @@
                                 </div>
                             </div>
                             <input type="hidden"name="solicitud" value="{{ $solicitud }}">
+                            <input id="cantArchivos"name="cantArchivos" type="hidden"value="0">
+                            <div class="form-group row mb-0">
+                                <label for="file" class="col-md-4 col-form-label text-md-right">{{ __('Adjuntar archivos (Máximo 3 archivos) ') }}</label>
+
+                                <div class="col-md-6 offset-md-4">
+                                    <input type="file" name="file0" id="file0" onChange="makeFileList();" style="display: none;"/>
+                                    <input type="file" name="file1" id="file1" onChange="makeFileList();" style="display: none;"/>
+                                    <input type="file" name="file2" id="file2" onChange="makeFileList();" style="display: none;"/>
+                                    <input type="button" value="Seleccione los archivos" onclick="document.getElementById('file'+i).click();" />
+                                    <input type="button" value="Borrar archivo" onclick="borrarArchivo();" />
+
+                                    <p>
+                                        <h1>Files Selected:</h1>
+                                    </p>
+                                    <ul id="fileList0"><li></li></ul>
+                                    <ul id="fileList1"><li></li></ul>
+                                    <ul id="fileList2"><li></li></ul>
+                                </div>
+                            </div>
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -540,11 +567,30 @@
 
 
                         </form>
+                        <script type="text/javascript">
+                        var i = 0;
+                            function makeFileList() {
+                                var fileInput = document.getElementById('file'+i);
+                                var filename = fileInput.files[0].name;
+                                document.getElementById("fileList"+i).innerHTML = filename;
+                                i = i+1;
+                                document.getElementById("cantArchivos").value = i;
+                            }
+                            function borrarArchivo(){
+                                if(i>0){
+                                i = i - 1;
+                                document.getElementById("fileList"+i).innerHTML = '';
+                                document.getElementById("cantArchivos").value = i;
+                                }
+
+
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
-
             @endif
+
 
     </div>
     <script>

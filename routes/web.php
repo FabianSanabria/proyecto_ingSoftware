@@ -43,5 +43,9 @@ Route::get('/lista-usuarios-editar','App\Http\Controllers\editarUsuarioControlle
 Route::get('/lista-usuarios-editar/editar','App\Http\Controllers\editarUsuarioController@editar')->name('editarUsuario');
 Route::put('/lista-usuarios-editar/editar','App\Http\Controllers\editarUsuarioController@update')->name('actualizar.datos');
 Route::get('/RestablecerContraseñaController', [App\Http\Controllers\ReestablecerContraseñaController::class, 'reestablecerContraseña'])->name('reestablecerCont');
-Route::resource('/solicitud-alumno', solicitudAlumnoController::class,['middleware'=>'auth']);
+
+
+Route::get('/solicitud-alumno/','App\Http\Controllers\solicitudAlumnoController@index');
+Route::get('/solicitud-alumno/create','App\Http\Controllers\solicitudAlumnoController@Solicitud');
 Route::post('/solicitud-alumno/create','App\Http\Controllers\solicitudAlumnoController@Solicitud')->name('tipoSolicitud');
+Route::put('/solicitud-alumno/create/success','App\Http\Controllers\solicitudAlumnoController@create')->name('solicitudAlumno.create');

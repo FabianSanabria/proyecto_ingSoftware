@@ -17,7 +17,7 @@
                                 <input id="rut" type="text" class="form-control @error('rut') is-invalid @enderror" name="rut" value="{{ old('rut') }}" required autocomplete="rut">
 
                                 @error('rut')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -31,7 +31,7 @@
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -45,7 +45,7 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -70,8 +70,8 @@
 
                                     @endif
                                 </select>
-                                <div id="validation" class="invalid-feedback">
-                                    @error('carreras')
+                                <div id="validation" class="text-danger"style="position:relative; left:270px;">
+                                    @error('carrera')
                                         <strong>{{ $message }}</strong>
                                     @enderror
                                 </div>
@@ -87,7 +87,7 @@
                                     <option value="Estudiante">Estudiante</option>
                                     <option value="Jefe de Carrera">Jefe de Carrera</option>
                                 </select>
-                                <div id="validationServer04Feedback" class="invalid-feedback">
+                                <div id="validationServer04Feedback" class="text-danger">
                                     @error('rol')
                                         <strong>{{ $message }}</strong>
                                     @enderror
@@ -104,11 +104,6 @@
                             </div>
                         </div>
 
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                       </ul>
                     </form>
                 </div>
             </div>

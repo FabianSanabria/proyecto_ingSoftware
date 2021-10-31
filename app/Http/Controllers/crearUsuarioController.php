@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrera;
+use App\Models\JefedeCarrera;
+use App\Models\Estudiante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Rules\existeJefedeCarrera;
 use App\Rules\validarEmail;
 use App\Rules\ValidarRut;
 use Illuminate\Support\Facades\Hash;
@@ -40,37 +44,22 @@ class crearUsuarioController extends Controller
     public function crearUsuario(Request $request)
     {
 
-        $request->validate([
-            'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
-            'rut' => ['required', 'string','unique:users', new ValidarRut()],
-            'email' => ['required', 'string',new validarEmail(), 'max:255', 'unique:users'],
-            'rol' =>['required','regex:(Estudiante|Jefe de Carrera|Administrador)'],
-
-        ]);
 
         if(strcmp($_POST['rol'],"Estudiante") == 0)
         {
-            $rolNum = 0;
-
-        }
-
-        if(strcmp($_POST['rol'],"Jefe de Carrera") == 0)
-        {
-            $rolNum = 1;
-
-        }
-        if(strcmp($_POST['rol'],"Administrador") == 0)
-        {
-            $rolNum = 2;
-
-        }
-        $carrera = $request->carrera;
+         $request->validate([
+                'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
+                'rut' => ['required', 'string','unique:users', new ValidarRut()],
+                'email' => ['required', 'string',new validarEmail(), 'max:255', 'unique:users'],
+                'rol' =>['required','regex:(Estudiante|Jefe de Carrera|Administrador)'],
+         ]);
+        $rolNum = 0;
+        $carreraid = $request->carrera;
         $rut = $request->rut;
 
         $password = substr($rut,0,6);
-        User::create([
+        $usuarioCreado = User::create([
 
-            'carrera_id' => $carrera,
             'name' => $request->name,
             'email' => $request->email,
             'rut' => $request->rut,
@@ -79,8 +68,59 @@ class crearUsuarioController extends Controller
             'rol' => $rolNum,
 
         ]);
+        Estudiante::create([
+
+            'carrera_id' => $carreraid,
+            'usuario_id' => $usuarioCreado->id,
+
+        ]);
 
         return redirect('/usuario')->with('message');
+
+        }
+
+        if(strcmp($_POST['rol'],"Jefe de Carrera") == 0)
+        {
+            $request->validate(
+
+                [
+                 'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
+                 'rut' => ['required', 'string','unique:users', new ValidarRut()],
+                 'email' => ['required', 'string',new validarEmail(), 'max:255', 'unique:users'],
+                 'rol' =>['required','regex:(Estudiante|Jefe de Carrera|Administrador)'],
+                 'carrera' =>['required',new existeJefedeCarrera()],
+                ]
+                );
+
+            $rolNum = 1;
+            $carrera_id = $request->carrera;
+            $carrera = Carrera::where('id',$carrera_id)->first();
+            $rut = $request->rut;
+            $password = substr($rut,0,6);
+            $usuarioCreado = User::create([
+
+                'name' => $request->name,
+                'email' => $request->email,
+                'rut' => $request->rut,
+                'status' => true,
+                'password' => Hash::make($password),
+                'rol' => $rolNum,
+
+            ]);
+            $jefedecarrera = JefedeCarrera::create([
+                'usuario_id' => $usuarioCreado->id,
+            ]);
+            $carrera->jefe_carrera_id = $jefedecarrera->id;
+            $carrera->save();
+            return redirect('/usuario')->with('message');
+
+
+        }
+        if(strcmp($_POST['rol'],"Administrador") == 0)
+        {
+            $rolNum = 2;
+
+        }
     }
 
 

@@ -23,14 +23,14 @@
                         <div class="form-group row">
 
                             <div class="col-md-6">
-                                <label for="tipoSolicitud" class="col-md-8 col-form-label text-md-right"style="position: relative; right: 205px; top:4px">TIPO DE SOLICITUD</label>
-                                <select name="tipoSolicitud" id= "tipoSolicitud"style="position: relative; bottom: 25px;border:1px solid #ccc; padding: 3px;border-radius: 10px;"aria-describedby="validationServer04Feedback" required >
-                                    <option selected value="Sobrecupo">Solicitud de sobrecupo</option>
-                                    <option value="Cambio paralelo"> Solicitud de cambio de paralelo</option>
-                                    <option value="Eliminación asignatura">Solicitud de eliminación de asignatura</option>
-                                    <option value="Inscripción asignatura"> Solicitud de inscripción de asignatura</option>
-                                    <option value="Ayudantía">Solicitud de ayudantía</option>
-                                    <option value="Facilidades">Facilidades académicas</option>
+                                <label for="solicitud" class="col-md-8 col-form-label text-md-right"style="position: relative; right: 205px; top:4px">TIPO DE SOLICITUD</label>
+                                <select name="solicitud" id= "solicitud"style="position: relative; bottom: 25px;border:1px solid #ccc; padding: 3px;border-radius: 10px;"aria-describedby="validationServer04Feedback" required >
+                                    <option selected value="0">Solicitud de sobrecupo</option>
+                                    <option value="1"> Solicitud de cambio de paralelo</option>
+                                    <option value="2">Solicitud de eliminación de asignatura</option>
+                                    <option value="3"> Solicitud de inscripción de asignatura</option>
+                                    <option value="4">Solicitud de ayudantía</option>
+                                    <option value="5">Facilidades académicas</option>
                                 </select>
                                 <div id="validationServer04Feedback" class="invalid-feedback">
                                     @error('tipoSolicitud')
