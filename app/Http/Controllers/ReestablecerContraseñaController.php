@@ -22,6 +22,6 @@ class ReestablecerContraseñaController extends Controller
 
         $usuario->password = Hash::make($newPassword);
         $usuario->save();
-        return redirect('/modificarEstado')->with('message','Cambios hechos!');
+        return redirect('/modificarEstado')->with('message','Contraseña restablecida!');
     }
 }
