@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarreraController;
+use App\Http\Controllers\crearUsuarioController;
 use App\Http\Controllers\modificarEstadoController;
 use App\Http\Controllers\solicitudAlumnoController;
 use Illuminate\Support\Facades\Route;
@@ -34,8 +35,8 @@ Route::get('/usuario','App\Http\Controllers\administrarUsuarioController@index')
 
 Route::get('/crearUsuario','App\Http\Controllers\crearUsuarioController@index');
 Route::post('crearUsuario', 'App\Http\Controllers\crearUsuarioController@crearUsuario')->name('crear.Usuario');
-
 Route::get('/buscarEstudiante','App\Http\Controllers\buscarEstudianteController@index');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -47,7 +48,13 @@ Route::put('/lista-usuarios-editar/editar','App\Http\Controllers\editarUsuarioCo
 Route::get('/RestablecerContraseñaController', [App\Http\Controllers\ReestablecerContraseñaController::class, 'reestablecerContraseña'])->name('reestablecerCont');
 
 
-Route::get('/solicitud-alumno/','App\Http\Controllers\solicitudAlumnoController@index');
+Route::get('/solicitud-alumno','App\Http\Controllers\solicitudAlumnoController@index');
 Route::get('/solicitud-alumno/create','App\Http\Controllers\solicitudAlumnoController@Solicitud');
 Route::post('/solicitud-alumno/create','App\Http\Controllers\solicitudAlumnoController@Solicitud')->name('tipoSolicitud');
 Route::put('/solicitud-alumno/create/success','App\Http\Controllers\solicitudAlumnoController@create')->name('solicitudAlumno.create');
+
+
+// esto es para la carga de excel
+Route::get('/cargamasiva','App\Http\Controllers\crearUsuarioController@importForm');
+Route::post('import-list-excel','App\Http\Controllers\crearUsuarioController@importExcel')->name('users.import.excel');
+

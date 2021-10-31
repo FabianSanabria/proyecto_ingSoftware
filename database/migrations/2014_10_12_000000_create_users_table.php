@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->integer('rol');  //Usuario = 0 ; Jefe de Carrera = 1 ; Administrador = 2
             $table->rememberToken();
             $table->timestamps();
+
         });
     }
 
