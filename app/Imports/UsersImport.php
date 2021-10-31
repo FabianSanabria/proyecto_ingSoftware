@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\User;
+use App\Models\Estudiante;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Support\Facades\DB;
 use App\Models\Carrera;
@@ -24,7 +25,7 @@ class UsersImport implements ToModel
         // if(!$existeCarrera){
         //     $codigoCarrera = $row[0];
         // }
-        $codigoCarrera = DB::table('carreras')->where('id',"=",$row[0])->first()->id;
+        // $codigoCarrera = DB::table('carreras')->where('id',"=",$row[0])->first()->id;
         // $cantidadDatos = array->count();
         return new User([
         'name'=>$row[2],
@@ -32,8 +33,7 @@ class UsersImport implements ToModel
         'status'=> '1',
         'email'=>$row[3],
         'password'=>'1234',
-        'rol'=>'0',
-        'carrera_id'=> $codigoCarrera,
+        'rol'=>'0'
         ]);
     }
     public function validate(){
