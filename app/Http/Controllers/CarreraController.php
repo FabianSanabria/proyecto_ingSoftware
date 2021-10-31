@@ -43,7 +43,8 @@ class CarreraController extends Controller
     {
         $request->validate([
             'codigo' => ['required', 'string','unique:carreras','min:4','max:4','regex:/^[1-9][0-9]*$/'],
-            'nombre' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
+            'nombre' => ['required', 'string', 'max:255']
+            //'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/' Quitando el regex se elimina que no deje ingresar numeros en el nombre.
         ]);
 
         Carrera::create([
