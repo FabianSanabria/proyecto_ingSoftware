@@ -25,15 +25,23 @@ class UsersImport implements ToModel
         // if(!$existeCarrera){
         //     $codigoCarrera = $row[0];
         // }
-        // $codigoCarrera = DB::table('carreras')->where('id',"=",$row[0])->first()->id;
+        // $codigoCarrera = DB::table('carreras')->where('id',$row[0])->first()->id;
+        $codigoCarrera = Carrera::where('id',$row[0])->get()->first();
         // $cantidadDatos = array->count();
-        return new User([
-        'name'=>$row[2],
-        'rut'=>$row[1],
-        'status'=> '1',
-        'email'=>$row[3],
-        'password'=>'1234',
-        'rol'=>'0'
+
+        $usuarioCreado = User::create([
+
+            'name'=>$row[2],
+            'rut'=>$row[1],
+            'status'=> '1',
+            'email'=>$row[3],
+            'password'=>'1234',
+            'rol'=>'0'
+        ]);
+        return new Estudiante([
+            'carrera_id' => $codigoCarrera,
+            'usuario_id' => $usuarioCreado->id,
+
         ]);
     }
     public function validate(){
