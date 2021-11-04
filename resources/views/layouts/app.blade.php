@@ -55,12 +55,7 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item" style="color:white">
-                                    <i class="fab fa-wpforms fa-1x text-center" alt=""></i>
-                                    <a class="navbar-brand" style="color:white" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+
                         @else
                         <li class="nav-item dropdown">
                             @if (Route::has('home'))

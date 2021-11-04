@@ -9,6 +9,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('crear.Usuario') }}">
                         @csrf
+                        <h1 style="position: relative; left: 270px;bottom: 10px;font-size: 12px; ">Rut ingresado debe ser sin puntos ni guión (Si termina en K esta debe ser mayúscula)</h1>
 
                         <div class="form-group row">
                             <label for="rut" class="col-md-4 col-form-label text-md-right">{{ __('Rut usuario') }}</label>
@@ -23,7 +24,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 

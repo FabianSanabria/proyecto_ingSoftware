@@ -88,7 +88,7 @@ class CarreraController extends Controller
     {
 
         $request->validate(['codigo' => 'regex:/^[0-9]+$/']);
-        $request->validate(['nombre' => 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/']);
+        $request->validate(['nombre' => ['required', 'string', 'max:255']]);
         $carrera->nombre = $request->nombre;
         $carrera->codigo = $request->codigo;
         $carrera->save();

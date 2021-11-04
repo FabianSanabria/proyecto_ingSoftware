@@ -25,3 +25,4 @@ class Carrera extends Model
         return $this->hasMany(Solicitud::class);
     }
 }
+
