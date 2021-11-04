@@ -12,6 +12,9 @@ use App\Rules\existeJefedeCarrera;
 use App\Rules\validarEmail;
 use App\Rules\ValidarRut;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
+
 class crearUsuarioController extends Controller
 {
     //
@@ -123,8 +126,15 @@ class crearUsuarioController extends Controller
         }
     }
 
+    public function importForm(){
+        return view('usuario.cargamasiva');
+    }
 
+    public function importExcel(Request $request){
+        $file = $request->file('file');
+        Excel :: import(new UsersImport,$file);
 
+        return redirect('/cargamasiva')->with('message');
 
-
+    }
 }

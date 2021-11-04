@@ -6,7 +6,9 @@
     icon: 'success',
     title: 'Bien!',
     text: 'La contraseña se ha actualizado!',
-    })
+    }).then(function() {
+        location.href = location.href;
+});
 </script>
 @endif
 <div class="container">
@@ -38,7 +40,7 @@
         @if (Auth::user()->rol == 1)
         <div class ="card-deck">
             <div class="card">
-                <i class="fas fa-users fa-10x text-center" style="background-color: #003057;"></i>
+                <i class="fas fa-search fa-10x text-center" style="color: #003057;"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Buscar Estudiante</h5>
                     <small class="text-muted">Despliega informacion del estudiante a partir del Rut.</small>
@@ -48,13 +50,13 @@
                 </div>
             </div>
             <div class="card">
-                <i class="fas fa-graduation-cap fa-10x text-center"style="background-color: #003057;" ></i>
+                <i class="fas fa-cloud-upload-alt fa-10x text-center"style="color: #003057;" ></i>
                 <div class="card-body">
-                    <h5 class="card-title text-center">A</h5>
-                    <small class="text-muted">En proceso.</small>
+                    <h5 class="card-title text-center">Carga masiva de estudiantes</h5>
+                    <small class="text-muted">El sistema permite al usuario realizar una carga masiva de estudiantes en formato excel.</small>
                 </div>
                 <div class="card-footer">
-                    <a href="/carrera" class="btn btn-info btn-block">IR</a>
+                    <a href="/cargamasiva" class="btn btn-info btn-block">IR</a>
                 </div>
             </div>
         </div>

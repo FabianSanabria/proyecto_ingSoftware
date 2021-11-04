@@ -7,7 +7,9 @@
     icon: 'success',
     title: 'Bien!',
     text: 'La contraseña se ha reestablecido!',
-    })
+    }).then(function() {
+        location.href = location.href;
+});
 </script>
 @endif
 @if (Auth::user()->rol == 2)
