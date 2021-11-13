@@ -35,11 +35,11 @@ class solicitudAlumnoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function Solicitud(Request $request)
-    {
+    { // funcion que maneja formulario inicial en la cual se elije el tipo de solicitud a enviar
 
         $solicitud = $request->solicitud;
 
-        if($solicitud == null){
+        if($solicitud == null){ // si es null es porque hubo un error en el envio del formulario de solicitud
             return view('solicitudAlumno.generarSolicitud');
 
         }
@@ -80,7 +80,7 @@ class solicitudAlumnoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {
+    { // funcion que maneja la creacion de las solicitudes,
 
         if($request->solicitud == 0)
         {
@@ -284,7 +284,7 @@ class solicitudAlumnoController extends Controller
             'solicitud_id' => $solicitud->id,
         ]);
 
-        if($request->cantArchivos == 1)
+        if($request->cantArchivos == 1) // se crean archivos dependiendo de cuantos se subieron
         {
             $file0 = $request->file('file0');
             $nombreArchivo0 = $file0->getClientOriginalName();

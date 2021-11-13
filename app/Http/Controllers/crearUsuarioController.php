@@ -36,7 +36,7 @@ class crearUsuarioController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index()
+    public function index() // funcion que retorna la vista crear usuario, con las carreras que se encuentran en la BD
 
     {
         $carreras = DB::table('carreras')->get();
@@ -48,7 +48,7 @@ class crearUsuarioController extends Controller
     {
 
 
-        if(strcmp($_POST['rol'],"Estudiante") == 0)
+        if(strcmp($_POST['rol'],"Estudiante") == 0) //si el rol elegido en el formulario es estudiante se crea un estudiante
         {
          $request->validate([
                 'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
@@ -60,8 +60,8 @@ class crearUsuarioController extends Controller
         $carreraid = $request->carrera;
         $rut = $request->rut;
 
-        $password = substr($rut,0,6);
-        $usuarioCreado = User::create([
+        $password = substr($rut,0,6); // la contraseña son los primeros 6 digitos del rut
+        $usuarioCreado = User::create([ // creamos al estudiante
 
             'name' => $request->name,
             'email' => $request->email,
@@ -71,7 +71,7 @@ class crearUsuarioController extends Controller
             'rol' => $rolNum,
 
         ]);
-        Estudiante::create([
+        Estudiante::create([ // creamos al estudiante y le pasamos la id del usuario
 
             'carrera_id' => $carreraid,
             'usuario_id' => $usuarioCreado->id,
@@ -82,16 +82,16 @@ class crearUsuarioController extends Controller
 
         }
 
-        if(strcmp($_POST['rol'],"Jefe de Carrera") == 0)
+        if(strcmp($_POST['rol'],"Jefe de Carrera") == 0) // creamos un jefe de carrera
         {
-            $request->validate(
+            $request->validate( // validamos los campos enviados por el formulario
 
                 [
                  'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
                  'rut' => ['required', 'string','unique:users', new ValidarRut()],
                  'email' => ['required', 'string',new validarEmail(), 'max:255', 'unique:users'],
                  'rol' =>['required','regex:(Estudiante|Jefe de Carrera|Administrador)'],
-                 'carrera' =>['required',new existeJefedeCarrera()],
+                 'carrera' =>['required',new existeJefedeCarrera()], // revisamos si existe ya un jefe de carrera
                 ]
                 );
 
@@ -113,7 +113,7 @@ class crearUsuarioController extends Controller
             $jefedecarrera = JefedeCarrera::create([
                 'usuario_id' => $usuarioCreado->id,
             ]);
-            $carrera->jefe_carrera_id = $jefedecarrera->id;
+            $carrera->jefe_carrera_id = $jefedecarrera->id; // Pasamos la id del jefe de carrera a la carrera correspondiente
             $carrera->save();
             return redirect('/usuario')->with('message','Usuario creado con éxito');
 
