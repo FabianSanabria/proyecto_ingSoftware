@@ -3,8 +3,9 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-
-class validarEmail implements Rule
+use Illuminate\Support\Facades\DB;
+use App\Models\Carrera;
+class existeCarrera implements Rule
 {
     /**
      * Create a new rule instance.
@@ -20,14 +21,19 @@ class validarEmail implements Rule
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
-     * @param  mixed  $value = email a verificar
+     * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)
     {
         //
-        return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $value)) ? FALSE : TRUE;
-
+        $codigoCarrera = Carrera::where('codigo',$value)->get()->first();
+        if($codigoCarrera == null)
+        {
+            return false;
+        }else{
+            return true;
+        }
     }
 
     /**
@@ -37,9 +43,6 @@ class validarEmail implements Rule
      */
     public function message()
     {
-        return 'El email ingresado no es valido.';
+        return 'No existe esta carrera en el sistema.';
     }
-
-
-
 }

@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Carrera;
-use App\Models\JefedeCarrera;
-use App\Models\Estudiante;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use App\Rules\existeJefedeCarrera;
-use App\Rules\validarEmail;
+use App\Models\Carrera;
 use App\Rules\ValidarRut;
-use Illuminate\Support\Facades\Hash;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Estudiante;
+use App\Rules\validarEmail;
 use App\Imports\UsersImport;
+use Illuminate\Http\Request;
+use App\Models\JefedeCarrera;
+use App\Rules\existeJefedeCarrera;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 class crearUsuarioController extends Controller
 {
@@ -36,7 +36,7 @@ class crearUsuarioController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index() // funcion que retorna la vista crear usuario, con las carreras que se encuentran en la BD
+    public function index()
 
     {
         $carreras = DB::table('carreras')->get();
@@ -48,7 +48,7 @@ class crearUsuarioController extends Controller
     {
 
 
-        if(strcmp($_POST['rol'],"Estudiante") == 0) //si el rol elegido en el formulario es estudiante se crea un estudiante
+        if(strcmp($_POST['rol'],"Estudiante") == 0)
         {
          $request->validate([
                 'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
@@ -60,8 +60,8 @@ class crearUsuarioController extends Controller
         $carreraid = $request->carrera;
         $rut = $request->rut;
 
-        $password = substr($rut,0,6); // la contraseña son los primeros 6 digitos del rut
-        $usuarioCreado = User::create([ // creamos al estudiante
+        $password = substr($rut,0,6);
+        $usuarioCreado = User::create([
 
             'name' => $request->name,
             'email' => $request->email,
@@ -71,27 +71,27 @@ class crearUsuarioController extends Controller
             'rol' => $rolNum,
 
         ]);
-        Estudiante::create([ // creamos al estudiante y le pasamos la id del usuario
+        Estudiante::create([
 
             'carrera_id' => $carreraid,
             'usuario_id' => $usuarioCreado->id,
 
         ]);
 
-        return redirect('/usuario')->with('message','Usuario creado con éxito');
+        return redirect('/usuario')->with('message');
 
         }
 
-        if(strcmp($_POST['rol'],"Jefe de Carrera") == 0) // creamos un jefe de carrera
+        if(strcmp($_POST['rol'],"Jefe de Carrera") == 0)
         {
-            $request->validate( // validamos los campos enviados por el formulario
+            $request->validate(
 
                 [
                  'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
                  'rut' => ['required', 'string','unique:users', new ValidarRut()],
                  'email' => ['required', 'string',new validarEmail(), 'max:255', 'unique:users'],
                  'rol' =>['required','regex:(Estudiante|Jefe de Carrera|Administrador)'],
-                 'carrera' =>['required',new existeJefedeCarrera()], // revisamos si existe ya un jefe de carrera
+                 'carrera' =>['required',new existeJefedeCarrera()],
                 ]
                 );
 
@@ -113,9 +113,9 @@ class crearUsuarioController extends Controller
             $jefedecarrera = JefedeCarrera::create([
                 'usuario_id' => $usuarioCreado->id,
             ]);
-            $carrera->jefe_carrera_id = $jefedecarrera->id; // Pasamos la id del jefe de carrera a la carrera correspondiente
+            $carrera->jefe_carrera_id = $jefedecarrera->id;
             $carrera->save();
-            return redirect('/usuario')->with('message','Usuario creado con éxito');
+            return redirect('/usuario')->with('message');
 
 
         }
@@ -127,13 +127,27 @@ class crearUsuarioController extends Controller
     }
 
     public function importForm(){
-        return view('usuario.cargamasiva');
+        $userImport = DB::table('user_excels')->get();
+        return view('usuario.cargamasiva')->with('userImport',$userImport);;
     }
 
     public function importExcel(Request $request){
+
+
         $file = $request->file('file');
-        Excel::import(new UsersImport,$file);
-        return redirect('/cargamasiva')->with('message');
+        $import = new UsersImport();
+        $import->import($file);
+
+        $totalUsers = DB::table('user_excels')->count();
+        //dd($totalUsers);
+        //dd($import->failures());
+        //dd($userImport);
+        if ($import->failures()->isNotEmpty()) {
+            return back()->withFailures($import->failures())->with('message','Se han agregado satisfactoriamente : '.$totalUsers.' '."usuarios");
+        }
+        return back()->with('message','Se han agregado satisfactoriamente : '.$totalUsers.' '."usuarios");
+
 
     }
+
 }
