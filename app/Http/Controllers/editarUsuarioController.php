@@ -24,9 +24,8 @@ class editarUsuarioController extends Controller
         return view('usuario.listaUsuarios',compact('usuarios'));
     }
     public function editar(Request $request)
-
+    // funcion que retorna vista que permitirá editar datos del usuario
     {
-
         $carreras = DB::table('carreras')->get();
         $usuario = User::where('id',$request->id)->get()->first();
         $carrera_usuario = NULL;
@@ -42,7 +41,7 @@ class editarUsuarioController extends Controller
         return view('usuario.modificarUsuario')->with("usuario",$usuario)->with('carreras',$carreras)->with('carrera_usuario',$carrera_usuario);
     }
     public function update(Request $request)
-    {
+    { // función que maneja los distintos casos posibles al editar un usuario
         $usuarioaModificar = $usuario = User::findOrFail($request->id);
 
         if($usuarioaModificar->rol == $request->rol)// si entra al if significa que el rol no se cambiará

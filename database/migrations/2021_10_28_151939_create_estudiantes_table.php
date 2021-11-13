@@ -19,7 +19,7 @@ class CreateEstudiantesTable extends Migration
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('users');
             $table->unsignedBigInteger('carrera_id')->nullable();
-            $table->foreign('carrera_id')->references('id')->on('carreras')->onDelete('cascade');
+            $table->foreign('carrera_id')->references('id')->on('carreras')->onDelete('set null');
         });
     }
 
