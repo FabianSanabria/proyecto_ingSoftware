@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Maatwebsite\Excel\Reader;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -15,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
     }
 
     /**

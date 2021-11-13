@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Carrera;
-use App\Models\JefedeCarrera;
-use App\Models\Estudiante;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use App\Rules\existeJefedeCarrera;
-use App\Rules\validarEmail;
+use App\Models\Carrera;
 use App\Rules\ValidarRut;
-use Illuminate\Support\Facades\Hash;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Estudiante;
+use App\Rules\validarEmail;
 use App\Imports\UsersImport;
+use Illuminate\Http\Request;
+use App\Models\JefedeCarrera;
+use App\Rules\existeJefedeCarrera;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 class crearUsuarioController extends Controller
 {
@@ -127,14 +127,27 @@ class crearUsuarioController extends Controller
     }
 
     public function importForm(){
-        return view('usuario.cargamasiva');
+        $userImport = DB::table('user_excels')->get();
+        return view('usuario.cargamasiva')->with('userImport',$userImport);;
     }
 
     public function importExcel(Request $request){
-        $file = $request->file('file');
-        Excel :: import(new UsersImport,$file);
 
-        return redirect('/cargamasiva')->with('message');
+
+        $file = $request->file('file');
+        $import = new UsersImport();
+        $import->import($file);
+
+        $totalUsers = DB::table('user_excels')->count();
+        //dd($totalUsers);
+        //dd($import->failures());
+        //dd($userImport);
+        if ($import->failures()->isNotEmpty()) {
+            return back()->withFailures($import->failures())->with('message','Se han agregado satisfactoriamente : '.$totalUsers.' '."usuarios");
+        }
+        return back()->with('message','Se han agregado satisfactoriamente : '.$totalUsers.' '."usuarios");
+
 
     }
+
 }
