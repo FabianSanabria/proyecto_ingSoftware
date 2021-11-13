@@ -4,7 +4,7 @@
 <div class="container">
 
 
-        @if ($solicitud == 0)
+        @if (session('solicitud') == 0)
             <div class="col-md-8">
                 <div class="card">
 
@@ -19,7 +19,7 @@
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
 
                                     @error('telefono')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -33,7 +33,7 @@
                                     <input id="nrc" type="text" class="form-control @error('nrc') is-invalid @enderror" name="nrc" value="{{ old('nrc') }}" required autocomplete="rut">
 
                                     @error('nrc')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -47,7 +47,7 @@
                                     <input id="nombreAsignatura" type="text" class="form-control @error('nombreAsignatura') is-invalid @enderror" name="nombreAsignatura" value="{{ old('nombreAsignatura') }}" required autocomplete="nombreAsignatura" autofocus>
 
                                     @error('nombreAsignatura')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -68,13 +68,13 @@
                                         font-size: 16px;
                                         resize: none;"></textarea>
                                     @error('detalle')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
-                            <input type="hidden"name="solicitud" value="{{ $solicitud }}">
+                            <input type="hidden"name="solicitud" value="{{ session('solicitud')  }}">
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -83,11 +83,6 @@
                                     </button>
                                 </div>
                             </div>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                           </ul>
 
 
                         </form>
@@ -95,7 +90,7 @@
                 </div>
             </div>
 
-            @elseif ($solicitud == 1)
+            @elseif (session('solicitud')  == 1)
             <div class="col-md-8">
                 <div class="card">
 
@@ -110,7 +105,7 @@
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
 
                                     @error('telefono')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -124,7 +119,7 @@
                                     <input id="nrc" type="text" class="form-control @error('nrc') is-invalid @enderror" name="nrc" value="{{ old('nrc') }}" required autocomplete="rut">
 
                                     @error('nrc')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -139,7 +134,7 @@
                                     <input id="nombreAsignatura" type="text" class="form-control @error('nombreAsignatura') is-invalid @enderror" name="nombreAsignatura" value="{{ old('nombreAsignatura') }}" required autocomplete="nombreAsignatura" autofocus>
 
                                     @error('nombreAsignatura')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -160,13 +155,13 @@
                                         font-size: 16px;
                                         resize: none;"></textarea>
                                     @error('detalle')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
-                            <input type="hidden"name="solicitud" value="{{ $solicitud }}">
+                            <input type="hidden"name="solicitud" value="{{ session('solicitud')  }}">
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -182,7 +177,7 @@
                 </div>
             </div>
 
-            @elseif ($solicitud == 2)
+            @elseif (session('solicitud') == 2)
             <div class="col-md-8">
                 <div class="card">
 
@@ -197,7 +192,7 @@
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
 
                                     @error('telefono')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -210,7 +205,7 @@
                                     <input id="nrc" type="text" class="form-control @error('nrc') is-invalid @enderror" name="nrc" value="{{ old('nrc') }}" required autocomplete="rut">
 
                                     @error('nrc')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -224,7 +219,7 @@
                                     <input id="nombreAsignatura" type="text" class="form-control @error('nombreAsignatura') is-invalid @enderror" name="nombreAsignatura" value="{{ old('nombreAsignatura') }}" required autocomplete="nombreAsignatura" autofocus>
 
                                     @error('nombreAsignatura')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -245,13 +240,13 @@
                                         font-size: 16px;
                                         resize: none;"></textarea>
                                     @error('detalle')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
-                            <input type="hidden"name="solicitud" value="{{ $solicitud }}">
+                            <input type="hidden"name="solicitud" value="{{ session('solicitud')  }}">
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -267,7 +262,7 @@
                 </div>
             </div>
 
-            @elseif ($solicitud == 3)
+            @elseif (session('solicitud') == 3)
             <div class="col-md-8">
                 <div class="card">
 
@@ -282,7 +277,7 @@
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
 
                                     @error('telefono')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -295,7 +290,7 @@
                                     <input id="nrc" type="text" class="form-control @error('nrc') is-invalid @enderror" name="nrc" value="{{ old('nrc') }}" required autocomplete="rut">
 
                                     @error('nrc')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -309,7 +304,7 @@
                                     <input id="nombreAsignatura" type="text" class="form-control @error('nombreAsignatura') is-invalid @enderror" name="nombreAsignatura" value="{{ old('nombreAsignatura') }}" required autocomplete="nombreAsignatura" autofocus>
 
                                     @error('nombreAsignatura')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -330,13 +325,13 @@
                                         font-size: 16px;
                                         resize: none;"></textarea>
                                     @error('detalle')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
-                            <input type="hidden"name="solicitud" value="{{ $solicitud }}">
+                            <input type="hidden"name="solicitud" value="{{ session('solicitud')  }}">
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -352,7 +347,7 @@
                 </div>
             </div>
 
-            @elseif ($solicitud == 4)
+            @elseif (session('solicitud') == 4)
             <div class="col-md-8">
                 <div class="card">
 
@@ -367,7 +362,7 @@
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
 
                                     @error('telefono')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -380,7 +375,7 @@
                                     <input id="nombreAsignatura" type="text" class="form-control @error('nombreAsignatura') is-invalid @enderror" name="nombreAsignatura" value="{{ old('nombreAsignatura') }}" required autocomplete="nombreAsignatura">
 
                                     @error('nombreAsignatura')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -394,7 +389,7 @@
                                     <input id="nota" type="text" class="form-control @error('nota') is-invalid @enderror" name="nota" value="{{ old('nota') }}" required autocomplete="nota" autofocus>
 
                                     @error('nota')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -407,7 +402,7 @@
                                     <input id="cantidadAyudantias" type="text" class="form-control @error('cantidadAyudantias') is-invalid @enderror" name="cantidadAyudantias" value="{{ old('cantidadAyudantias') }}" required autocomplete="cantidadAyudantias" autofocus>
 
                                     @error('cantidadAyudantias')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -428,13 +423,13 @@
                                         font-size: 16px;
                                         resize: none;"></textarea>
                                     @error('detalle')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
-                            <input type="hidden"name="solicitud" value="{{ $solicitud }}">
+                            <input type="hidden"name="solicitud" value="{{ session('solicitud')  }}">
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -450,7 +445,7 @@
                 </div>
             </div>
 
-            @elseif ($solicitud == 5)
+            @elseif (session('solicitud')  == 5)
             <div class="col-md-8">
                 <div class="card">
 
@@ -465,7 +460,7 @@
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
 
                                     @error('telefono')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -475,14 +470,15 @@
                                 <div class="col-md-6">
                                     <label for="facilidadAcademica" class="col-md-8 col-form-label text-md-right">Tipo de solicitud</label>
                                     <select name="facilidadAcademica" id= "facilidadAcademica"style="position: relative;left:260px; bottom: 30px;border:1px solid #ccc; padding: 3px;border-radius: 10px;"aria-describedby="validationServer04Feedback" required >
-                                    <option selected value="0">Licencia Médica o Certificado Médico</option>
+                                    <option disabled selected>Seleccione Tipo de Solicitud</option>
+                                        <option value="0"> Licencia Médica o Certificado Médico</option>
                                         <option value="1"> Inasistencia por Fuerza Mayor</option>
                                         <option value="2">Representación de la Universidad</option>
                                         <option value="3"> Inasistencia a clases por motivos familiares o personales</option>
                                     </select>
-                                    <div id="validationServer04Feedback" class="invalid-feedback">
+                                    <div id="validationServer04Feedback" class="text-danger">
                                         @error('facilidadAcademica')
-                                            <strong>{{ $message }}</strong>
+                                            <strong style="position:relative; left:263px; bottom:20px">{{ $message }}</strong>
                                         @enderror
                                     </div>
                                 </div>
@@ -494,7 +490,7 @@
                                     <input id="nombreProfesor" type="text" class="form-control @error('nombreProfesor') is-invalid @enderror" name="nombreProfesor" value="{{ old('nombreProfesor') }}" required autocomplete="nombreProfesor">
 
                                     @error('nombreProfesor')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -508,7 +504,7 @@
                                     <input id="nombreAsignatura" type="text" class="form-control @error('nombreAsignatura') is-invalid @enderror" name="nombreAsignatura" value="{{ old('nombreAsignatura') }}" required autocomplete="nombreAsignatura" autofocus>
 
                                     @error('nombreAsignatura')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -529,13 +525,13 @@
                                         font-size: 16px;
                                         resize: none;"></textarea>
                                     @error('detalle')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
-                            <input type="hidden"name="solicitud" value="{{ $solicitud }}">
+                            <input type="hidden"name="solicitud" value="{{ session('solicitud')  }}">
                             <input id="cantArchivos"name="cantArchivos" type="hidden"value="0">
                             <div class="form-group row mb-0">
                                 <label for="file" class="col-md-4 col-form-label text-md-right">{{ __('Adjuntar archivos (Máximo 3 archivos) ') }}</label>
@@ -544,15 +540,15 @@
                                     <input type="file" name="file0" id="file0" onChange="makeFileList();" style="display: none;"/>
                                     <input type="file" name="file1" id="file1" onChange="makeFileList();" style="display: none;"/>
                                     <input type="file" name="file2" id="file2" onChange="makeFileList();" style="display: none;"/>
-                                    <input type="button" value="Seleccione los archivos" onclick="document.getElementById('file'+i).click();" />
-                                    <input type="button" value="Borrar archivo" onclick="borrarArchivo();" />
+                                    <input type="button" value="Seleccione los archivos" style= "position:relative; bottom: 40px;"onclick="document.getElementById('file'+i).click();" />
+                                    <input type="button" value="Borrar archivo" style= "position:relative; bottom: 40px; left:10px;" onclick="borrarArchivo();" />
 
                                     <p>
-                                        <h1>Files Selected:</h1>
+                                        <h1 style= "position:relative; bottom: 60px;left:300px;" >Archivos Seleccionados</h1>
                                     </p>
-                                    <ul id="fileList0"><li></li></ul>
-                                    <ul id="fileList1"><li></li></ul>
-                                    <ul id="fileList2"><li></li></ul>
+                                    <ul id="fileList0" style= "position:absolute; bottom: 30px;left:350px;" ><li></li></ul>
+                                    <ul id="fileList1" style= "position:absolute; bottom: 10px;left:350px;"><li></li></ul>
+                                    <ul id="fileList2" style= "position:absolute; top: 24px;left:350px;"><li></li></ul>
                                 </div>
                             </div>
 

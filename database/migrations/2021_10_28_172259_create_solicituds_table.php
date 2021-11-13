@@ -20,9 +20,11 @@ class CreateSolicitudsTable extends Migration
             $table->string('numero_de_telefono');
             $table->integer('estado'); // Pendiente = 0; Aceptada = 1; Aceptada con observaciones = 2; Rechazada = 3; Anulada = 4;
             $table->string('nombre_asignatura');
+            $table->string('tipo');
+            $table->string('respuestaSolicitud')->nullable();
             //claves foraneas
-            $table->unsignedBigInteger('estudiante_id');
-            $table->foreign('estudiante_id')->references('id')->on('estudiantes');
+            $table->unsignedBigInteger('estudiante_id')->nullable();
+            $table->foreign('estudiante_id')->references('id')->on('estudiantes')->onDelete('set null');
             $table->unsignedBigInteger('carrera_id');
             $table->foreign('carrera_id')->references('id')->on('carreras');
         });

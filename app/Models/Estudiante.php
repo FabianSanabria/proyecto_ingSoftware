@@ -20,7 +20,7 @@ class Estudiante extends Model
         return $this->belongsTo(Carrera::class);
     }
     public function solicitudes() {
-        return $this->hasMany(Solicitud::class);
+        return $this->hasMany(Solicitud::class,'estudiante_id');
     }
 
 }

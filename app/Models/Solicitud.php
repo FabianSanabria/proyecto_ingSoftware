@@ -15,6 +15,8 @@ class Solicitud extends Model
         'nombre_asignatura',
         'estudiante_id',
         'carrera_id',
+        'tipo',
+        'respuestaSolicitud',
     ];
     public function estudiante() {
         return $this->belongsTo(Estudiante::class);

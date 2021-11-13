@@ -18,7 +18,7 @@ class CreateCarrerasTable extends Migration
             $table->string("codigo");
             $table->string("nombre");
             $table->unsignedBigInteger('jefe_carrera_id')->nullable();
-            $table->foreign('jefe_carrera_id')->references('id')->on('jefede_carreras');
+            $table->foreign('jefe_carrera_id')->references('id')->on('jefede_carreras')->onDelete('set null');
             $table->timestamps();
         });
     }

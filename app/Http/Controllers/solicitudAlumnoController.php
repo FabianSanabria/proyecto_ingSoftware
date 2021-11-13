@@ -15,8 +15,7 @@ use App\Models\Solicitud;
 use Illuminate\Support\Facades\Validator;
 use App\Models\JefedeCarrera;
 use App\Models\Sobrecupo;
-use Ramsey\Uuid\Type\Integer;
-use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class solicitudAlumnoController extends Controller
 {
@@ -39,26 +38,37 @@ class solicitudAlumnoController extends Controller
     {
 
         $solicitud = $request->solicitud;
+
+        if($solicitud == null){
+            return view('solicitudAlumno.generarSolicitud');
+
+        }
         if($solicitud == 0){
-            return view('solicitudAlumno.generarSolicitud')->with("solicitud",0);
+            $request->session()->flash('solicitud',0);
+            return view('solicitudAlumno.generarSolicitud');
         }
         if($solicitud == 1){
-            return view('solicitudAlumno.generarSolicitud')->with("solicitud",1);
+            $request->session()->flash('solicitud',1);
+            return view('solicitudAlumno.generarSolicitud');
         }
         if($solicitud == 2){
-            return view('solicitudAlumno.generarSolicitud')->with("solicitud",2);
+            $request->session()->flash('solicitud',2);
+            return view('solicitudAlumno.generarSolicitud');
 
         }
         if($solicitud == 3){
-            return view('solicitudAlumno.generarSolicitud')->with("solicitud",3);
+            $request->session()->flash('solicitud',3);
+            return view('solicitudAlumno.generarSolicitud');
 
         }
         if($solicitud == 4){
-            return view('solicitudAlumno.generarSolicitud')->with("solicitud",4);
+            $request->session()->flash('solicitud',4);
+            return view('solicitudAlumno.generarSolicitud');
 
         }
         if($solicitud == 5){
-            return view('solicitudAlumno.generarSolicitud')->with("solicitud",5);
+            $request->session()->flash('solicitud',5);
+            return view('solicitudAlumno.generarSolicitud');
 
         }
 
@@ -84,6 +94,7 @@ class solicitudAlumnoController extends Controller
         if ($validator->fails())
         {
 
+            $request->session()->put('solicitud', 0);
             return  back()->withErrors($validator)->withInput($request->all());
         }
         $estudiante = Estudiante::where('usuario_id',$request->user()->id)->first();
@@ -95,12 +106,13 @@ class solicitudAlumnoController extends Controller
             'estado' => 0,
             'estudiante_id' => $estudiante->id,
             'carrera_id'=> $carrera->id,
+            'tipo'=> 0,
         ]);
         Sobrecupo::create([
             'nrc' => $request->nrc,
             'solicitud_id' => $solicitud->id,
         ]);
-        return redirect('solicitud-alumno');
+        return redirect('solicitud-alumno')->with('message','Se ha creado la solicitud con id: #'.$solicitud->id.'. Con fecha: '.$solicitud->created_at);
 
         }
         if($request->solicitud == 1)
@@ -115,6 +127,7 @@ class solicitudAlumnoController extends Controller
         if ($validator->fails())
         {
 
+            $request->session()->put('solicitud', 1);
             return  back()->withErrors($validator)->withInput($request->all());
         }
         $estudiante = Estudiante::where('usuario_id',$request->user()->id)->first();
@@ -126,13 +139,14 @@ class solicitudAlumnoController extends Controller
             'estado' => 0,
             'estudiante_id' => $estudiante->id,
             'carrera_id'=> $carrera->id,
+            'tipo'=> 1,
         ]);
         CambioParalelo::create([
             'nrc' => $request->nrc,
             'solicitud_id' => $solicitud->id,
         ]);
-        return redirect('solicitud-alumno');
-        }
+        return redirect('solicitud-alumno')->with('message','Se ha creado la solicitud con id: #'.$solicitud->id.'. Con fecha: '.$solicitud->created_at);
+    }
 
 
         if($request->solicitud == 2)
@@ -147,6 +161,7 @@ class solicitudAlumnoController extends Controller
         if ($validator->fails())
         {
 
+            $request->session()->put('solicitud', 2);
             return  back()->withErrors($validator)->withInput($request->all());
         }
         $estudiante = Estudiante::where('usuario_id',$request->user()->id)->first();
@@ -158,13 +173,14 @@ class solicitudAlumnoController extends Controller
             'estado' => 0,
             'estudiante_id' => $estudiante->id,
             'carrera_id'=> $carrera->id,
+            'tipo'=> 2,
         ]);
         EliminacionAsignatura::create([
             'nrc' => $request->nrc,
             'solicitud_id' => $solicitud->id,
         ]);
-        return redirect('solicitud-alumno');
-        }
+        return redirect('solicitud-alumno')->with('message','Se ha creado la solicitud con id: #'.$solicitud->id.'. Con fecha: '.$solicitud->created_at);
+    }
 
         if($request->solicitud == 3)
         {
@@ -178,6 +194,7 @@ class solicitudAlumnoController extends Controller
         if ($validator->fails())
         {
 
+            $request->session()->put('solicitud', 3);
             return  back()->withErrors($validator)->withInput($request->all());
         }
         $estudiante = Estudiante::where('usuario_id',$request->user()->id)->first();
@@ -189,43 +206,14 @@ class solicitudAlumnoController extends Controller
             'estado' => 0,
             'estudiante_id' => $estudiante->id,
             'carrera_id'=> $carrera->id,
+            'tipo'=> 3,
         ]);
         InscripcionAsignatura::create([
             'nrc' => $request->nrc,
             'solicitud_id' => $solicitud->id,
         ]);
-        return redirect('solicitud-alumno');
-        }
-        if($request->solicitud == 3)
-        {
-
-       $validator =  Validator::make($request->all(),[
-        'telefono' => ['required', 'string','min:9','max:9'],
-        'nrc' => ['required', 'string', 'max:4','min:4'],
-        'nombreAsignatura' => ['required', 'string'],
-        'detalle' => ['required', 'string'],
-        ]);
-        if ($validator->fails())
-        {
-
-            return  back()->withErrors($validator)->withInput($request->all());
-        }
-        $estudiante = Estudiante::where('usuario_id',$request->user()->id)->first();
-        $carrera = Carrera::where('id',$estudiante->carrera_id)->first();
-        $solicitud = Solicitud::create([
-            'nombre_asignatura' => $request->nombreAsignatura,
-            'detalle' => $request->detalle,
-            'numero_de_telefono' => $request->telefono,
-            'estado' => 0,
-            'estudiante_id' => $estudiante->id,
-            'carrera_id'=> $carrera->id,
-        ]);
-        InscripcionAsignatura::create([
-            'nrc' => $request->nrc,
-            'solicitud_id' => $solicitud->id,
-        ]);
-        return redirect('solicitud-alumno');
-        }
+        return redirect('solicitud-alumno')->with('message','Se ha creado la solicitud con id: #'.$solicitud->id.'. Con fecha: '.$solicitud->created_at);
+    }
         if($request->solicitud == 4)
         {
 
@@ -239,6 +227,7 @@ class solicitudAlumnoController extends Controller
         if ($validator->fails())
         {
 
+            $request->session()->put('solicitud', 4);
             return  back()->withErrors($validator)->withInput($request->all());
         }
         $estudiante = Estudiante::where('usuario_id',$request->user()->id)->first();
@@ -250,6 +239,7 @@ class solicitudAlumnoController extends Controller
             'estado' => 0,
             'estudiante_id' => $estudiante->id,
             'carrera_id'=> $carrera->id,
+            'tipo'=> 4,
         ]);
         $ayudantia = Ayudantia::create([
             'nota_aprobacion' => $request->nota,
@@ -257,8 +247,8 @@ class solicitudAlumnoController extends Controller
             'solicitud_id' => $solicitud->id,
         ]);
 
-        return redirect('solicitud-alumno');
-        }
+        return redirect('solicitud-alumno')->with('message','Se ha creado la solicitud con id: #'.$solicitud->id.'. Con fecha: '.$solicitud->created_at);
+    }
 
         if($request->solicitud == 5)
         {
@@ -268,10 +258,12 @@ class solicitudAlumnoController extends Controller
         'nombreProfesor' => ['required', 'string'],
         'nombreAsignatura' => ['required', 'string'],
         'detalle' => ['required', 'string'],
+        'facilidadAcademica' => ['required'],
         ]);
         if ($validator->fails())
         {
 
+            $request->session()->put('solicitud', 5);
             return  back()->withErrors($validator)->withInput($request->all());
         }
         $estudiante = Estudiante::where('usuario_id',$request->user()->id)->first();
@@ -283,7 +275,9 @@ class solicitudAlumnoController extends Controller
             'estado' => 0,
             'estudiante_id' => $estudiante->id,
             'carrera_id'=> $carrera->id,
+            'tipo'=> 5,
         ]);
+
         $facilidad = Facilidades::create([
             'nombre_profesor' => $request->nombreProfesor,
             'tipo_solicitud' => $request->facilidadAcademica,
@@ -300,8 +294,8 @@ class solicitudAlumnoController extends Controller
                 'nombre_archivo' => $nombreArchivo0 ,
                 'facilidad_id' => $facilidad->id,
             ]);
-            dd("woa");
-            return redirect('solicitud-alumno');
+
+            return redirect('solicitud-alumno')->with('message','Se ha creado la solicitud con id: #'.$solicitud->id.'. Con fecha: '.$solicitud->created_at);
 
         }
         elseif($request->cantArchivos == 2)
@@ -321,7 +315,7 @@ class solicitudAlumnoController extends Controller
                 'nombre_archivo' => $nombreArchivo1 ,
                 'facilidad_id' => $facilidad->id,
             ]);
-            return redirect('solicitud-alumno');
+            return redirect('solicitud-alumno')->with('message','Se ha creado la solicitud con id: #'.$solicitud->id.'. Con fecha: '.$solicitud->created_at);
         }
         elseif($request->cantArchivos == 3){
 
@@ -348,12 +342,12 @@ class solicitudAlumnoController extends Controller
                 'nombre_archivo' => $nombreArchivo2 ,
                 'facilidad_id' => $facilidad->id,
             ]);
-            return redirect('solicitud-alumno');
+            return redirect('solicitud-alumno')->with('message','Se ha creado la solicitud con id: #'.$solicitud->id.'. Con fecha: '.$solicitud->created_at);
         }
         else
         {
 
-            return redirect('solicitud-alumno');
+            return redirect('solicitud-alumno')->with('message','Se ha creado la solicitud con id: #'.$solicitud->id.'. Con fecha: '.$solicitud->created_at);
         }
         }
 

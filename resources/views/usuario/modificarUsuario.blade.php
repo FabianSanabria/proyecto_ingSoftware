@@ -24,7 +24,7 @@
                                 name="rut" required disabled>
 
                             @error('rut')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -35,7 +35,7 @@
                              required>
 
                             @error('nombre')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -46,7 +46,7 @@
                                 name="email" required>
 
                             @error('email')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -59,16 +59,16 @@
                                 <select name="carrera" id ="carrera" class="form-control">
 
                                     @foreach ($carreras as $carrera)
-                                    @if( $carrera->id == $usuario->carrera_id)
-                                    <option selected disabled value="{{$carrera->id}}">{{$carrera->nombre}}</option>
 
+                                    @if( $carrera->id == $carrera_usuario)
+                                    <option selected  value="{{$carrera->id}}">{{$carrera->nombre}}</option>
                                     @else
                                     <option value="{{$carrera->id}}">{{$carrera->nombre}}</option>
 
                                     @endif
                                     @endforeach
                                 </select>
-                                <div id="validation" class="invalid-feedback">
+                                <div id="validation" class="text-danger">
                                     @error('carrera')
                                         <strong>{{ $message }}</strong>
                                     @enderror
@@ -102,7 +102,7 @@
                                     @endif
 
                                 </select>
-                                <div id="validation" class="invalid-feedback">
+                                <div id="validation" class="text-danger">
                                     @error('rol')
                                         <strong>{{ $message }}</strong>
                                     @enderror
@@ -123,11 +123,6 @@
             <div class="col-lg-3 col-md-2"></div>
         </div>
     </div>
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-   </ul>
 
     @endif
     @endsection

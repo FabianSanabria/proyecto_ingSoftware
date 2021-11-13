@@ -2,6 +2,11 @@
 @section('content')
 @if (Auth::user()->rol == 0)
 <div class="container">
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+    @endif
     <div class="row">
         <div class="col-lg-3 col-md-2"></div>
         <div class="col-lg-6 col-md-8 login-box">
