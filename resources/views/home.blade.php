@@ -50,6 +50,16 @@
                 </div>
             </div>
             <div class="card">
+                <i class="fas fa-check-double fa-10x text-center"style="color: #003057;" ></i>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Resolver solicitudes pendientes</h5>
+                    <small class="text-muted">El sistema despliega las solicitudes que se encuentren en estado "Pendiente".</small>
+                </div>
+                <div class="card-footer">
+                    <a href="/resolverSolicitud" class="btn btn-info btn-block">IR</a>
+                </div>
+            </div>
+            <div class="card">
                 <i class="fas fa-cloud-upload-alt fa-10x text-center"style="color: #003057;" ></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Carga masiva de estudiantes</h5>

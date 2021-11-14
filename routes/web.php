@@ -37,6 +37,10 @@ Route::get('/crearUsuario','App\Http\Controllers\crearUsuarioController@index');
 Route::post('crearUsuario', 'App\Http\Controllers\crearUsuarioController@crearUsuario')->name('crear.Usuario');
 Route::get('/buscarEstudiante','App\Http\Controllers\buscarEstudianteController@index');
 
+//Resolver solicitudes pendientes
+Route::get('/resolverSolicitud','App\Http\Controllers\resolverSolicitudController@index');
+Route::get('/responderSolicitud','App\Http\Controllers\resolverSolicitudController@resolverSolicitud')->name('responderSolicitud');
+//Route::get('/lista-usuarios-editar/editar','App\Http\Controllers\editarUsuarioController@editar')->name('editarUsuario');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
