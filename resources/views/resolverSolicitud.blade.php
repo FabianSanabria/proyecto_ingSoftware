@@ -20,8 +20,11 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($carreras as $carrera)
+            @if($carrera->jefe_carrera_id == Auth::user()->id)
+
             @foreach ($solicitud->sortBy('updated_at') as $solicitud)
-            @if ($solicitud->estado == 0)
+            @if ($solicitud->estado == 0 && $solicitud->carrera_id == $carrera->id)
             <tr>
                 <th scope="row">{{$solicitud->updated_at}}</th>
                 <td>{{$solicitud->id}}</td>
@@ -54,6 +57,9 @@
                 @endswitch
                 <td><a class="btn btn-primary" href={{ route('responderSolicitud', ['id' => $solicitud]) }}>Gestionar</a></td>
             </tr>
+            @endif
+            @endforeach
+
             @endif
             @endforeach
         </tbody>

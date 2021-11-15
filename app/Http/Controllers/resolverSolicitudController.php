@@ -41,15 +41,15 @@ class resolverSolicitudController extends Controller
     {
         //dd($totalCarreras);
         //return view('resolverSolicitud');
-
+        $carreras = DB::table('carreras')->get();
         if ($request->search == null) {
             $solicitud = Solicitud::simplePaginate(100); //Puede que haya que corregír esto más pronto que tarde
             $user = User::simplePaginate(100); //Esto también
-            return view('resolverSolicitud',compact('solicitud','user'));
+            return view('resolverSolicitud',compact('solicitud','user','carreras'));
         }else {
             $solicitud = Solicitud::where('codigo', $request->search)->simplePaginate(1);
             $user = User::where('codigo', $request->search)->simplePaginate(1);
-            return view('resolverSolicitud')->with('solicitudes',$solicitud,'users',$user);
+            return view('resolverSolicitud')->with('solicitudes',$solicitud,'users',$user)->with('carreras',$carreras);
         }
     }
 
