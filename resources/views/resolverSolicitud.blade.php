@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if (Auth::user()->rol == 1)
 <div class="container">
     <div class="row mb-3">
         <div class="col col-13">
@@ -19,7 +20,8 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($solicitud as $solicitud)
+            @foreach ($solicitud->sortBy('updated_at') as $solicitud)
+            @if ($solicitud->estado == 0)
             <tr>
                 <th scope="row">{{$solicitud->updated_at}}</th>
                 <td>{{$solicitud->id}}</td>
@@ -52,9 +54,11 @@
                 @endswitch
                 <td><a class="btn btn-primary" href={{ route('responderSolicitud', ['id' => $solicitud]) }}>Gestionar</a></td>
             </tr>
+            @endif
             @endforeach
         </tbody>
     </table>
 </div>
 
+@endif
 @endsection

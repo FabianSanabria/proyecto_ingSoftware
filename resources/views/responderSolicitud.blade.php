@@ -15,9 +15,7 @@
 
             <div class="col-lg-12 login-form">
                 <div class="col-lg-12 login-form">
-                    <form method="POST" action="{{route('actualizar.datos',['id' => $usuario])}}">
-                        @csrf
-                        @method('PUT')
+
 
                         <div class="form-group">
                             <label class="form-control-label">Fecha de la solicitud</label>
@@ -129,16 +127,11 @@
 
                             @foreach ($listaUsuarios as $listaU)
                             @if( $listaU->id == $solicitudes->estudiante_id)
-                            <input value={{$listaU->email}} id="email" type="text" class="form-control @error('email') is-invalid @enderror"
+                            <input value={{$listaU->email}} id="email" type="text" class="form-control"
                             name="email" readonly>
                             @endif
                             @endforeach
 
-                            @error('email')
-                            <span class="text-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -157,19 +150,31 @@
 
                         <div class="form-group">
                             <label for = "exampleFormControlTextarea">Detalle de la solicitud</label>
-                            <textarea class = "form-control" id = "exampleFormControlTextArea" rows = "5" disabled>
+                            <textarea class = "form-control" id = "exampleFormControlTextArea" rows = "5" disabled>{{$solicitudes->detalle}}</textarea>
+                        </div>
 
-                                {{$solicitudes->detalle}}
+                    <form method="POST" action="{{route('actualizarSolicitud',['id' => $solicitudes])}}">
+                        @csrf
+                        @method('PUT')
 
-                            </textarea>
+                        <div class="form-group">
+                            <label for="form-control-select">Estado</label>
+                            <select class="form-control" name="tipoRespuesta" id="tipoRespuesta">
+                                <option>Aceptada</option>
+                                <option>Aceptada con observaciones</option>
+                                <option>Rechazada</option>
+                            </select>
+                            @error('tipoRespuesta')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label class="form-control-label">Observaciones</label>
-                            <textarea class = "form-control" id = "respuestaSolicitud" rows = "4" required>
-
-                            </textarea>
-                            @error('respuestaSolicitud')
+                            <textarea class = "form-control" name="observaciones" id = "observaciones" rows = "4" required></textarea>
+                            @error('observaciones')
                             <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

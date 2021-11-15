@@ -40,7 +40,7 @@ Route::get('/buscarEstudiante','App\Http\Controllers\buscarEstudianteController@
 //Resolver solicitudes pendientes
 Route::get('/resolverSolicitud','App\Http\Controllers\resolverSolicitudController@index');
 Route::get('/responderSolicitud','App\Http\Controllers\resolverSolicitudController@resolverSolicitud')->name('responderSolicitud');
-//Route::get('/lista-usuarios-editar/editar','App\Http\Controllers\editarUsuarioController@editar')->name('editarUsuario');
+Route::put('/responderSolicitud','App\Http\Controllers\resolverSolicitudController@update')->name('actualizarSolicitud');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
