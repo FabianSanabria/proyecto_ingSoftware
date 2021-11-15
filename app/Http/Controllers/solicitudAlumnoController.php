@@ -388,5 +388,18 @@ class solicitudAlumnoController extends Controller
     {
         //
     }
+
+    public function update(Request $request, Solicitud $solicitud)
+    {
+
+        $request->validate(['id' => 'regex:/^[0-9]+$/']);
+        $request->validate(['tipo' => ['required', 'string', 'max:255']]);
+        $request->validate(['estado' => 'regex:/^[0-9]+$/']);
+        $solicitud->id = $request->id;
+        $solicitud->tipo = $request->tipo;
+        $solicitud->estado = $request->estado;
+        $solicitud->save();
+        return redirect('solicitud-alumno')->with('message','Se ha modificado la solicitud con id: #'.$solicitud->id.'. Con fecha: '.$solicitud->updated_at);
+    }
 }
 

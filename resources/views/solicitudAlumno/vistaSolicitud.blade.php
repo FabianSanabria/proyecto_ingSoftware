@@ -40,7 +40,48 @@
             <tr>
                 <th scope="row">{{ ($solicitud->created_at)}}</th>
                 <td>{{ ($solicitud->id)}}</td>
-                <td>{{$solicitud->tipo}}</td>
+                @switch(($solicitud->tipo))
+                @case(0)
+                <td>
+                        Sobrecupo
+                    </div>
+                </td>
+                @break
+                @case(1)
+                <td>
+                        Cambio de paralelo
+                    </div>
+                </td>
+                @break
+                @case(2)
+                <td>
+                        Eliminación de asignatura
+                    </div>
+                </td>
+                @break
+                @case(3)
+                <td>
+                        Inscripción de asignatura
+                    </div>
+                </td>
+                @break
+                @case(4)
+                <td>
+                        Solicitud de ayudantia
+                    </div>
+                </td>
+                @break
+                @case(5)
+                <td>
+                        Facilidades académicas
+                    </div>
+                </td>
+                @break
+
+                @default
+
+                @endswitch
+
                 @switch(($solicitud->estado))
                 @case(0)
                 <td>
