@@ -76,8 +76,8 @@
             <div class="card">
                 <i class="fas fa-graduation-cap fa-10x text-center"style="background-color: #003057;" ></i>
                 <div class="card-body">
-                    <h5 class="card-title text-center">Editar o anular solicitud</h5>
-                    <small class="text-muted">Permite editar o anular una solicitud ya creada.</small>
+                    <h5 class="card-title text-center">Gestión de solicitud</h5>
+                    <small class="text-muted">Permite gestionar o visualizar solicitudes ya creadas.</small>
                 </div>
                 <div class="card-footer">
                     <a href="/solicitud-alumno/edit" class="btn btn-info btn-block">IR</a>

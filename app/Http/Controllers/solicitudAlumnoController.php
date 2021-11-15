@@ -374,7 +374,8 @@ class solicitudAlumnoController extends Controller
      */
     public function edit()
     {
-        return view('solicitudAlumno.editarSolicitud');
+        $solicitud = Solicitud::all();
+        return view('solicitudAlumno.vistaSolicitud') -> with ('solicitudes', $solicitud);
     }
 
     /**

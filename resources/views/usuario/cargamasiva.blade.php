@@ -13,6 +13,11 @@
         {{ session()->get('message') }}
     </div>
     @endif
+    @if(session()->has('errors'))
+    <div class="alert alert-danger">
+        <li>{{$errors->first() }}</li>
+    </div>
+    @endif
     <div class = "row justify-content">
         <div class ="card-deck">
             <div class="card" style="width: 19rem;">
