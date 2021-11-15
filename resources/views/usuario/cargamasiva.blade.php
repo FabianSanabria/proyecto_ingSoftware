@@ -118,7 +118,7 @@
     </div>
 </div>
 <?php
-$con = mysqli_connect('localhost', 'root', '','proyecto');
+$con = mysqli_connect('127.0.0.1:3307', 'root','','proyecto_laravelbd');// 'localhost' tiraba error
 mysqli_query($con, 'TRUNCATE TABLE `user_excels`');
 
 ?>
