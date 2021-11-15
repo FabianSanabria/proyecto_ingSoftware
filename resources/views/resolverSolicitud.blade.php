@@ -20,11 +20,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($carreras as $carrera)
-            @if($carrera->jefe_carrera_id == Auth::user()->id)
+            @foreach ($jefesdecarreras as $jefeC)
+            @if($jefeC->usuario_id == Auth::user()->id)
 
             @foreach ($solicitud->sortBy('updated_at') as $solicitud)
-            @if ($solicitud->estado == 0 && $solicitud->carrera_id == $carrera->id)
+            @if ($solicitud->estado == 0 && $solicitud->carrera_id == $jefeC->id)
             <tr>
                 <th scope="row">{{$solicitud->updated_at}}</th>
                 <td>{{$solicitud->id}}</td>
