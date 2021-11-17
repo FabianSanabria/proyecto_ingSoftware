@@ -15,7 +15,7 @@ class Solicitud extends Model
         'nombre_asignatura',
         'estudiante_id',
         'carrera_id',
-        'tipo',
+        'tipo', // Sobrecupo = 0; Cambio Paralelo = 1, Eliminación Asginatura = 2; Inscripción Asignatura = 3; Ayudantía = 4; Facilidades = 5;
         'respuestaSolicitud',
     ];
     public function estudiante() {
