@@ -62,7 +62,7 @@ class ValidarRut implements Rule
             }
 
             //Finalmente validamos
-            if(substr((string)$value, strlen((string)$value)-1, 1) == $digitoV)
+            if((substr((string)$value, strlen((string)$value)-1, 1) == $digitoV) || (substr((string)$value, strlen((string)$value)-1, 1) == 'k' && $digitoV == 'K'))
             {
                 return true;
             }else
