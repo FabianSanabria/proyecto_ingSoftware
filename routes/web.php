@@ -37,6 +37,10 @@ Route::get('/crearUsuario','App\Http\Controllers\crearUsuarioController@index');
 Route::post('crearUsuario', 'App\Http\Controllers\crearUsuarioController@crearUsuario')->name('crear.Usuario');
 Route::get('/buscarEstudiante','App\Http\Controllers\buscarEstudianteController@index');
 
+//Resolver solicitudes pendientes
+Route::get('/resolverSolicitud','App\Http\Controllers\resolverSolicitudController@index');
+Route::get('/responderSolicitud','App\Http\Controllers\resolverSolicitudController@resolverSolicitud')->name('responderSolicitud');
+Route::put('/responderSolicitud','App\Http\Controllers\resolverSolicitudController@update')->name('actualizarSolicitud');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -48,10 +52,12 @@ Route::put('/lista-usuarios-editar/editar','App\Http\Controllers\editarUsuarioCo
 Route::get('/RestablecerContraseñaController', [App\Http\Controllers\ReestablecerContraseñaController::class, 'reestablecerContraseña'])->name('reestablecerCont');
 
 
-Route::get('/solicitud-alumno/','App\Http\Controllers\solicitudAlumnoController@index');
+Route::get('/solicitud-alumno','App\Http\Controllers\solicitudAlumnoController@index');
 Route::get('/solicitud-alumno/create','App\Http\Controllers\solicitudAlumnoController@Solicitud');
 Route::post('/solicitud-alumno/create','App\Http\Controllers\solicitudAlumnoController@Solicitud')->name('tipoSolicitud');
 Route::put('/solicitud-alumno/create/success','App\Http\Controllers\solicitudAlumnoController@create')->name('solicitudAlumno.create');
+Route::get('/solicitud-alumno/edit', 'App\Http\Controllers\solicitudAlumnoController@edit')->name('solicitud.gestion');
+
 
 
 // esto es para la carga de excel

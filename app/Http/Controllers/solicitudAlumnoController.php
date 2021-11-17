@@ -374,7 +374,8 @@ class solicitudAlumnoController extends Controller
      */
     public function edit()
     {
-        return view('solicitudAlumno.editarSolicitud');
+        $solicitud = Solicitud::all();
+        return view('solicitudAlumno.vistaSolicitud') -> with ('solicitudes', $solicitud);
     }
 
     /**
@@ -386,6 +387,19 @@ class solicitudAlumnoController extends Controller
     public function destroy(Carrera $carrera)
     {
         //
+    }
+
+    public function update(Request $request, Solicitud $solicitud)
+    {
+
+        $request->validate(['id' => 'regex:/^[0-9]+$/']);
+        $request->validate(['tipo' => ['required', 'string', 'max:255']]);
+        $request->validate(['estado' => 'regex:/^[0-9]+$/']);
+        $solicitud->id = $request->id;
+        $solicitud->tipo = $request->tipo;
+        $solicitud->estado = $request->estado;
+        $solicitud->save();
+        return redirect('solicitud-alumno')->with('message','Se ha modificado la solicitud con id: #'.$solicitud->id.'. Con fecha: '.$solicitud->updated_at);
     }
 }
 
