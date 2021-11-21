@@ -62,8 +62,8 @@ class ValidarRut implements Rule
             }
 
             //Finalmente validamos
-            if(substr((string)$value, strlen((string)$value)-1, 1) == $digitoV)
-            {
+            if((substr((string)$value, strlen((string)$value)-1, 1) == $digitoV) || (substr((string)$value, strlen((string)$value)-1, 1) == 'k' && $digitoV == 'K'))
+            {//Si el ultimo digito es igual a digitoV, entonces true
                 return true;
             }else
             {
