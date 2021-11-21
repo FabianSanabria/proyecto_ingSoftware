@@ -80,7 +80,7 @@
                     <small class="text-muted">Permite gestionar o visualizar solicitudes ya creadas.</small>
                 </div>
                 <div class="card-footer">
-                    <a href="/solicitud-alumno/edit" class="btn btn-info btn-block">IR</a>
+                    <a href="/solicitud-alumno/lista" class="btn btn-info btn-block">IR</a>
                 </div>
             </div>
         </div>
