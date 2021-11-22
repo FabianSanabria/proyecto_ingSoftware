@@ -160,9 +160,9 @@
                         <div class="form-group">
                             <label for="form-control-select">Estado</label>
                             <select class="form-control" name="tipoRespuesta" id="tipoRespuesta">
-                                <option>Aceptada</option>
-                                <option>Aceptada con observaciones</option>
-                                <option>Rechazada</option>
+                                <option value = "Aceptada">Aceptada</option>
+                                <option value = "AceptadaCon">Aceptada con observaciones</option>
+                                <option value = "Rechazada">Rechazada</option>
                             </select>
                             @error('tipoRespuesta')
                             <span class="text-danger" role="alert">
@@ -173,7 +173,7 @@
 
                         <div class="form-group">
                             <label class="form-control-label">Observaciones</label>
-                            <textarea class = "form-control" name="observaciones" id = "observaciones" rows = "4" required></textarea>
+                            <textarea class = "form-control" name="observaciones" id = "observaciones" rows = "4"></textarea>
                             @error('observaciones')
                             <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -186,6 +186,22 @@
                                 <button type="submit" class="btn btn-outline-primary">{{ __('Responder') }}</button>
                             </div>
                         </div>
+
+                        <script type = "text/javascript">
+                        const estado = document.getElementById('tipoRespuesta');
+                        const observacion = document.getElementById('observaciones');
+
+                        estado.addEventListener('change',() =>
+                        {
+                            if(estado.value === "AceptadaCon" || estado.value === "Rechazada")
+                            {
+                                observacion.required = true;
+                            }else
+                            {
+                                observacion.required = false;
+                            }
+                        })
+                        </script>
                     </form>
                 </div>
             </div>
