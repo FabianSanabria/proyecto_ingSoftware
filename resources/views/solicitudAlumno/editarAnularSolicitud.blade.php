@@ -12,16 +12,21 @@
                     <div class="col-lg-12 login-title">
                         EDITAR SOLICITUD
                     </div>
-        @if (session('solicitud') == 0)
+                    @foreach ($solicitud as $solicitud)
+
+                    <h1>{{$solicitud->tipo}}</h1>
+
+                    @endforeach
+        @if (session('tipo') == 0)
                     <div class="col-lg-12 login-form">
                         <div class="col-lg-12 login-form">
                             <form method="POST"
-                                action="{{ route('solicitud.edit', [$solicitud]) }}">
+                                action="{{ route('solicitud.edit', [$solicitud->tipo]) }}">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
                                     <label class="form-control-label">TELEFONO</label>
-                                    <input value="{{ $solicitud->telefono }}"
+                                    <input value="{{ $solicitud->numero_de_telefono }}"
                                         id="telefono"
                                         type="text"
                                         class="form-control @error('telefono') is-invalid @enderror"
@@ -101,16 +106,17 @@
                     <div class="col-lg-3 col-md-2"></div>
                 </div>
             </div>
-            @elseif (session('solicitud')  == 1)
+            @elseif (session('tipo')  == 1)
+
             <div class="col-lg-12 login-form">
                 <div class="col-lg-12 login-form">
                     <form method="POST"
-                        action="{{ route('solicitud.edit', [$solicitud]) }}">
+                        action="{{ route('solicitud.edit', [$solicitud->tipo]) }}">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
                             <label class="form-control-label">TELEFONO</label>
-                            <input value="{{ $solicitud->telefono }}"
+                            <input value="{{ $solicitud->numero_de_telefono }}"
                                 id="telefono"
                                 type="text"
                                 class="form-control @error('telefono') is-invalid @enderror"
@@ -190,16 +196,16 @@
             <div class="col-lg-3 col-md-2"></div>
         </div>
     </div>
-                @elseif (session('solicitud')  == 2)
+                @elseif (session('tipo')  == 2)
                         <div class="col-lg-12 login-form">
                             <div class="col-lg-12 login-form">
                                 <form method="POST"
-                                    action="{{ route('solicitud.edit', [$solicitud]) }}">
+                                    action="{{ route('solicitud.edit', [$solicitud->$tipo]) }}">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
                                         <label class="form-control-label">TELEFONO</label>
-                                        <input value="{{ $solicitud->telefono }}"
+                                        <input value="{{ $solicitud->numero_de_telefono }}"
                                             id="telefono"
                                             type="text"
                                             class="form-control @error('telefono') is-invalid @enderror"
@@ -279,16 +285,16 @@
                         <div class="col-lg-3 col-md-2"></div>
                     </div>
                 </div>
-                    @elseif (session('solicitud')  == 3)
+                    @elseif (session('tipo')  == 3)
                         <div class="col-lg-12 login-form">
                             <div class="col-lg-12 login-form">
                                 <form method="POST"
-                                action="{{ route('solicitud.edit', [$solicitud]) }}">
+                                action="{{ route('solicitud.edit', [$solicitud->$tipo]) }}">
                                 @csrf
                                 @method('PUT')
                         <div class="form-group">
                             <label class="form-control-label">TELEFONO</label>
-                            <input value="{{ $solicitud->telefono }}"
+                            <input value="{{ $solicitud->numero_de_telefono }}"
                                 id="telefono"
                                 type="text"
                                 class="form-control @error('telefono') is-invalid @enderror"
@@ -368,16 +374,16 @@
             <div class="col-lg-3 col-md-2"></div>
         </div>
     </div>
-                        @elseif (session('solicitud')  == 4)
+                        @elseif (session('tipo')  == 4)
                             <div class="col-lg-12 login-form">
                                 <div class="col-lg-12 login-form">
                                 <form method="POST"
-                                action="{{ route('solicitud.edit', [$solicitud]) }}">
+                                action="{{ route('solicitud.edit', [$solicitud->$tipo]) }}">
                                 @csrf
                                 @method('PUT')
                         <div class="form-group">
                             <label class="form-control-label">TELEFONO</label>
-                            <input value="{{ $solicitud->telefono }}"
+                            <input value="{{ $solicitud->numero_de_telefono }}"
                                 id="telefono"
                                 type="text"
                                 class="form-control @error('telefono') is-invalid @enderror"
@@ -457,16 +463,17 @@
             <div class="col-lg-3 col-md-2"></div>
         </div>
     </div>
-                        @elseif (session('solicitud')  == 5)
+                        @elseif (session('tipo')  == 5)
+
             <div class="col-lg-12 login-form">
                 <div class="col-lg-12 login-form">
                     <form method="POST"
-                        action="{{ route('solicitud.edit', [$solicitud]) }}">
+                        action="{{ route('solicitud.edit', [$solicitud->$tipo]) }}">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
                             <label class="form-control-label">TELEFONO</label>
-                            <input value="{{ $solicitud->telefono }}"
+                            <input value="{{ $solicitud->numero_de_telefono }}"
                                 id="telefono"
                                 type="text"
                                 class="form-control @error('telefono') is-invalid @enderror"
@@ -562,16 +569,17 @@
                     <div class="col-lg-3 col-md-2"></div>
                 </div>
             </div>
-            @elseif (session('solicitud')  == 6)
+            @elseif (session('tipo')  == 6)
+
                             <div class="col-lg-12 login-form">
                                 <div class="col-lg-12 login-form">
                                 <form method="POST"
-                                action="{{ route('solicitud.edit', [$solicitud]) }}">
+                                action="{{ route('solicitud.edit', [$solicitud->$tipo]) }}">
                                 @csrf
                                 @method('PUT')
                         <div class="form-group">
                             <label class="form-control-label">TELEFONO</label>
-                            <input value="{{ $solicitud->telefono }}"
+                            <input value="{{ $solicitud->numero_de_telefono }}"
                                 id="telefono"
                                 type="text"
                                 class="form-control @error('telefono') is-invalid @enderror"

@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row mb-4">
         <div class="col col-3">
-            <form class="form-inline my-2 my-lg-0" method="PUT" action="{{ route('buscarSolicitud') }}">
+            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('vistaSolicitud') }}">
                 <input class="form-control mr-sm-2" name="search" id="search" type="search"
                     placeholder="Buscar por id de solicitud" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
@@ -123,7 +123,7 @@
 
                 @endswitch
                 <td><a class="btn btn-info" data-toggle="tooltip" data-placement="top" title="editar" href={{
-                        route('editarSolicitud', [$solicitud]) }}><i class="far fa-edit"></i></a></td>
+                        route('editarSolicitud', [$solicitud->tipo]) }}><i class="far fa-edit"></i></a></td>
             </tr>
             @empty
             <tr>
