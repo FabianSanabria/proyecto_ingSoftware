@@ -10,9 +10,9 @@
 <div class="container">
     <div class="row mb-4">
         <div class="col col-3">
-            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('carrera.index') }}">
+            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('vistaSolicitud') }}">
                 <input class="form-control mr-sm-2" name="search" id="search" type="search"
-                    placeholder="Buscar por número de solicitud" aria-label="Search">
+                    placeholder="Buscar por id de solicitud" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
                         class="fas fa-search"></i></button>
             </form>
@@ -21,7 +21,7 @@
             <p class="text-center" style="font-size: x-large">Mis Solicitudes</p>
         </div>
         <div class="col col-2">
-            <a class="btn btn-success btn-block" href="{{ route('solicitudAlumno.create') }}"> <i class="fas fa-plus"></i> Nueva
+            <a class="btn btn-success btn-block" href="{{ route('nuevaSolicitud') }}"> <i class="fas fa-plus"></i> Nueva
                 Solicitud</a>
         </div>
     </div>
@@ -36,11 +36,52 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($solicitudes as $solicitud)
+            @forelse ($solicitud as $solicitud)
             <tr>
                 <th scope="row">{{ ($solicitud->created_at)}}</th>
                 <td>{{ ($solicitud->id)}}</td>
-                <td>{{$solicitud->tipo}}</td>
+                @switch(($solicitud->tipo))
+                @case(0)
+                <td>
+                        Sobrecupo
+                    </div>
+                </td>
+                @break
+                @case(1)
+                <td>
+                        Cambio de paralelo
+                    </div>
+                </td>
+                @break
+                @case(2)
+                <td>
+                        Eliminación de asignatura
+                    </div>
+                </td>
+                @break
+                @case(3)
+                <td>
+                        Inscripción de asignatura
+                    </div>
+                </td>
+                @break
+                @case(4)
+                <td>
+                        Solicitud de ayudantia
+                    </div>
+                </td>
+                @break
+                @case(5)
+                <td>
+                        Facilidades académicas
+                    </div>
+                </td>
+                @break
+
+                @default
+
+                @endswitch
+
                 @switch(($solicitud->estado))
                 @case(0)
                 <td>
@@ -70,12 +111,19 @@
                     </div>
                 </td>
                 @break
+                @case(4)
+                <td>
+                    <div class="alert alert-danger" role="alert">
+                        Anulada
+                    </div>
+                </td>
+                @break
 
                 @default
 
                 @endswitch
                 <td><a class="btn btn-info" data-toggle="tooltip" data-placement="top" title="editar" href={{
-                        route('solicitud.gestion', [$solicitud]) }}><i class="far fa-edit"></i></a></td>
+                        route('editarSolicitud', [$solicitud->tipo]) }}><i class="far fa-edit"></i></a></td>
             </tr>
             @empty
             <tr>

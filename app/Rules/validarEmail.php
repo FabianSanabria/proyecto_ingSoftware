@@ -26,7 +26,7 @@ class validarEmail implements Rule
     public function passes($attribute, $value)
     {
         //
-        return (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $value)) ? FALSE : TRUE;
+        return (!preg_match("/^([a-zñ0-9\+_\-]+)(\.[a-zñ0-9\+_\-]+)*@([a-zñ0-9\-]+\.)+[a-zñ]{2,6}$/ix", $value)) ? FALSE : TRUE;
 
     }
 
