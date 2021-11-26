@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('message'))
+<script>
+    Swal.fire({
+    icon: 'success',
+    title: '¡Bien!',
+    text: '¡La respuesta se ha enviado!',
+    })
+</script>
+@endif
 @if (Auth::user()->rol == 1)
 <div class="container">
     <div class="row">
@@ -140,7 +149,6 @@
                                 <input value={{$solicitudes->numero_de_telefono}} id="numero_de_telefono" type="text" class="form-control @error('numero_de_telefono') is-invalid @enderror"
                                 name="numero_de_telefono" required disabled>
 
-
                             @error('id')
                             <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -152,6 +160,47 @@
                             <label for = "exampleFormControlTextarea">Detalle de la solicitud</label>
                             <textarea class = "form-control" id = "exampleFormControlTextArea" rows = "5" disabled>{{$solicitudes->detalle}}</textarea>
                         </div>
+
+                        @if($solicitudes->tipo == 4)
+                        <div class="form-group">
+                            @foreach ($ayudantias as $ayud)
+                            @if( $solicitudes->id == $ayud->solicitud_id)
+
+                            <label class="form-control-label">Nota de aprobación</label>
+                            <input value={{$ayud->nota_aprobacion}} id="notaAprobacion" type="text" class="form-control"
+                            name="notaAprobacion" readonly>
+
+                            <label class="form-control-label">Cantidad de ayudantias</label>
+                            <input value={{$ayud->cant_ayudantias}} id="cantAyudantias" type="text" class="form-control"
+                            name="cantAyudantias" readonly>
+
+                            @endif
+                            @endforeach
+                        </div>
+                        @endif
+
+                        @if($solicitudes->tipo == 5)
+
+                        <div class="form-group">
+                            @foreach ($facilidades as $fac)
+                            @if( $solicitudes->id == $fac->solicitud_id)
+
+                            <label class="form-control-label">Nombre del profesor</label>
+                            <input value={{$fac->nombre_profesor}} id="nombreProfesor" type="text" class="form-control"
+                            name="nombreProfesor" readonly>
+
+                            @foreach ($archivos as $arch)
+                                @if ($fac->id == $arch->facilidad_id)
+                                    <label class="form-control-label">Archivo Adjunto</label>
+                                    <input value={{$arch->nombre_archivo}} id="nombreArchivo" type="text" class="form-control"
+                                    name="nombreArchivo" readonly>
+                                @endif
+                            @endforeach
+
+                            @endif
+                            @endforeach
+                        </div>
+                        @endif
 
                     <form method="POST" action="{{route('actualizarSolicitud',['id' => $solicitudes])}}">
                         @csrf
