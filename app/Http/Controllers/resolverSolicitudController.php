@@ -44,15 +44,16 @@ class resolverSolicitudController extends Controller
         //dd($totalCarreras);
         //return view('resolverSolicitud');
         $jefesdecarreras = DB::table('jefede_carreras')->get();
+        $listaEstudiantes = DB::table('estudiantes')->get();
 
         if ($request->search == null) {
             $solicitud = Solicitud::simplePaginate(100); //Puede que haya que corregír esto más pronto que tarde
             $user = User::simplePaginate(100); //Esto también
-            return view('resolverSolicitud',compact('solicitud','user','jefesdecarreras'));
+            return view('resolverSolicitud',compact('solicitud','user','jefesdecarreras','listaEstudiantes'));
         }else {
             $solicitud = Solicitud::where('codigo', $request->search)->simplePaginate(1);
             $user = User::where('codigo', $request->search)->simplePaginate(1);
-            return view('resolverSolicitud')->with('solicitudes',$solicitud,'users',$user)->with('jefesdecarreras',$jefesdecarreras);
+            return view('resolverSolicitud')->with('solicitudes',$solicitud,'users',$user)->with('jefesdecarreras',$jefesdecarreras)->with('listaEstudiantes',$listaEstudiantes);
         }
     }
 
@@ -61,8 +62,9 @@ class resolverSolicitudController extends Controller
     {//Desplegando los datos de la solicitud y la opción para aceptar o rechazar.
         $carreras = DB::table('carreras')->get();
         $solicitudes = Solicitud::where('id',$request->id)->get()->first();
-        $usuario = User::where('id',$request->id)->get()->first();
+        //$usuario = User::where('id',$request->id)->get()->first();
         $listaUsuarios = DB::table('users')->get();
+        $listaEstudiantes = DB::table('estudiantes')->get();
         $carrera_usuario = NULL;
         $solicitud_id = NULL;
 
@@ -70,6 +72,7 @@ class resolverSolicitudController extends Controller
         $facilidades = DB::table('facilidades')->get();
         $archivos = DB::table('archivos')->get();
 
+        /*
         if($usuario->rol == 0)
         {
             $estudiante = Estudiante::where('usuario_id',$usuario->id)->get()->first(); //Retornamos el usuario seleccionado
@@ -81,7 +84,9 @@ class resolverSolicitudController extends Controller
             $carrera = Carrera::where('jefe_carrera_id',$jefedecarrera->id)->get()->first();
             $carrera_usuario = $carrera->id;
         }
-        return view('responderSolicitud')->with("usuario",$usuario)->with('carreras',$carreras)->with('carrera_usuario',$carrera_usuario)->with('solicitudes',$solicitudes)->with('listaUsuarios',$listaUsuarios)->with('ayudantias',$ayudantias)->with('facilidades',$facilidades)->with('archivos',$archivos);
+        */
+
+        return view('responderSolicitud')->with('carreras',$carreras)->with('carrera_usuario',$carrera_usuario)->with('solicitudes',$solicitudes)->with('listaUsuarios',$listaUsuarios)->with('ayudantias',$ayudantias)->with('facilidades',$facilidades)->with('archivos',$archivos)->with('listaEstudiantes',$listaEstudiantes);
     }
 
     public function update(Request $request)

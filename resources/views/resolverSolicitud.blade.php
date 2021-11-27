@@ -37,10 +37,14 @@
             <tr>
                 <th scope="row">{{$solicitud->updated_at}}</th>
                 <td>{{$solicitud->id}}</td>
-                @foreach ($user as $users)
-                    @if($users->id == $solicitud->estudiante_id)
-                    <td>{{$users->rut}}</td>
-                    <td>{{$users->name}}</td>
+                @foreach ($listaEstudiantes as $estud)
+                    @if ($estud->id == $solicitud->estudiante_id)
+                        @foreach ($user as $us)
+                            @if ($us->id == $estud->usuario_id)
+                            <td>{{$us->rut}}</td>
+                            <td>{{$us->name}}</td>
+                            @endif
+                        @endforeach
                     @endif
                 @endforeach
                 @switch($solicitud->tipo)
