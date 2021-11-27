@@ -60,7 +60,7 @@ Route::get('/solicitud-alumno/lista', 'App\Http\Controllers\solicitudAlumnoContr
 Route::get('/solicitud-alumno/lista/create','App\Http\Controllers\solicitudAlumnoController@index')->name('nuevaSolicitud');
 Route::get('/solicitud-alumno/lista/edit', 'App\Http\Controllers\solicitudAlumnoController@edit')->name('solicitud.edit');
 Route::post('/solicitud-alumno/lista/edit', 'App\Http\Controllers\solicitudAlumnoController@edit')->name('editarSolicitud');
-Route::get('/solicitud-alumno/buscarSolicitud', 'App\Http\Controllers\solicitudAlumnoController@update')->name('buscarSolicitud');
+Route::get('/solicitud-alumno/buscarSolicitud', 'App\Http\Controllers\solicitudAlumnoController@update')->name('vistaSolicitud');
 
 
 

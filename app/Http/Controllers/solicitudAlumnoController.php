@@ -319,10 +319,10 @@ class solicitudAlumnoController extends Controller
      * @param  \App\Models\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Request $request, Solicitud $solicitud)
     {
         $solicitud = Solicitud::all();
-        return view('solicitudAlumno.vistaSolicitud') -> with('solicitud', $solicitud);
+        return view('solicitudAlumno.vistaSolicitud', compact('solicitud'));
     }
 
     /**
@@ -333,32 +333,31 @@ class solicitudAlumnoController extends Controller
      */
     public function edit(Request $request, Solicitud $solicitud)
     {
-        //$solicitud = $request->solicitud;
-        $solicitud = Solicitud::all();
+        $solicitud=$request->solicitud;
+        $solicitud=Solicitud::all();
 
-
-        if (@dd($solicitud -> tipo) == 0) {
-            $request->session()->flash('solicitud', 0);
+        if ($request->tipo == 0){
+            $request->session()->flash('tipo', 0);
             return view('solicitudAlumno.editarAnularSolicitud') -> with('solicitud', $solicitud);
         }
-        if (@dd($solicitud -> tipo) == 1) {
-            $request->session()->flash('solicitud', 1);
+        elseif ($request->tipo == 1) {
+            $request->session()->flash('tipo', 1);
             return view('solicitudAlumno.editarAnularSolicitud') -> with('solicitud', $solicitud);
         }
-        if (@dd($solicitud -> tipo) == 2) {
-            $request->session()->flash('solicitud', 2);
+        elseif ($request->tipo == 2) {
+            $request->session()->flash('tipo', 2);
             return view('solicitudAlumno.editarAnularSolicitud') -> with('solicitud', $solicitud);
         }
-        if (@dd($solicitud -> tipo) == 3) {
-            $request->session()->flash('solicitud', 3);
+        elseif ($request->tipo == 3) {
+            $request->session()->flash('tipo', 3);
             return view('solicitudAlumno.editarAnularSolicitud') -> with('solicitud', $solicitud);
         }
-        if (@dd($solicitud -> tipo) == 4) {
-            $request->session()->flash('solicitud', 4);
+        elseif ($request->tipo == 4) {
+            $request->session()->flash('tipo', 4);
             return view('solicitudAlumno.editarAnularSolicitud') -> with('solicitud', $solicitud);
         }
-        if (@dd($solicitud -> tipo) == 5) {
-            $request->session()->flash('solicitud', 5);
+        elseif ($request->tipo == 5) {
+            $request->session()->flash('tipo', 5);
             return view('solicitudAlumno.editarAnularSolicitud') -> with('solicitud', $solicitud);
         }
     }
@@ -376,6 +375,7 @@ class solicitudAlumnoController extends Controller
     public function update(Request $request, Solicitud $solicitud)
     {
         $request->validate(['id' => 'regex:/^[0-9]+$/']);
+        $request->validate(['tipo' => 'required']);
         $request->validate(['numero_de_telefono' => 'regex:/^[0-9]+$/', 'required']);
         $request->validate(['nrc' => 'regex:/^[0-9]+$/', 'required']);
         $request->validate(['nombre_asignatura' => ['required', 'string', 'max:255']]);
@@ -386,6 +386,7 @@ class solicitudAlumnoController extends Controller
         $request->validate(['detalle' => ['required', 'string', 'max:255']]);
         $request->validate(['archivo' => 'required']);
         $solicitud->id = $request->id;
+        $solicitud->tipo = $request->tipo;
         $solicitud->numero_de_telefono = $request->numero_de_telefono;
         $solicitud->nrc = $request->nrc;
         $solicitud->nombre_asignatura = $request->nombre_asignatura;
