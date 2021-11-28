@@ -38,17 +38,21 @@ class resolverSolicitudController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
+    /**
+     * Según el request que corresponde a la solicitud seleccionada, se despliegan sus datos
+     * Además se añade una lista de estudiantes asociada a la tabla estudiantes y
+     * la lista de usuarios.
+     * @param Request $request - Corresponde a la solicitud seleccionada.
+     * @return void
+    */
     public function index(Request $request)
-
     {
-        //dd($totalCarreras);
-        //return view('resolverSolicitud');
         $jefesdecarreras = DB::table('jefede_carreras')->get();
         $listaEstudiantes = DB::table('estudiantes')->get();
 
         if ($request->search == null) {
-            $solicitud = Solicitud::simplePaginate(100); //Puede que haya que corregír esto más pronto que tarde
-            $user = User::simplePaginate(100); //Esto también
+            $solicitud = Solicitud::simplePaginate(100);
+            $user = User::simplePaginate(100);
             return view('resolverSolicitud',compact('solicitud','user','jefesdecarreras','listaEstudiantes'));
         }else {
             $solicitud = Solicitud::where('codigo', $request->search)->simplePaginate(1);
@@ -57,12 +61,16 @@ class resolverSolicitudController extends Controller
         }
     }
 
+    /**
+     * Función que permite resolver la solicitud
+     * Desplegando los datos de la solicitud y la opción para aceptarla o rechazarla.
+     * @param Request $request - Corresponde a la solicitud seleccionada.
+     * @return void
+     */
     public function resolverSolicitud(Request $request)
-    //Funcion que permite resolver la solicitud
-    {//Desplegando los datos de la solicitud y la opción para aceptar o rechazar.
+    {
         $carreras = DB::table('carreras')->get();
         $solicitudes = Solicitud::where('id',$request->id)->get()->first();
-        //$usuario = User::where('id',$request->id)->get()->first();
         $listaUsuarios = DB::table('users')->get();
         $listaEstudiantes = DB::table('estudiantes')->get();
         $carrera_usuario = NULL;
@@ -72,28 +80,18 @@ class resolverSolicitudController extends Controller
         $facilidades = DB::table('facilidades')->get();
         $archivos = DB::table('archivos')->get();
 
-        /*
-        if($usuario->rol == 0)
-        {
-            $estudiante = Estudiante::where('usuario_id',$usuario->id)->get()->first(); //Retornamos el usuario seleccionado
-            $carrera_usuario = $estudiante->carrera_id; //La carrera del usuario seleccionado
-            $estudiante_id = $estudiante->id; //El id del estudiante seleccionado
-
-        }else{//IMPORTANTE, luego debería dejar solo el rol 0, estudiante, porque los jefes de carrera no deberían poder hacer solicitudes
-            $jefedecarrera = JefedeCarrera::where('usuario_id',$usuario->id)->get()->first();
-            $carrera = Carrera::where('jefe_carrera_id',$jefedecarrera->id)->get()->first();
-            $carrera_usuario = $carrera->id;
-        }
-        */
-
         return view('responderSolicitud')->with('carreras',$carreras)->with('carrera_usuario',$carrera_usuario)->with('solicitudes',$solicitudes)->with('listaUsuarios',$listaUsuarios)->with('ayudantias',$ayudantias)->with('facilidades',$facilidades)->with('archivos',$archivos)->with('listaEstudiantes',$listaEstudiantes);
     }
 
+    /**
+     * Función que maneja los distintos casos al editar un usuario.
+     * Y actualiza la base de datos con los datos respondidos.
+     * A su vez cambia el estado de la solicitud a aceptado o rechazado.
+     * @param Request $request - Corresponde a los datos de la solicitud.
+     * @return void
+     */
     public function update(Request $request)
-    { // función que maneja los distintos casos posibles al editar un usuario
-        //Por parametro debe estar recibiendo la solicitud en la que estamos operando
-        //$usuarioaModificar = $usuario = User::findOrFail($request->id);
-
+    {
         $solicitudaModificar = $solicitudes = Solicitud::findOrFail($request->id);
         $solicitudaModificar->respuestaSolicitud = $request->observaciones;
 
