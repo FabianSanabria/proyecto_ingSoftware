@@ -27,7 +27,7 @@
                     <h5 class="card-title text-center">Carga Masiva Estudiantes</h5>
                     <h6 class="text-muted text-center">El archivo Excel debe contener 4 columnas correspondientes a estas: Carrera,Rut,Nombre y Correo.</h6>
                 </div>
-                <div class="card-body  position: absolute" style =" top:240px">
+                <div class="card-body  position: absolute" style =" top:250px">
                     <form  name ="subirExcel" method="POST" enctype="multipart/form-data" action="{{route('users.import.excel')}}" >
                         @csrf
                         <div class ="form-group" >

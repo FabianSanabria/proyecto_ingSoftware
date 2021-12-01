@@ -30,12 +30,12 @@ class solicitudAlumnoController extends Controller
     }
 
     /**
-     * Identifica que solicitud se quiere crear.
-     *
-     * @return \Illuminate\Http\Response
+     * Identifica que solicitud se quiere crear, para luego enviar la vista con el formulario correspondiente.
+     * @param $request - Corresponde al request con la informacion de la solicitud
+     * @return resources/views/solicitudAlumno/generarSolicitud
      */
     public function Solicitud(Request $request)
-    { // funcion que maneja formulario inicial en la cual se elije el tipo de solicitud a enviar
+    {
 
         $solicitud = $request->solicitud;
 
@@ -69,20 +69,29 @@ class solicitudAlumnoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
+     * Luego de hacer submit de los datos de la solicitud, se procede a crear esta, y ser guardada
+     * la base de datos
+     * @param $request - Corresponde al request con la informacion de la solicitud
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    { // funcion que maneja la creacion de las solicitudes,
+    {
 
         if ($request->solicitud == 0) {
-            $validator =  Validator::make($request->all(), [
-        'telefono' => ['required', 'string','min:9','max:9'],
-        'nrc' => ['required', 'string', 'max:4','min:4'],
+            $validator =  Validator::make($request->all(),
+        [
+        'telefono' => ['required','regex:/(9)[0-9]{8}/'],
+        'nrc' => ['required','regex:/[0-9]{5}/'],
         'nombreAsignatura' => ['required', 'string'],
         'detalle' => ['required', 'string'],
-        ]);
+        ],
+        [
+            'telefono.regex' => 'Ingrese un número de teléfono válido',
+            'nrc.regex' => 'Ingrese un NRC válido'
+        ]
+
+
+    );
             if ($validator->fails()) {
                 $request->session()->put('solicitud', 0);
                 return  back()->withErrors($validator)->withInput($request->all());
@@ -106,10 +115,14 @@ class solicitudAlumnoController extends Controller
         }
         if ($request->solicitud == 1) {
             $validator =  Validator::make($request->all(), [
-        'telefono' => ['required', 'string','min:9','max:9'],
-        'nrc' => ['required', 'string', 'max:4','min:4'],
+         'telefono' => ['required','regex:/(9)[0-9]{8}/'],
+        'nrc' => ['required','regex:/[0-9]{5}/'],
         'nombreAsignatura' => ['required', 'string'],
         'detalle' => ['required', 'string'],
+        ],
+        [
+            'telefono.regex' => 'Ingrese un número de teléfono válido',
+            'nrc.regex' => 'Ingrese un NRC válido'
         ]);
             if ($validator->fails()) {
                 $request->session()->put('solicitud', 1);
@@ -136,10 +149,14 @@ class solicitudAlumnoController extends Controller
 
         if ($request->solicitud == 2) {
             $validator =  Validator::make($request->all(), [
-        'telefono' => ['required', 'string','min:9','max:9'],
-        'nrc' => ['required', 'string', 'max:4','min:4'],
+        'telefono' => ['required','regex:/(9)[0-9]{8}/'],
+        'nrc' => ['required','regex:/[0-9]{5}/'],
         'nombreAsignatura' => ['required', 'string'],
         'detalle' => ['required', 'string'],
+        ],
+        [
+            'telefono.regex' => 'Ingrese un número de teléfono válido',
+            'nrc.regex' => 'Ingrese un NRC válido'
         ]);
             if ($validator->fails()) {
                 $request->session()->put('solicitud', 2);
@@ -165,10 +182,14 @@ class solicitudAlumnoController extends Controller
 
         if ($request->solicitud == 3) {
             $validator =  Validator::make($request->all(), [
-        'telefono' => ['required', 'string','min:9','max:9'],
-        'nrc' => ['required', 'string', 'max:4','min:4'],
+        'telefono' => ['required','regex:/(9)[0-9]{8}/'],
+        'nrc' => ['required','regex:/[0-9]{5}/'],
         'nombreAsignatura' => ['required', 'string'],
         'detalle' => ['required', 'string'],
+        ],
+        [
+            'telefono.regex' => 'Ingrese un número de teléfono válido',
+            'nrc.regex' => 'Ingrese un NRC válido'
         ]);
             if ($validator->fails()) {
                 $request->session()->put('solicitud', 3);
@@ -193,11 +214,15 @@ class solicitudAlumnoController extends Controller
         }
         if ($request->solicitud == 4) {
             $validator =  Validator::make($request->all(), [
-        'telefono' => ['required', 'string','min:9','max:9'],
-        'nota' => ['required', 'integer'],
+        'telefono' => ['required','regex:/(9)[0-9]{8}/'],
+        'nota' => ['required', 'regex:/[0-9](.|,)[0-9]/'],
         'nombreAsignatura' => ['required', 'string'],
-        'cantidadAyudantias' => ['required', 'integer'],
+        'cantidadAyudantias' => ['required', 'integer','max:99','min:0'],
         'detalle' => ['required', 'string'],
+        ],
+        [
+            'telefono.regex' => 'Ingrese un número de teléfono válido',
+            'nota.regex' => 'Ingrese una nota válida'
         ]);
             if ($validator->fails()) {
                 $request->session()->put('solicitud', 4);
@@ -230,6 +255,12 @@ class solicitudAlumnoController extends Controller
         'nombreAsignatura' => ['required', 'string'],
         'detalle' => ['required', 'string'],
         'facilidadAcademica' => ['required'],
+        'file0' => ['file','mimes:jpeg,png,jpg,pdf,docx,doc','max:10000'],
+        'file1' => ['file','mimes:jpeg,png,jpg,pdf,docx,doc','max:10000'],
+        'file2' => ['file','mimes:jpeg,png,jpg,pdf,docx,doc','max:10000'],
+        ],
+        [
+            'telefono.regex' => 'Ingrese un número de teléfono válido',
         ]);
             if ($validator->fails()) {
                 $request->session()->put('solicitud', 5);

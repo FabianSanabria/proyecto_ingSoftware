@@ -551,11 +551,36 @@
                                     <ul id="fileList2" style= "position:absolute; top: 24px;left:350px;"><li></li></ul>
                                 </div>
                             </div>
+                            <div class="form-group row mb-0">
 
+                                    @error('file0')
+                                    <span class="text-danger" role="alert"style="position:relative; left:280px">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 
+                            </div>
+                            <div class="form-group row mb-0">
+
+                                    @error('file1')
+                                    <span class="text-danger" role="alert"style="position:relative; left:280px">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                            <div class="form-group row mb-0">
+
+                                    @error('file2')
+                                    <span class="text-danger" role="alert" style="position:relative; left:280px">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button id="boton" name= "boton" type="submit" class="btn btn-primary">
+                                    <button id="boton" name= "boton" style="position:relative; top:3px;" type="submit" class="btn btn-primary">
                                         {{ __('Register') }}
                                     </button>
                                 </div>
