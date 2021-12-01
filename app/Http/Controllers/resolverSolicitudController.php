@@ -49,15 +49,16 @@ class resolverSolicitudController extends Controller
     {
         $jefesdecarreras = DB::table('jefede_carreras')->get();
         $listaEstudiantes = DB::table('estudiantes')->get();
+        $listaCarreras = DB::table('carreras')->get();
 
         if ($request->search == null) {
             $solicitud = Solicitud::simplePaginate(100);
             $user = User::simplePaginate(100);
-            return view('resolverSolicitud',compact('solicitud','user','jefesdecarreras','listaEstudiantes'));
+            return view('resolverSolicitud',compact('solicitud','user','jefesdecarreras','listaEstudiantes','listaCarreras'));
         }else {
             $solicitud = Solicitud::where('codigo', $request->search)->simplePaginate(1);
             $user = User::where('codigo', $request->search)->simplePaginate(1);
-            return view('resolverSolicitud')->with('solicitudes',$solicitud,'users',$user)->with('jefesdecarreras',$jefesdecarreras)->with('listaEstudiantes',$listaEstudiantes);
+            return view('resolverSolicitud')->with('solicitudes',$solicitud,'users',$user)->with('jefesdecarreras',$jefesdecarreras)->with('listaEstudiantes',$listaEstudiantes)->with('carreras',$listaCarreras);
         }
     }
 
