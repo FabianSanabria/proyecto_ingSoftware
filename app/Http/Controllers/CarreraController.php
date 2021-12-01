@@ -52,7 +52,7 @@ class CarreraController extends Controller
             'nombre' => $request->nombre
         ]);
 
-        return redirect('/carrera')->with('message');
+        return redirect('/carrera')->with('message',"Carrera creada con éxito");
     }
 
     /**

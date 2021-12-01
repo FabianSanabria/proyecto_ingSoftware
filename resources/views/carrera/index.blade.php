@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+    @endif
     <div class="row mb-3">
         <div class="col col-2">
             <form method="GET" action="{{ route('carrera.index') }}">

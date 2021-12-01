@@ -78,7 +78,7 @@ class crearUsuarioController extends Controller
 
         ]);
 
-        return redirect('/usuario')->with('message');
+        return redirect('/usuario')->with('message',"Usuario creado con éxito");
 
         }
 
@@ -115,7 +115,7 @@ class crearUsuarioController extends Controller
             ]);
             $carrera->jefe_carrera_id = $jefedecarrera->id;
             $carrera->save();
-            return redirect('/usuario')->with('message');
+            return redirect('/usuario')->with('message',"Usuario creado con éxito");
 
 
         }
