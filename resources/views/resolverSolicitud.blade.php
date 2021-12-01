@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('message'))
+<script>
+    Swal.fire({
+    icon: 'success',
+    title: '¡Bien!',
+    text: '¡La respuesta se ha enviado!',
+    })
+</script>
+@endif
 @if (Auth::user()->rol == 1)
 <div class="container">
     <div class="row mb-3">
@@ -28,10 +37,14 @@
             <tr>
                 <th scope="row">{{$solicitud->updated_at}}</th>
                 <td>{{$solicitud->id}}</td>
-                @foreach ($user as $users)
-                    @if($users->id == $solicitud->estudiante_id)
-                    <td>{{$users->rut}}</td>
-                    <td>{{$users->name}}</td>
+                @foreach ($listaEstudiantes as $estud)
+                    @if ($estud->id == $solicitud->estudiante_id)
+                        @foreach ($user as $us)
+                            @if ($us->id == $estud->usuario_id)
+                            <td>{{$us->rut}}</td>
+                            <td>{{$us->name}}</td>
+                            @endif
+                        @endforeach
                     @endif
                 @endforeach
                 @switch($solicitud->tipo)
