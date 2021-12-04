@@ -52,8 +52,8 @@ class resolverSolicitudController extends Controller
         $listaCarreras = DB::table('carreras')->get();
 
         if ($request->search == null) {
-            $solicitud = Solicitud::simplePaginate(100);
-            $user = User::simplePaginate(100);
+            $solicitud = Solicitud::simplePaginate(300); //Esto influye en la cantidad de datos que se puede acceder desde las otras vistas
+            $user = User::simplePaginate(300); //Esto influye en la cantidad de datos que se puede acceder desde las otras vistas
             return view('resolverSolicitud',compact('solicitud','user','jefesdecarreras','listaEstudiantes','listaCarreras'));
         }else {
             $solicitud = Solicitud::where('codigo', $request->search)->simplePaginate(1);

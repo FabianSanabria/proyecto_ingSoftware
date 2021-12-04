@@ -40,13 +40,13 @@
             @if ($solicitud->estado == 0 && $solicitud->carrera_id == $carrera->id)
             <tr>
                 <th scope="row">{{$solicitud->updated_at}}</th>
-                <td>{{$solicitud->id}}</td>
+                <td>{{$solicitud->estudiante_id}}</td>
                 @foreach ($listaEstudiantes as $estud)
                     @if ($estud->id == $solicitud->estudiante_id)
                         @foreach ($user as $us)
                             @if ($us->id == $estud->usuario_id)
-                            <td>{{$us->rut}}</td>
-                            <td>{{$us->name}}</td>
+                                <td>{{$us->rut}}</td>
+                                <td>{{$us->name}}</td>
                             @endif
                         @endforeach
                     @endif
