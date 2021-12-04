@@ -50,10 +50,12 @@ class resolverSolicitudController extends Controller
         $jefesdecarreras = DB::table('jefede_carreras')->get();
         $listaEstudiantes = DB::table('estudiantes')->get();
         $listaCarreras = DB::table('carreras')->get();
+        $solicitud = DB::table('solicituds')->get();
+        $user = DB::table('users')->get();
 
         if ($request->search == null) {
-            $solicitud = Solicitud::simplePaginate(300); //Esto influye en la cantidad de datos que se puede acceder desde las otras vistas
-            $user = User::simplePaginate(300); //Esto influye en la cantidad de datos que se puede acceder desde las otras vistas
+            //$solicitud = Solicitud::simplePaginate(300); //Esto influye en la cantidad de datos que se puede acceder desde las otras vistas
+            //$user = User::simplePaginate(300); //Esto influye en la cantidad de datos que se puede acceder desde las otras vistas
             return view('resolverSolicitud',compact('solicitud','user','jefesdecarreras','listaEstudiantes','listaCarreras'));
         }else {
             $solicitud = Solicitud::where('codigo', $request->search)->simplePaginate(1);
