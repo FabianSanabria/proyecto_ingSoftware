@@ -40,7 +40,7 @@
             @if ($solicitud->estado == 0 && $solicitud->carrera_id == $carrera->id)
             <tr>
                 <th scope="row">{{$solicitud->updated_at}}</th>
-                <td>{{$solicitud->estudiante_id}}</td>
+                <td>{{$solicitud->id}}</td>
                 @foreach ($listaEstudiantes as $estud)
                     @if ($estud->id == $solicitud->estudiante_id)
                         @foreach ($user as $us)
