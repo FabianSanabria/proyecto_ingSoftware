@@ -64,6 +64,7 @@
 
 
                                     @else
+                                    <option selected disabled >Seleccione Carrera</option>
                                     @foreach($carreras as $carrera)
                                         <option value="{{$carrera->id}}">{{$carrera->nombre}}</option>
                                     @endforeach

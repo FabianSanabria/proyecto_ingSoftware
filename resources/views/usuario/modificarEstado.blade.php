@@ -34,6 +34,7 @@
         </thead>
         <tbody>
             @foreach ($usuarios as $usuario)
+            @if($usuario->rol != 2)
             <tr>
                 <th scope="row">{{$usuario->rut}}</th>
                 <td>{{$usuario->name}}</td>
@@ -57,6 +58,7 @@
                     <td><a class="btn btn-info" href={{ route('cambiarEstado', ['id' => $usuario]) }}>Habilitar</a></td>
                 @endif
             </tr>
+            @endif
             @endforeach
         </tbody>
     </table>

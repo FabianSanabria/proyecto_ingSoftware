@@ -30,7 +30,8 @@
                             <div class="col-md-6">
                                 <label for="solicitud" class="col-md-8 col-form-label text-md-right"style="position: relative; right: 205px; top:4px">TIPO DE SOLICITUD</label>
                                 <select name="solicitud" id= "solicitud"style="position: relative; bottom: 25px;border:1px solid #ccc; padding: 3px;border-radius: 10px;"aria-describedby="validationServer04Feedback" required >
-                                    <option selected value="0">Solicitud de sobrecupo</option>
+                                    <option selected disabled value="10">Seleccione tipo de solicitud </option>
+                                    <option value="0"> Solicitud de sobrecupo</option>
                                     <option value="1"> Solicitud de cambio de paralelo</option>
                                     <option value="2">Solicitud de eliminación de asignatura</option>
                                     <option value="3"> Solicitud de inscripción de asignatura</option>
@@ -47,7 +48,7 @@
 
                         <div class="col-lg-12 py-3">
                             <div class="col-lg-12 text-center">
-                                <button id="enviar1" class="btn btn-outline-primary"style="position: relative; right: 210px; bottom:20px">{{ __('Desplegar formulario') }}</button>
+                                <button disabled id="enviar1" class="btn btn-outline-primary"style="position: relative; right: 210px; bottom:20px">{{ __('Desplegar formulario') }}</button>
                             </div>
                         </div>
                     </form>
@@ -61,5 +62,13 @@
     </div>
 
 @endif
+<script>
+    const tipo = document.getElementById('solicitud').add;
+    document.getElementById("solicitud").addEventListener("click", function() {
+        document.getElementById("enviar1").disabled = false;
 
+});
+
+
+</script>
 @endsection

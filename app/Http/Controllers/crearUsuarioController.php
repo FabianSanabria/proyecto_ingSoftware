@@ -55,6 +55,7 @@ class crearUsuarioController extends Controller
                 'rut' => ['required', 'string','unique:users', new ValidarRut()],
                 'email' => ['required', 'string',new validarEmail(), 'max:255', 'unique:users'],
                 'rol' =>['required','regex:(Estudiante|Jefe de Carrera|Administrador)'],
+                'carrera' =>['required'],
          ]);
         $rolNum = 0;
         $carreraid = $request->carrera;
