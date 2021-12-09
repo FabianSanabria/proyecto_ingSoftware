@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('message'))
+<script>
+    Swal.fire({
+    icon: 'success',
+    title: '¡Bien!',
+    text: '¡La respuesta se ha enviado!',
+    })
+</script>
+@endif
 @if (Auth::user()->rol == 1)
 <div class="container">
     <div class="row mb-3">
@@ -24,14 +33,22 @@
             @if($jefeC->usuario_id == Auth::user()->id)
 
             @foreach ($solicitud->sortBy('updated_at') as $solicitud)
-            @if ($solicitud->estado == 0 && $solicitud->carrera_id == $jefeC->id)
+            @foreach ($listaCarreras as $carrera)
+
+            @if(($carrera->jefe_carrera_id == $jefeC->id))
+
+            @if ($solicitud->estado == 0 && $solicitud->carrera_id == $carrera->id)
             <tr>
                 <th scope="row">{{$solicitud->updated_at}}</th>
                 <td>{{$solicitud->id}}</td>
-                @foreach ($user as $users)
-                    @if($users->id == $solicitud->estudiante_id)
-                    <td>{{$users->rut}}</td>
-                    <td>{{$users->name}}</td>
+                @foreach ($listaEstudiantes as $estud)
+                    @if ($estud->id == $solicitud->estudiante_id)
+                        @foreach ($user as $us)
+                            @if ($us->id == $estud->usuario_id)
+                                <td>{{$us->rut}}</td>
+                                <td>{{$us->name}}</td>
+                            @endif
+                        @endforeach
                     @endif
                 @endforeach
                 @switch($solicitud->tipo)
@@ -58,6 +75,10 @@
                 <td><a class="btn btn-primary" href={{ route('responderSolicitud', ['id' => $solicitud]) }}>Gestionar</a></td>
             </tr>
             @endif
+            @endif
+            @endforeach
+
+
             @endforeach
 
             @endif
