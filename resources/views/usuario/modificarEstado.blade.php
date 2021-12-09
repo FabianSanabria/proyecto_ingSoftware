@@ -29,7 +29,7 @@
                 <th style="width: 25%" scope="col">Email</th>
                 <th style="width: 20%" scope="col">Rol</th>
                 <th style="width: 20%" scope="col">Status</th>
-                <th style="width: 20%" scope="col" colspan="3">Accion</th>
+                <th style="width: 20%" scope="col" colspan="3">Acción</th>
             </tr>
         </thead>
         <tbody>

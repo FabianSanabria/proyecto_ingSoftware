@@ -41,7 +41,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label">CORREO ELECTRONICO</label>
+                            <label class="form-control-label">CORREO ELECTRÓNICO</label>
                             <input value="{{$usuario->email}}" id="email" type="text" class="form-control @error('email') is-invalid @enderror"
                                 name="email" required>
 

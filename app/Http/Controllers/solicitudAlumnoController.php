@@ -254,13 +254,19 @@ class solicitudAlumnoController extends Controller
         'nombreProfesor' => ['required', 'string'],
         'nombreAsignatura' => ['required', 'string'],
         'detalle' => ['required', 'string'],
-        'facilidadAcademica' => ['required'],
+        'facilidadAcademica' => ['required','different:0'],
         'file0' => ['file','mimes:jpeg,png,jpg,pdf,docx,doc','max:10000'],
         'file1' => ['file','mimes:jpeg,png,jpg,pdf,docx,doc','max:10000'],
         'file2' => ['file','mimes:jpeg,png,jpg,pdf,docx,doc','max:10000'],
         ],
         [
             'telefono.regex' => 'Ingrese un número de teléfono válido',
+            'file0.max' => 'Ingrese archivo con un peso menor a 10MB',
+            'file1.max' => 'Ingrese archivo con un peso menor a 10MB',
+            'file2.max' => 'Ingrese archivo con un peso menor a 10MB',
+            'file0.mimes' => 'Ingrese archivo con extensión pdf, docx, doc, jpeg, png, jpg.',
+            'file1.mimes' => 'Ingrese archivo con extensión pdf, docx, doc, jpeg, png, jpg.',
+            'file2.mimes' => 'Ingrese archivo con extensión pdf, docx, doc, jpeg, png, jpg.',
         ]);
             if ($validator->fails()) {
                 $request->session()->put('solicitud', 5);

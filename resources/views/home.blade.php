@@ -53,7 +53,7 @@
                 <i class="fas fa-search fa-10x text-center" style="color: #003057;"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Buscar Estudiante</h5>
-                    <small class="text-muted">Despliega informacion del estudiante a partir del Rut.</small>
+                    <small class="text-muted">Despliega información del estudiante a partir del Rut.</small>
                 </div>
                 <div class="card-footer">
                     <a href="/buscarEstudiante" class="btn btn-info btn-block">IR</a>
@@ -78,7 +78,7 @@
                 <i class="fas fa-users fa-10x text-center" style="color: #003057;"></i>
                 <div class="card-body">
                     <h5 class="card-title text-center">Generar solicitud</h5>
-                    <small class="text-muted">Permite la creacion de solicitud especial al Jefe de Carrera.</small>
+                    <small class="text-muted">Permite la creación de solicitud especial al Jefe de Carrera.</small>
                 </div>
                 <div class="card-footer">
                     <a href="/solicitud-alumno" class="btn btn-info btn-block">IR</a>

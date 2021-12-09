@@ -10,7 +10,7 @@
     <div class="row mb-3">
         <div class="col col-2">
             <form method="GET" action="{{ route('carrera.index') }}">
-                <input type="text" name="search" id="search" placeholder="Buscar por codigo">
+                <input type="text" name="search" id="search" placeholder="Buscar por código">
                 <button class="btn btn-primary">Buscar</button>
             </form>
         </div>

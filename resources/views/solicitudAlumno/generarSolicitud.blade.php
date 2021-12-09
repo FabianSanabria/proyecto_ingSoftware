@@ -13,7 +13,7 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
+                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de teléfono') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
@@ -66,7 +66,7 @@
                                         border-radius: 4px;
                                         background-color: #f8f8f8;
                                         font-size: 16px;
-                                        resize: none;"></textarea>
+                                        resize: none;"@error('detalle') is-invalid @enderror name="detalle" required autocomplete="detalle" autofocus>{{ old('detalle') }}</textarea>
                                     @error('detalle')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -99,7 +99,7 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
+                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de teléfono') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
@@ -153,7 +153,7 @@
                                         border-radius: 4px;
                                         background-color: #f8f8f8;
                                         font-size: 16px;
-                                        resize: none;"></textarea>
+                                        resize: none;"@error('detalle') is-invalid @enderror name="detalle" required autocomplete="detalle" autofocus>{{ old('detalle') }}</textarea>
                                     @error('detalle')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -186,7 +186,7 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
+                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de teléfono') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
@@ -238,7 +238,7 @@
                                         border-radius: 4px;
                                         background-color: #f8f8f8;
                                         font-size: 16px;
-                                        resize: none;"></textarea>
+                                        resize: none;"@error('detalle') is-invalid @enderror name="detalle" required autocomplete="detalle" autofocus>{{ old('detalle') }}</textarea>
                                     @error('detalle')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -271,7 +271,7 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
+                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de télefono') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
@@ -323,7 +323,7 @@
                                         border-radius: 4px;
                                         background-color: #f8f8f8;
                                         font-size: 16px;
-                                        resize: none;"></textarea>
+                                        resize: none;"@error('detalle') is-invalid @enderror name="detalle" required autocomplete="detalle" autofocus>{{ old('detalle') }}</textarea>
                                     @error('detalle')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -356,7 +356,7 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
+                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de télefono') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
@@ -383,7 +383,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="nota" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese calificacion con la que aprobo la asignatura') }}</label>
+                                <label for="nota" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese calificación con la que aprobó la asignatura') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="nota" type="text" class="form-control @error('nota') is-invalid @enderror" name="nota" value="{{ old('nota') }}" required autocomplete="nota" autofocus>
@@ -396,7 +396,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="cantidadAyudantias" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese cantidad de ayudantias que ha realizado durante su vida universitaria (en total, entre todas sus ayudantias), si no ha realizado ingrese 0') }}</label>
+                                <label for="cantidadAyudantias" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese cantidad de ayudantías que ha realizado durante su vida universitaria (en total, entre todas sus ayudantías), si no ha realizado ingrese 0') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="cantidadAyudantias" type="text" class="form-control @error('cantidadAyudantias') is-invalid @enderror" name="cantidadAyudantias" value="{{ old('cantidadAyudantias') }}" required autocomplete="cantidadAyudantias" autofocus>
@@ -421,7 +421,7 @@
                                         border-radius: 4px;
                                         background-color: #f8f8f8;
                                         font-size: 16px;
-                                        resize: none;"></textarea>
+                                        resize: none;"@error('detalle') is-invalid @enderror name="detalle" required autocomplete="detalle" autofocus>{{ old('detalle') }}</textarea>
                                     @error('detalle')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -454,7 +454,7 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de telefono') }}</label>
+                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su numero de teléfono') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono">
@@ -470,11 +470,11 @@
                                 <div class="col-md-6">
                                     <label for="facilidadAcademica" class="col-md-8 col-form-label text-md-right">Tipo de solicitud</label>
                                     <select name="facilidadAcademica" id= "facilidadAcademica"style="position: relative;left:260px; bottom: 30px;border:1px solid #ccc; padding: 3px;border-radius: 10px;"aria-describedby="validationServer04Feedback" required >
-                                    <option disabled selected>Seleccione Tipo de Solicitud</option>
-                                        <option value="0"> Licencia Médica o Certificado Médico</option>
-                                        <option value="1"> Inasistencia por Fuerza Mayor</option>
-                                        <option value="2">Representación de la Universidad</option>
-                                        <option value="3"> Inasistencia a clases por motivos familiares o personales</option>
+                                    <option disabled selected value = "0">Seleccione tipo de solicitud</option>
+                                        <option value="1"{{ old('facilidadAcademica') == 1 ? 'selected' : '' }}> Licencia Médica o Certificado Médico</option>
+                                        <option value="2"{{ old('facilidadAcademica') == 2 ? 'selected' : '' }}> Inasistencia por Fuerza Mayor</option>
+                                        <option value="3"{{ old('facilidadAcademica') == 3 ? 'selected' : '' }}>Representación de la Universidad</option>
+                                        <option value="4"{{ old('facilidadAcademica') == 4 ? 'selected' : '' }}> Inasistencia a clases por motivos familiares o personales</option>
                                     </select>
                                     <div id="validationServer04Feedback" class="text-danger">
                                         @error('facilidadAcademica')
@@ -523,7 +523,7 @@
                                         border-radius: 4px;
                                         background-color: #f8f8f8;
                                         font-size: 16px;
-                                        resize: none;"></textarea>
+                                        resize: none;"@error('detalle') is-invalid @enderror name="detalle" required autocomplete="detalle" autofocus>{{ old('detalle') }}</textarea>
                                     @error('detalle')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -544,11 +544,12 @@
                                     <input type="button" value="Borrar archivo" style= "position:relative; bottom: 40px; left:10px;" onclick="borrarArchivo();" />
 
                                     <p>
-                                        <h1 style= "position:relative; bottom: 60px;left:300px;" >Archivos Seleccionados</h1>
+                                        <h1 style= "position:relative; bottom: 10px;" >Archivos Seleccionados:</h1>
+                                        <h1> </h1>
                                     </p>
-                                    <ul id="fileList0" style= "position:absolute; bottom: 30px;left:350px;" ><li></li></ul>
-                                    <ul id="fileList1" style= "position:absolute; bottom: 10px;left:350px;"><li></li></ul>
-                                    <ul id="fileList2" style= "position:absolute; top: 24px;left:350px;"><li></li></ul>
+                                    <ul id="fileList0"><li></li></ul>
+                                    <ul id="fileList1"><li></li></ul>
+                                    <ul id="fileList2"><li></li></ul>
                                 </div>
                             </div>
                             <div class="form-group row mb-0">
@@ -593,7 +594,7 @@
                             function makeFileList() {
                                 var fileInput = document.getElementById('file'+i);
                                 var filename = fileInput.files[0].name;
-                                document.getElementById("fileList"+i).innerHTML = filename;
+                                document.getElementById("fileList"+i).innerHTML = (i+1)+".- " +filename;
                                 i = i+1;
                                 document.getElementById("cantArchivos").value = i;
                             }

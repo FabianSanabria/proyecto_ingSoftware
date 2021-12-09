@@ -46,7 +46,9 @@ class crearUsuarioController extends Controller
     }
     public function crearUsuario(Request $request)
     {
-
+        $request->validate([
+            'rol' =>['required'],
+         ]);
 
         if(strcmp($_POST['rol'],"Estudiante") == 0)
         {
@@ -54,7 +56,7 @@ class crearUsuarioController extends Controller
                 'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
                 'rut' => ['required', 'string','unique:users', new ValidarRut()],
                 'email' => ['required', 'string',new validarEmail(), 'max:255', 'unique:users'],
-                'rol' =>['required','regex:(Estudiante|Jefe de Carrera|Administrador)'],
+                'rol' =>['regex:(Estudiante|Jefe de Carrera|Administrador)'],
                 'carrera' =>['required'],
          ]);
         $rolNum = 0;
@@ -91,7 +93,7 @@ class crearUsuarioController extends Controller
                  'name' => ['required', 'string', 'max:255','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
                  'rut' => ['required', 'string','unique:users', new ValidarRut()],
                  'email' => ['required', 'string',new validarEmail(), 'max:255', 'unique:users'],
-                 'rol' =>['required','regex:(Estudiante|Jefe de Carrera|Administrador)'],
+                 'rol' =>['regex:(Estudiante|Jefe de Carrera|Administrador)'],
                  'carrera' =>['required',new existeJefedeCarrera()],
                 ]
                 );
@@ -120,11 +122,7 @@ class crearUsuarioController extends Controller
 
 
         }
-        if(strcmp($_POST['rol'],"Administrador") == 0)
-        {
-            $rolNum = 2;
 
-        }
     }
 
     public function importForm(){

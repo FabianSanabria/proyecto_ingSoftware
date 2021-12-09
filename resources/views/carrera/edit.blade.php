@@ -19,7 +19,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label class="form-control-label">CODIGO</label>
+                            <label class="form-control-label">CÓDIGO</label>
                             <input value={{$carrera->codigo}} id="codigo" type="text" class="form-control @error('codigo') is-invalid @enderror"
                                 name="codigo" readonly="readonly">
 

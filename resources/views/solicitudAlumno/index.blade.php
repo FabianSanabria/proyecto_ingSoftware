@@ -64,7 +64,7 @@
 @endif
 <script>
     const tipo = document.getElementById('solicitud').add;
-    document.getElementById("solicitud").addEventListener("click", function() {
+    document.getElementById("solicitud").addEventListener("change", function() {
         document.getElementById("enviar1").disabled = false;
 
 });

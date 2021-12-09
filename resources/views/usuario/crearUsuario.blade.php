@@ -88,7 +88,7 @@
                                     <option value="Estudiante">Estudiante</option>
                                     <option value="Jefe de Carrera">Jefe de Carrera</option>
                                 </select>
-                                <div id="validationServer04Feedback" class="text-danger">
+                                <div id="validationServer04Feedback" class="text-danger"style="position:relative; left:270px; top:4px">
                                     @error('rol')
                                         <strong>{{ $message }}</strong>
                                     @enderror
