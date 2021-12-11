@@ -41,6 +41,7 @@ Route::get('/buscarEstudiante','App\Http\Controllers\buscarEstudianteController@
 Route::get('/resolverSolicitud','App\Http\Controllers\resolverSolicitudController@index');
 Route::get('/responderSolicitud','App\Http\Controllers\resolverSolicitudController@resolverSolicitud')->name('responderSolicitud');
 Route::put('/responderSolicitud','App\Http\Controllers\resolverSolicitudController@update')->name('actualizarSolicitud');
+Route::get('/download/{archivo}', 'App\Http\Controllers\DescargarArchivosController@download');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

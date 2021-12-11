@@ -201,6 +201,9 @@
                             @foreach ($archivos as $arch)
                                 @if ($fac->id == $arch->facilidad_id)
                                     <label class="form-control-label">Archivo Adjunto</label>
+                                    <a href="/download/{{$arch->nombre_archivo}}">
+                                    <button type="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-download">Descargar</i></button>
+                                    </a>
                                     <input value={{$arch->nombre_archivo}} id="nombreArchivo" type="text" class="form-control"
                                     name="nombreArchivo" readonly>
                                 @endif
