@@ -8,14 +8,14 @@
             <p class="text-center" style="font-size: x-large; text-align: center;">Buscar Información Estudiante</p>
         </div>
     </div>
-    @if (session('error'))
+    @if ($error== 1)
     <script>
         Swal.fire({
         icon: 'error',
-        title: 'Bien!',
-        text: 'xddd!',
+        title: '¡Error!',
+        text: 'El RUT ingresado no existe.',
         }).then(function() {
-            location.href = location.href;
+            location.href="buscarEstudiante";
     });
     </script>
     @endif
@@ -23,7 +23,7 @@
         <div class="card-body " style="width: 5rem">
             <form method="GET" action="{{ route('buscarEstudiante') }}">
                 <span style="margin:10px"> Ingrese rut del Estudiante :<span>
-                <input type="text" name="search" id="search" style="margin:10px; border: 4px solid powderblue">
+                <input type="text" placeholder="Ej: 21344994K" pattern="[0-9K]+" name="search" id="search" style="margin:10px; border: 4px solid powderblue">
                     <button class="btn btn-primary" style="position:relative; left:10px;">Buscar</button>
             </form>
 
@@ -65,14 +65,14 @@
             @foreach ($jefesdecarreras as $jefeC)
             @if($jefeC->usuario_id == Auth::user()->id)
 
-            @foreach ($solicitud->sortBy('updated_at') as $solicitud)
+            @foreach ($solicitud->sortBy('created_at') as $solicitud)
             @foreach ($listaCarreras as $carrera)
 
             @if(($carrera->jefe_carrera_id == $jefeC->id))
 
             @if ( $solicitud->carrera_id == $carrera->id)
             <tr>
-                <th scope="row">{{$solicitud->updated_at}}</th>
+                <th scope="row">{{$solicitud->created_at}}</th>
                 <td>{{$solicitud->id}}</td>
                 @foreach ($listaEstudiantes as $estud)
                     @if ($estud->id == $solicitud->estudiante_id)

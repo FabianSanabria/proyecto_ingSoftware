@@ -101,7 +101,7 @@ class resolverSolicitudController extends Controller
 
         if($request->tipoRespuesta == "Aceptada")
         {   $solicitudaModificar->estado = 1;   }
-        else if($request->tipoRespuesta == "AceptadaCon")
+        else if($request->tipoRespuesta == "Aceptada con observaciones")
         {   $solicitudaModificar->estado = 2;   }
         else
         {   $solicitudaModificar->estado = 3;   }

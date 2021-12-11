@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+@if (Auth::user()->rol == 1)
+    @if (session()->has($error))
+    <script>
+        Swal.fire({
+        icon: 'error',
+        title: '¡xd!',
+        text: '¡xddd!',
+        })
+    </script>
+    @endif
 <div class="container">
     <div class="row">
         <div class="col-lg-3 col-md-2"></div>
@@ -9,7 +19,7 @@
                 <i class="fas fa-chalkboard-teacher"></i>
             </div>
             <div class="col-lg-12 login-title">
-                Revisar Datos Solicitud
+                Ver Datos Estudiante
             </div>
 
             <div class="col-lg-12 login-form">
@@ -18,12 +28,7 @@
 
                         <div class="form-group">
                             <label class="form-control-label">Fecha de la solicitud</label>
-
-
-                                <input value={{$solicitudes->updated_at}} id="updated_at" type="text" class="form-control @error('updated_at') is-invalid @enderror"
-                                name="updated_at" required disabled>
-
-
+                                <textarea class = "form-control" id = "updated_at" rows = "1" disabled>{{$solicitudes->updated_at}}</textarea>
                             @error('updated_at')
                             <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -33,12 +38,8 @@
 
                         <div class="form-group">
                             <label class="form-control-label">Número de la solicitud</label>
-
-
                                 <input value={{$solicitudes->id}} id="id" type="text" class="form-control @error('id') is-invalid @enderror"
                                 name="id" required disabled>
-
-
                             @error('id')
                             <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -50,11 +51,15 @@
                         <div class="form-group">
                             <label class="form-control-label">Rut del estudiante</label>
 
-                            @foreach ($listaUsuarios as $listaU)
-                            @if( $listaU->id == $solicitudes->estudiante_id)
-                            <input value={{$listaU->rut}} id="rut" type="text" class="form-control @error('rut') is-invalid @enderror"
-                            name="rut" required disabled>
-                            @endif
+                            @foreach ($listaEstudiantes as $estud)
+                                @if ($estud->id == $solicitudes->estudiante_id)
+                                    @foreach ($listaUsuarios as $user)
+                                        @if ($user->id == $estud->usuario_id)
+                                        <input value={{$user->rut}} id="rut" type="text" class="form-control @error('rut') is-invalid @enderror"
+                                        name="rut" required disabled>
+                                        @endif
+                                    @endforeach
+                                @endif
                             @endforeach
 
                             @error('rut')
@@ -67,10 +72,13 @@
                         <div class="form-group">
                             <label class="form-control-label">Nombre del estudiante</label>
 
-                            @foreach ($listaUsuarios as $listaU)
-                            @if( $listaU->id == $solicitudes->estudiante_id)
-                            <input value={{$listaU->name}} id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            name="name" required disabled>
+                            @foreach ($listaEstudiantes as $estud)
+                            @if ($estud->id == $solicitudes->estudiante_id)
+                                @foreach ($listaUsuarios as $user)
+                                    @if ($user->id == $estud->usuario_id)
+                                    <textarea class = "form-control" id = "name" rows = "1" disabled>{{$user->name}}</textarea>
+                                    @endif
+                                @endforeach
                             @endif
                             @endforeach
 
@@ -83,7 +91,6 @@
 
                         <div class="form-group">
                             <label class="form-control-label">Tipo de solicitud</label>
-
 
                                 @switch($solicitudes->tipo)
                                 @case(0)
@@ -124,10 +131,14 @@
                         <div class="form-group">
                             <label class="form-control-label">Correo electronico del estudiante</label>
 
-                            @foreach ($listaUsuarios as $listaU)
-                            @if( $listaU->id == $solicitudes->estudiante_id)
-                            <input value={{$listaU->email}} id="email" type="text" class="form-control"
-                            name="email" readonly>
+                            @foreach ($listaEstudiantes as $estud)
+                            @if ($estud->id == $solicitudes->estudiante_id)
+                                @foreach ($listaUsuarios as $user)
+                                    @if ($user->id == $estud->usuario_id)
+                                    <input value={{$user->email}} id="email" type="text" class="form-control"
+                                    name="email" readonly>
+                                    @endif
+                                @endforeach
                             @endif
                             @endforeach
 
@@ -135,12 +146,9 @@
 
                         <div class="form-group">
                             <label class="form-control-label">Teléfono del estudiante</label>
-
                                 <input value={{$solicitudes->numero_de_telefono}} id="numero_de_telefono" type="text" class="form-control @error('numero_de_telefono') is-invalid @enderror"
                                 name="numero_de_telefono" required disabled>
-
-
-                            @error('id')
+                            @error('numero_de_telefono')
                             <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -152,6 +160,56 @@
                             <textarea class = "form-control" id = "exampleFormControlTextArea" rows = "5" disabled>{{$solicitudes->detalle}}</textarea>
                         </div>
 
+                        <div class="form-group">
+                            <label class="form-control-label">Nombre de la asignatura</label>
+                                <textarea class = "form-control" id = "nombre_asignatura" rows = "1" disabled>{{$solicitudes->nombre_asignatura}}</textarea>
+                            @error('nombre_asignatura')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        @if($solicitudes->tipo == 4)
+                        <div class="form-group">
+                            @foreach ($ayudantias as $ayud)
+                            @if( $solicitudes->id == $ayud->solicitud_id)
+
+                            <label class="form-control-label">Nota de aprobación</label>
+                            <input value={{$ayud->nota_aprobacion}} id="notaAprobacion" type="text" class="form-control"
+                            name="notaAprobacion" readonly>
+
+                            <label class="form-control-label">Cantidad de ayudantias</label>
+                            <input value={{$ayud->cant_ayudantias}} id="cantAyudantias" type="text" class="form-control"
+                            name="cantAyudantias" readonly>
+
+                            @endif
+                            @endforeach
+                        </div>
+                        @endif
+
+                        @if($solicitudes->tipo == 5)
+
+                        <div class="form-group">
+                            @foreach ($facilidades as $fac)
+                            @if( $solicitudes->id == $fac->solicitud_id)
+
+                            <label class="form-control-label">Nombre del profesor</label>
+                            <input value={{$fac->nombre_profesor}} id="nombreProfesor" type="text" class="form-control"
+                            name="nombreProfesor" readonly>
+
+                            @foreach ($archivos as $arch)
+                                @if ($fac->id == $arch->facilidad_id)
+                                    <label class="form-control-label">Archivo Adjunto</label>
+                                    <input value={{$arch->nombre_archivo}} id="nombreArchivo" type="text" class="form-control"
+                                    name="nombreArchivo" readonly>
+                                @endif
+                            @endforeach
+
+                            @endif
+                            @endforeach
+                        </div>
+                        @endif
                         <div class="form-group">
                             <label for = "exampleFormControlTextarea">Estado</label>
                             @if($solicitudes->estado == 0)
@@ -175,7 +233,7 @@
                         <div class="form-group">
                             @if($solicitudes->estado == 2 || $solicitudes->estado == 3)
                             <label class="form-control-label">Observaciones</label>
-                            <textarea class = "form-control" rows = "4" required disabled {{$solicitudes->observaciones}}></textarea>
+                            <textarea class = "form-control" rows = "4" required disabled>{{$solicitudes->respuestaSolicitud}}</textarea>
                             @endif
                         </div>
 
@@ -184,8 +242,12 @@
                                 <button type="button" onclick="history.back()"class="btn btn-outline-primary">{{ __('Volver') }}</button>
                             </div>
                         </div>
+
                 </div>
             </div>
+            <div class="col-lg-3 col-md-2"></div>
         </div>
     </div>
+
+    @endif
     @endsection
