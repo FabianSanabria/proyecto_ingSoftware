@@ -129,7 +129,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-control-label">Correo electronico del estudiante</label>
+                            <label class="form-control-label">Correo electrónico del estudiante</label>
 
                             @foreach ($listaEstudiantes as $estud)
                             @if ($estud->id == $solicitudes->estudiante_id)

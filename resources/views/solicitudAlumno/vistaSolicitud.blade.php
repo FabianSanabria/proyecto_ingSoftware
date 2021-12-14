@@ -9,18 +9,13 @@
 @endif
 <div class="container">
     <div class="row mb-4">
-        <div class="col col-3">
-            <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('vistaSolicitud') }}">
-                <input class="form-control mr-sm-2" name="search" id="search" type="search"
-                    placeholder="Buscar por id de solicitud" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
-                        class="fas fa-search"></i></button>
-            </form>
+        <div class="col col-2">
+
         </div>
         <div class="col col-7">
             <p class="text-center" style="font-size: x-large">Mis Solicitudes</p>
         </div>
-        <div class="col col-2">
+        <div class="col col-3">
             <a class="btn btn-success btn-block" href="{{ route('nuevaSolicitud') }}"> <i class="fas fa-plus"></i> Nueva
                 Solicitud</a>
         </div>
@@ -36,7 +31,13 @@
             </tr>
         </thead>
         <tbody>
+
+            @foreach ($listaEstudiantes as $estudiante)
+            @if ($estudiante->usuario_id == Auth::user()->id)
+
             @forelse ($solicitud as $solicitud)
+
+            @if ($solicitud->estudiante_id == $estudiante->id)
             <tr>
                 <th scope="row">{{ ($solicitud->created_at)}}</th>
                 <td>{{ ($solicitud->id)}}</td>
@@ -67,7 +68,7 @@
                 @break
                 @case(4)
                 <td>
-                        Solicitud de ayudantia
+                        Solicitud de ayudantía
                     </div>
                 </td>
                 @break
@@ -88,6 +89,9 @@
                     <div class="alert alert-warning" role="alert">
                         Pendiente
                     </div>
+                    <td><a class="btn btn-info" data-toggle="tooltip" data-placement="top" title="editar" href={{
+                    route('editarSolicitud', ['id' => $solicitud]) }}><i class="far fa-edit"></i></a></td>
+
                 </td>
                 @break
                 @case(1)
@@ -122,16 +126,24 @@
                 @default
 
                 @endswitch
-                <td><a class="btn btn-info" data-toggle="tooltip" data-placement="top" title="editar" href={{
-                        route('editarSolicitud', [$solicitud->tipo]) }}><i class="far fa-edit"></i></a></td>
+
             </tr>
+            @endif
+
             @empty
             <tr>
                 <td colspan="5">
-                    <p>No hay solicitudes ingresadas</p>
+                    <p>No hay solicitudes ingresadas.</p>
                 </td>
             </tr>
             @endforelse
+
+
+            @endif
+
+            @endforeach
+
+
         </tbody>
     </table>
 
