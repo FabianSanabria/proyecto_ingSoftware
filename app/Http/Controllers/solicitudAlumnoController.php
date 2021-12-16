@@ -15,6 +15,9 @@ use App\Models\Solicitud;
 use Illuminate\Support\Facades\Validator;
 use App\Models\JefedeCarrera;
 use App\Models\Sobrecupo;
+use Directory;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class solicitudAlumnoController extends Controller
@@ -249,6 +252,8 @@ class solicitudAlumnoController extends Controller
         }
 
         if ($request->solicitud == 5) {
+
+
             $validator =  Validator::make($request->all(), [
         'telefono' => ['required', 'string','min:9','max:9'],
         'nombreProfesor' => ['required', 'string'],
@@ -416,7 +421,24 @@ class solicitudAlumnoController extends Controller
                 return  back()->withErrors($validator)->withInput($request->all());
             }
             */
+            $validator =  Validator::make($request->all(),
+            [
+            'telefono' => ['required','regex:/(9)[0-9]{8}/'],
+            'nrc' => ['required','regex:/[0-9]{5}/'],
+            'nombreAsignatura' => ['required', 'string'],
+            'detalle' => ['required', 'string'],
+            ],
+            [
+                'telefono.regex' => 'Ingrese un número de teléfono válido',
+                'nrc.regex' => 'Ingrese un NRC válido'
+            ]
 
+
+             );
+            if ($validator->fails()) {
+                $request->session()->put('solicitud', 0);
+                return  back()->withErrors($validator)->withInput($request->all());
+            }
             if($request->input('action') == 'editar')
             {
                 $sobrecupoEditar = Sobrecupo::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos el sobrecupo a editar, para cambiarle el nrc
@@ -449,6 +471,24 @@ class solicitudAlumnoController extends Controller
         }
         else if($solicitudEditar->tipo == 1)
         {
+            $validator =  Validator::make($request->all(),
+            [
+            'telefono' => ['required','regex:/(9)[0-9]{8}/'],
+            'nrc' => ['required','regex:/[0-9]{5}/'],
+            'nombreAsignatura' => ['required', 'string'],
+            'detalle' => ['required', 'string'],
+            ],
+            [
+                'telefono.regex' => 'Ingrese un número de teléfono válido',
+                'nrc.regex' => 'Ingrese un NRC válido'
+            ]
+
+
+             );
+            if ($validator->fails()) {
+                $request->session()->put('solicitud', 0);
+                return  back()->withErrors($validator)->withInput($request->all());
+            }
             if($request->input('action') == 'editar')
             {
                 $cambioParaleloEditar = CambioParalelo::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos el cambioParalelo a editar, para cambiarle el nrc
@@ -480,6 +520,24 @@ class solicitudAlumnoController extends Controller
         }
         else if($solicitudEditar->tipo == 2)
         {
+            $validator =  Validator::make($request->all(),
+            [
+            'telefono' => ['required','regex:/(9)[0-9]{8}/'],
+            'nrc' => ['required','regex:/[0-9]{5}/'],
+            'nombreAsignatura' => ['required', 'string'],
+            'detalle' => ['required', 'string'],
+            ],
+            [
+                'telefono.regex' => 'Ingrese un número de teléfono válido',
+                'nrc.regex' => 'Ingrese un NRC válido'
+            ]
+
+
+             );
+            if ($validator->fails()) {
+                $request->session()->put('solicitud', 0);
+                return  back()->withErrors($validator)->withInput($request->all());
+            }
             if($request->input('action') == 'editar')
             {
                 $eliminacionEditar = EliminacionAsignatura::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos el eliminacionAsignatura a editar, para cambiarle el nrc
@@ -511,6 +569,24 @@ class solicitudAlumnoController extends Controller
         }
         else if($solicitudEditar->tipo == 3)
         {
+            $validator =  Validator::make($request->all(),
+            [
+            'telefono' => ['required','regex:/(9)[0-9]{8}/'],
+            'nrc' => ['required','regex:/[0-9]{5}/'],
+            'nombreAsignatura' => ['required', 'string'],
+            'detalle' => ['required', 'string'],
+            ],
+            [
+                'telefono.regex' => 'Ingrese un número de teléfono válido',
+                'nrc.regex' => 'Ingrese un NRC válido'
+            ]
+
+
+             );
+            if ($validator->fails()) {
+                $request->session()->put('solicitud', 0);
+                return  back()->withErrors($validator)->withInput($request->all());
+            }
             if($request->input('action') == 'editar')
             {
                 $inscripcionEditar = InscripcionAsignatura::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos el inscripcionAsignatura a editar, para cambiarle el nrc
@@ -542,6 +618,21 @@ class solicitudAlumnoController extends Controller
         }
         else if($solicitudEditar->tipo == 4)
         {
+            $validator =  Validator::make($request->all(), [
+                'telefono' => ['required','regex:/(9)[0-9]{8}/'],
+                'nota' => ['required', 'regex:/[0-9](.|,)[0-9]/'],
+                'nombreAsignatura' => ['required', 'string'],
+                'cantidadAyudantias' => ['required', 'integer','max:99','min:0'],
+                'detalle' => ['required', 'string'],
+                ],
+                [
+                    'telefono.regex' => 'Ingrese un número de teléfono válido',
+                    'nota.regex' => 'Ingrese una nota válida'
+                ]);
+                    if ($validator->fails()) {
+                        $request->session()->put('solicitud', 4);
+                        return  back()->withErrors($validator)->withInput($request->all());
+                    }
             if($request->input('action') == 'editar')
             {
                 $ayudantiaEditar = Ayudantia::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos la ayudantia a editar
@@ -577,17 +668,122 @@ class solicitudAlumnoController extends Controller
             //Este es el método que me falta terminar :/ la verdad que no tengo ni idea de como hacerle editar los archivos
             if($request->input('action') == 'editar')
             {
+
+                $validator =  Validator::make($request->all(), [
+                    'telefono' => ['required', 'string','min:9','max:9'],
+                    'nombreProfesor' => ['required', 'string'],
+                    'nombreAsignatura' => ['required', 'string'],
+                    'detalle' => ['required', 'string'],
+                    'facilidadAcademica' => ['required','different:0'],
+                    'file0' => ['file','mimes:jpeg,png,jpg,pdf,docx,doc','max:10000'],
+                    'file1' => ['file','mimes:jpeg,png,jpg,pdf,docx,doc','max:10000'],
+                    'file2' => ['file','mimes:jpeg,png,jpg,pdf,docx,doc','max:10000'],
+                    ],
+                    [
+                        'telefono.regex' => 'Ingrese un número de teléfono válido',
+                        'file0.max' => 'Ingrese archivo con un peso menor a 10MB',
+                        'file1.max' => 'Ingrese archivo con un peso menor a 10MB',
+                        'file2.max' => 'Ingrese archivo con un peso menor a 10MB',
+                        'file0.mimes' => 'Ingrese archivo con extensión pdf, docx, doc, jpeg, png, jpg.',
+                        'file1.mimes' => 'Ingrese archivo con extensión pdf, docx, doc, jpeg, png, jpg.',
+                        'file2.mimes' => 'Ingrese archivo con extensión pdf, docx, doc, jpeg, png, jpg.',
+                    ]);
+                        if ($validator->fails()) {
+                            $request->session()->put('solicitud', 5);
+                            return  back()->withErrors($validator)->withInput($request->all());
+                        }
                 $facilidadEditar = Facilidades::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos la facilidad a editar
 
                 $solicitudEditar->numero_de_telefono = $request->telefono;
-                $solicitudEditar->nombre_asignatura = $request->nombre_asignatura;
+                $solicitudEditar->nombre_asignatura = $request->nombreAsignatura;
                 $solicitudEditar->detalle = $request->detalle;
 
-                $facilidadEditar->tipo_solicitud = $request->tipo_solicitud;
-                $facilidadEditar->nombre_profesor = $request->nombre_profesor;
+                $facilidadEditar->tipo_solicitud = $request->facilidadAcademica;
+                $facilidadEditar->nombre_profesor = $request->nombreProfesor;
 
                 $facilidadEditar->saveOrFail();
                 $solicitudEditar->saveOrFail();
+                $IDFacilidad = $facilidadEditar->id;
+                $archivoEditar = Archivo::where('facilidad_id',$IDFacilidad)->firstOrFail();
+                if($request->estado0 != null)
+                {
+                    if($request->estado0 == 1) // se editó archivo
+                    {
+
+                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
+
+                        $file0 = $request->file('file0');
+                        $nombreArchivo0 = $file0->getClientOriginalName();
+                        $file0->storeAs('public/archivos/', $nombreArchivo0);
+
+                        $archivoEditar->nombre_archivo = $nombreArchivo0;
+                        $archivoEditar->saveOrFail();
+
+                    }
+                    if($request->estado0 == 2) // se eliminó archivo
+                    {
+
+                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
+                        $archivoEditar->delete();
+                    }
+                }
+                if($request->estado1 != null)
+                {
+                    if($request->estado1 == 1) // se editó archivo
+                    {
+                        $nroIDArchivo  = $archivoEditar->id + 1;
+                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
+
+                        $file1 = $request->file('file1');
+                        $nombreArchivo1 = $file1->getClientOriginalName();
+                        $file1->storeAs('public/archivos/', $nombreArchivo1);
+
+                        $archivoEditar->nombre_archivo = $nombreArchivo1;
+                        $archivoEditar->saveOrFail();
+
+
+                    }
+                    if($request->estado1 == 2) // se eliminó archivo
+                    {
+                        $nroIDArchivo  = $archivoEditar->id + 1;
+                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
+                        $archivoEditar->delete();
+                    }
+
+
+                }
+                if($request->estado2 != null)
+                {
+                    if($request->estado2 == 1) // se editó archivo
+                    {
+                        $nroIDArchivo  = $archivoEditar->id + 2;
+                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
+
+                        $file2 = $request->file('file2');
+                        $nombreArchivo2 = $file2->getClientOriginalName();
+                        $file2->storeAs('public/archivos/', $nombreArchivo2);
+
+                        $archivoEditar->nombre_archivo = $nombreArchivo2;
+                        $archivoEditar->saveOrFail();
+
+                    }
+                    if($request->estado2 == 2) // se eliminó archivo
+                    {
+                        $nroIDArchivo  = $archivoEditar->id + 2;
+                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
+                        $archivoEditar->delete();
+                    }
+                }
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
