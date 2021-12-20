@@ -404,47 +404,31 @@ class solicitudAlumnoController extends Controller
 
         if($solicitudEditar->tipo == 0)
         {
-            /*
-            $validator =  Validator::make($request->all(), [
-            'telefono' => ['required','regex:/(9)[0-9]{8}/'],
-            'nrc' => ['required','regex:/[0-9]{5}/'],
-            'nombre_asignatura' => ['required', 'string'],
-            'detalle' => ['required', 'string'],
-            ],
-            [
-                'telefono.regex' => 'Ingrese un número de teléfono válido',
-                'nrc.regex' => 'Ingrese un NRC válido'
-            ]);
-            if ($validator->fails())
-            {
-                $request->session()->put('solicitud', 0);
-                return  back()->withErrors($validator)->withInput($request->all());
-            }
-            */
-            $validator =  Validator::make($request->all(),
-            [
-            'telefono' => ['required','regex:/(9)[0-9]{8}/'],
-            'nrc' => ['required','regex:/[0-9]{5}/'],
-            'nombreAsignatura' => ['required', 'string'],
-            'detalle' => ['required', 'string'],
-            ],
-            [
-                'telefono.regex' => 'Ingrese un número de teléfono válido',
-                'nrc.regex' => 'Ingrese un NRC válido'
-            ]
-
-
-             );
-            if ($validator->fails()) {
-                $request->session()->put('solicitud', 0);
-                return  back()->withErrors($validator)->withInput($request->all());
-            }
             if($request->input('action') == 'editar')
             {
+                $validator =  Validator::make($request->all(),
+                [
+                'telefono' => ['required','regex:/^(9)[0-9]{8}$/'], //Debe empezar con 9, de 0 a 9 los digitos validos y 8 caracteres maximo.
+                'nrc' => ['required','regex:/^[0-9]{5}$/'],
+                'nombreAsignatura' => ['required', 'string'],
+                'detalle' => ['required', 'string'],
+                ],
+                [
+                    'telefono.regex' => 'Ingrese un número de teléfono válido',
+                    'nrc.regex' => 'Ingrese un NRC válido'
+                ]
+
+
+                 );
+                if ($validator->fails()) {
+                    $request->session()->put('solicitud', 0);
+                    return  back()->withErrors($validator)->withInput($request->all());
+                }
+
                 $sobrecupoEditar = Sobrecupo::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos el sobrecupo a editar, para cambiarle el nrc
 
                 $solicitudEditar->numero_de_telefono = $request->telefono;
-                $solicitudEditar->nombre_asignatura = $request->nombre_asignatura;
+                $solicitudEditar->nombre_asignatura = $request->nombreAsignatura;
                 $solicitudEditar->detalle = $request->detalle;
 
                 $sobrecupoEditar->nrc = $request->nrc;
@@ -455,7 +439,7 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
             else if($request->input('action') == 'anular')
             {//En el caso de que entre aquí no sería necesario validar ningún campo ya que no se toman en cuenta
@@ -466,35 +450,36 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
         }
         else if($solicitudEditar->tipo == 1)
         {
-            $validator =  Validator::make($request->all(),
-            [
-            'telefono' => ['required','regex:/(9)[0-9]{8}/'],
-            'nrc' => ['required','regex:/[0-9]{5}/'],
-            'nombreAsignatura' => ['required', 'string'],
-            'detalle' => ['required', 'string'],
-            ],
-            [
-                'telefono.regex' => 'Ingrese un número de teléfono válido',
-                'nrc.regex' => 'Ingrese un NRC válido'
-            ]
-
-
-             );
-            if ($validator->fails()) {
-                $request->session()->put('solicitud', 0);
-                return  back()->withErrors($validator)->withInput($request->all());
-            }
             if($request->input('action') == 'editar')
             {
+                $validator =  Validator::make($request->all(),
+                [
+                'telefono' => ['required','regex:/^(9)[0-9]{8}$/'], //Debe empezar con 9, de 0 a 9 los digitos validos y 8 caracteres maximo.
+                'nrc' => ['required','regex:/^[0-9]{5}$/'],
+                'nombreAsignatura' => ['required', 'string'],
+                'detalle' => ['required', 'string'],
+                ],
+                [
+                    'telefono.regex' => 'Ingrese un número de teléfono válido',
+                    'nrc.regex' => 'Ingrese un NRC válido'
+                ]
+
+
+                 );
+                if ($validator->fails()) {
+                    $request->session()->put('solicitud', 0);
+                    return  back()->withErrors($validator)->withInput($request->all());
+                }
+
                 $cambioParaleloEditar = CambioParalelo::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos el cambioParalelo a editar, para cambiarle el nrc
 
                 $solicitudEditar->numero_de_telefono = $request->telefono;
-                $solicitudEditar->nombre_asignatura = $request->nombre_asignatura;
+                $solicitudEditar->nombre_asignatura = $request->nombreAsignatura;
                 $solicitudEditar->detalle = $request->detalle;
 
                 $cambioParaleloEditar->nrc = $request->nrc;
@@ -505,7 +490,7 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
             else if($request->input('action') == 'anular')
             {
@@ -515,35 +500,36 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
         }
         else if($solicitudEditar->tipo == 2)
         {
-            $validator =  Validator::make($request->all(),
-            [
-            'telefono' => ['required','regex:/(9)[0-9]{8}/'],
-            'nrc' => ['required','regex:/[0-9]{5}/'],
-            'nombreAsignatura' => ['required', 'string'],
-            'detalle' => ['required', 'string'],
-            ],
-            [
-                'telefono.regex' => 'Ingrese un número de teléfono válido',
-                'nrc.regex' => 'Ingrese un NRC válido'
-            ]
-
-
-             );
-            if ($validator->fails()) {
-                $request->session()->put('solicitud', 0);
-                return  back()->withErrors($validator)->withInput($request->all());
-            }
             if($request->input('action') == 'editar')
             {
+                $validator =  Validator::make($request->all(),
+                [
+                'telefono' => ['required','regex:/^(9)[0-9]{8}$/'], //Debe empezar con 9, de 0 a 9 los digitos validos y 8 caracteres maximo.
+                'nrc' => ['required','regex:/^[0-9]{5}$/'],
+                'nombreAsignatura' => ['required', 'string'],
+                'detalle' => ['required', 'string'],
+                ],
+                [
+                    'telefono.regex' => 'Ingrese un número de teléfono válido',
+                    'nrc.regex' => 'Ingrese un NRC válido'
+                ]
+
+
+                 );
+                if ($validator->fails()) {
+                    $request->session()->put('solicitud', 0);
+                    return  back()->withErrors($validator)->withInput($request->all());
+                }
+
                 $eliminacionEditar = EliminacionAsignatura::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos el eliminacionAsignatura a editar, para cambiarle el nrc
 
                 $solicitudEditar->numero_de_telefono = $request->telefono;
-                $solicitudEditar->nombre_asignatura = $request->nombre_asignatura;
+                $solicitudEditar->nombre_asignatura = $request->nombreAsignatura;
                 $solicitudEditar->detalle = $request->detalle;
 
                 $eliminacionEditar->nrc = $request->nrc;
@@ -554,7 +540,7 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
             else if($request->input('action') == 'anular')
             {
@@ -564,35 +550,36 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
         }
         else if($solicitudEditar->tipo == 3)
         {
-            $validator =  Validator::make($request->all(),
-            [
-            'telefono' => ['required','regex:/(9)[0-9]{8}/'],
-            'nrc' => ['required','regex:/[0-9]{5}/'],
-            'nombreAsignatura' => ['required', 'string'],
-            'detalle' => ['required', 'string'],
-            ],
-            [
-                'telefono.regex' => 'Ingrese un número de teléfono válido',
-                'nrc.regex' => 'Ingrese un NRC válido'
-            ]
-
-
-             );
-            if ($validator->fails()) {
-                $request->session()->put('solicitud', 0);
-                return  back()->withErrors($validator)->withInput($request->all());
-            }
             if($request->input('action') == 'editar')
             {
+                $validator =  Validator::make($request->all(),
+                [
+                'telefono' => ['required','regex:/^(9)[0-9]{8}$/'], //Debe empezar con 9, de 0 a 9 los digitos validos y 8 caracteres maximo.
+                'nrc' => ['required','regex:/^[0-9]{5}$/'],
+                'nombreAsignatura' => ['required', 'string'],
+                'detalle' => ['required', 'string'],
+                ],
+                [
+                    'telefono.regex' => 'Ingrese un número de teléfono válido',
+                    'nrc.regex' => 'Ingrese un NRC válido'
+                ]
+
+
+                 );
+                if ($validator->fails()) {
+                    $request->session()->put('solicitud', 0);
+                    return  back()->withErrors($validator)->withInput($request->all());
+                }
+
                 $inscripcionEditar = InscripcionAsignatura::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos el inscripcionAsignatura a editar, para cambiarle el nrc
 
                 $solicitudEditar->numero_de_telefono = $request->telefono;
-                $solicitudEditar->nombre_asignatura = $request->nombre_asignatura;
+                $solicitudEditar->nombre_asignatura = $request->nombreAsignatura;
                 $solicitudEditar->detalle = $request->detalle;
 
                 $inscripcionEditar->nrc = $request->nrc;
@@ -603,7 +590,7 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
             else if($request->input('action') == 'anular')
             {
@@ -613,36 +600,38 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
         }
         else if($solicitudEditar->tipo == 4)
         {
-            $validator =  Validator::make($request->all(), [
-                'telefono' => ['required','regex:/(9)[0-9]{8}/'],
-                'nota' => ['required', 'regex:/[0-9](.|,)[0-9]/'],
-                'nombreAsignatura' => ['required', 'string'],
-                'cantidadAyudantias' => ['required', 'integer','max:99','min:0'],
-                'detalle' => ['required', 'string'],
-                ],
-                [
-                    'telefono.regex' => 'Ingrese un número de teléfono válido',
-                    'nota.regex' => 'Ingrese una nota válida'
-                ]);
-                    if ($validator->fails()) {
-                        $request->session()->put('solicitud', 4);
-                        return  back()->withErrors($validator)->withInput($request->all());
-                    }
             if($request->input('action') == 'editar')
             {
+                $validator =  Validator::make($request->all(), [
+                    'telefono' => ['required','regex:/^(9)[0-9]{8}$/'], //Debe empezar con 9, de 0 a 9 los digitos validos y 8 caracteres maximo.
+                    'nota' => ['required', 'regex:/[0-9](.|,)[0-9]/'],
+                    'nombreAsignatura' => ['required', 'string'],
+                    'cantidadAyudantias' => ['required', 'integer','max:99','min:0'],
+                    'detalle' => ['required', 'string'],
+                    ],
+                    [
+                        'telefono.regex' => 'Ingrese un número de teléfono válido',
+                        'nota.regex' => 'Ingrese una nota válida',
+                        'cantidadAyudantias.regex' => 'Ingrese una cantidad de ayudantías válida'
+                    ]);
+                        if ($validator->fails()) {
+                            $request->session()->put('solicitud', 4);
+                            return  back()->withErrors($validator)->withInput($request->all());
+                        }
+
                 $ayudantiaEditar = Ayudantia::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos la ayudantia a editar
 
                 $solicitudEditar->numero_de_telefono = $request->telefono;
-                $solicitudEditar->nombre_asignatura = $request->nombre_asignatura;
+                $solicitudEditar->nombre_asignatura = $request->nombreAsignatura;
                 $solicitudEditar->detalle = $request->detalle;
 
-                $ayudantiaEditar->nota_aprobacion = $request->nota_aprobacion;
-                $ayudantiaEditar->cant_ayudantias = $request->cant_ayudantia;
+                $ayudantiaEditar->nota_aprobacion = $request->nota;
+                $ayudantiaEditar->cant_ayudantias = $request->cantidadAyudantias;
 
                 $ayudantiaEditar->saveOrFail();
                 $solicitudEditar->saveOrFail();
@@ -650,7 +639,7 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
             else if($request->input('action') == 'anular')
             {
@@ -660,7 +649,7 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
         }
         else if($solicitudEditar->tipo == 5)
@@ -668,9 +657,8 @@ class solicitudAlumnoController extends Controller
             //Este es el método que me falta terminar :/ la verdad que no tengo ni idea de como hacerle editar los archivos
             if($request->input('action') == 'editar')
             {
-
                 $validator =  Validator::make($request->all(), [
-                    'telefono' => ['required', 'string','min:9','max:9'],
+                    'telefono' => ['required','regex:/^(9)[0-9]{8}$/'], //Debe empezar con 9, de 0 a 9 los digitos validos y 8 caracteres maximo.
                     'nombreProfesor' => ['required', 'string'],
                     'nombreAsignatura' => ['required', 'string'],
                     'detalle' => ['required', 'string'],
@@ -692,6 +680,7 @@ class solicitudAlumnoController extends Controller
                             $request->session()->put('solicitud', 5);
                             return  back()->withErrors($validator)->withInput($request->all());
                         }
+
                 $facilidadEditar = Facilidades::where('solicitud_id',$solicitudEditar->id)->firstOrFail(); //Buscamos la facilidad a editar
 
                 $solicitudEditar->numero_de_telefono = $request->telefono;
@@ -709,7 +698,6 @@ class solicitudAlumnoController extends Controller
                 {
                     if($request->estado0 == 1) // se editó archivo
                     {
-
                         $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
                         File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
 
@@ -723,7 +711,6 @@ class solicitudAlumnoController extends Controller
                     }
                     if($request->estado0 == 2) // se eliminó archivo
                     {
-
                         $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
                         File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
                         $archivoEditar->delete();
@@ -744,8 +731,6 @@ class solicitudAlumnoController extends Controller
 
                         $archivoEditar->nombre_archivo = $nombreArchivo1;
                         $archivoEditar->saveOrFail();
-
-
                     }
                     if($request->estado1 == 2) // se eliminó archivo
                     {
@@ -755,8 +740,6 @@ class solicitudAlumnoController extends Controller
                         File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
                         $archivoEditar->delete();
                     }
-
-
                 }
                 if($request->estado2 != null)
                 {
@@ -773,7 +756,6 @@ class solicitudAlumnoController extends Controller
 
                         $archivoEditar->nombre_archivo = $nombreArchivo2;
                         $archivoEditar->saveOrFail();
-
                     }
                     if($request->estado2 == 2) // se eliminó archivo
                     {
@@ -788,7 +770,7 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
             else if($request->input('action') == 'anular')
             {
@@ -798,10 +780,10 @@ class solicitudAlumnoController extends Controller
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
                 $solicitud = Solicitud::all();         //Datos que necesita la vista principal
 
-                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
+                return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
         }
-
+        //En realidad nunca debería entrar aquí.
         return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
     }
 }

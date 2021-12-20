@@ -7,6 +7,13 @@
     {{ session('success') }}
 </div>
 @endif
+
+@if(!empty($successMsg))
+    <div class="alert alert-success">
+        {{ $successMsg }}
+    </div>
+@endif
+
 <div class="container">
     <div class="row mb-4">
         <div class="col col-2">

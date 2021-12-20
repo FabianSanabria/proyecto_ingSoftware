@@ -136,7 +136,7 @@
                                         id="nombreAsignatura"
                                         type="text"
                                         class="form-control @error('nombreAsignatura') is-invalid @enderror"
-                                        name="nombrAsignatura"
+                                        name="nombreAsignatura"
                                         required>
 
                                     @error('nombreAsignatura')
