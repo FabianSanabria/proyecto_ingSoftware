@@ -2,15 +2,6 @@
 
 @section('content')
 @if (Auth::user()->rol == 1)
-    @if (session()->has($error))
-    <script>
-        Swal.fire({
-        icon: 'error',
-        title: '¡xd!',
-        text: '¡xddd!',
-        })
-    </script>
-    @endif
 <div class="container">
     <div class="row">
         <div class="col-lg-3 col-md-2"></div>
