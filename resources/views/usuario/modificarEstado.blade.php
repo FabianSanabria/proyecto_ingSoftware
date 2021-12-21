@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@if (session('message'))
+@if (session('error'))
 <script>
     Swal.fire({
     icon: 'success',

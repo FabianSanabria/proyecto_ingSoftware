@@ -60,9 +60,10 @@ class resolverSolicitudController extends Controller
         }else {
             $solicitud = Solicitud::where('codigo', $request->search)->simplePaginate(1);
             $user = User::where('codigo', $request->search)->simplePaginate(1);
-            return view('resolverSolicitud')->with('solicitudes',$solicitud,'users',$user)->with('jefesdecarreras',$jefesdecarreras)->with('listaEstudiantes',$listaEstudiantes)->with('carreras',$listaCarreras);
+            return view('resolverSolicitud')->with('solicitud',$solicitud,'users',$user)->with('jefesdecarreras',$jefesdecarreras)->with('listaEstudiantes',$listaEstudiantes)->with('carreras',$listaCarreras);
         }
     }
+
 
     /**
      * Función que permite resolver la solicitud
