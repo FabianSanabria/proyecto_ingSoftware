@@ -46,7 +46,7 @@
 
             @if ($solicitud->estudiante_id == $estudiante->id)
             <tr>
-                <th scope="row">{{ ($solicitud->created_at)}}</th>
+                <th scope="row">{{ ($solicitud->updated_at)}}</th>
                 <td>{{ ($solicitud->id)}}</td>
                 @switch(($solicitud->tipo))
                 @case(0)
