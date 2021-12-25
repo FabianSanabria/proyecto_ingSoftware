@@ -732,24 +732,24 @@ class solicitudAlumnoController extends Controller
                     if($request->estado1 == 1) // se editó archivo
                     {
                         $nroIDArchivo  = $archivoEditar->id + 1;
-                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
-                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        $archivoEditar1 = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar1->nombre_archivo;
                         File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
 
                         $file1 = $request->file('file1');
                         $nombreArchivo1 = $file1->getClientOriginalName();
                         $file1->storeAs('public/archivos/', $nombreArchivo1);
 
-                        $archivoEditar->nombre_archivo = $nombreArchivo1;
-                        $archivoEditar->saveOrFail();
+                        $archivoEditar1->nombre_archivo = $nombreArchivo1;
+                        $archivoEditar1->saveOrFail();
                     }
                     if($request->estado1 == 2) // se eliminó archivo
                     {
                         $nroIDArchivo  = $archivoEditar->id + 1;
-                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
-                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        $archivoEditar1 = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar1->nombre_archivo;
                         File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
-                        $archivoEditar->delete();
+                        $archivoEditar1->delete();
                     }
                 }
                 if($request->estado2 != null)
@@ -757,24 +757,24 @@ class solicitudAlumnoController extends Controller
                     if($request->estado2 == 1) // se editó archivo
                     {
                         $nroIDArchivo  = $archivoEditar->id + 2;
-                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
-                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        $archivoEditar2 = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar2->nombre_archivo;
                         File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
 
                         $file2 = $request->file('file2');
                         $nombreArchivo2 = $file2->getClientOriginalName();
                         $file2->storeAs('public/archivos/', $nombreArchivo2);
 
-                        $archivoEditar->nombre_archivo = $nombreArchivo2;
-                        $archivoEditar->saveOrFail();
+                        $archivoEditar2->nombre_archivo = $nombreArchivo2;
+                        $archivoEditar2->saveOrFail();
                     }
                     if($request->estado2 == 2) // se eliminó archivo
                     {
                         $nroIDArchivo  = $archivoEditar->id + 2;
-                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
-                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        $archivoEditar2 = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar2->nombre_archivo;
                         File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
-                        $archivoEditar->delete();
+                        $archivoEditar2->delete();
                     }
                 }
 
