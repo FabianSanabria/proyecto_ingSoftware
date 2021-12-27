@@ -38,6 +38,9 @@
             </tr>
         </thead>
         <tbody>
+            <?php
+            $cantSolicitud = 0
+            ?>
 
             @foreach ($listaEstudiantes as $estudiante)
             @if ($estudiante->usuario_id == Auth::user()->id)
@@ -45,8 +48,13 @@
             @forelse ($solicitud as $solicitud)
 
             @if ($solicitud->estudiante_id == $estudiante->id)
+
+            <?php
+            ++$cantSolicitud
+            ?>
+
             <tr>
-                <th scope="row">{{ ($solicitud->created_at)}}</th>
+                <th scope="row">{{ ($solicitud->updated_at)}}</th>
                 <td>{{ ($solicitud->id)}}</td>
                 @switch(($solicitud->tipo))
                 @case(0)
@@ -150,9 +158,14 @@
 
             @endforeach
 
-
         </tbody>
     </table>
+
+    @if ($cantSolicitud == 0)
+        <div class="alert alert-danger" role="alert">
+            No hay solicitudes ingresadas.
+        </div>
+    @endif
 
 </div>
 

@@ -195,8 +195,7 @@
                             @if( $solicitudes->id == $fac->solicitud_id)
 
                             <label class="form-control-label">Nombre del profesor</label>
-                            <input value={{$fac->nombre_profesor}} id="nombreProfesor" type="text" class="form-control"
-                            name="nombreProfesor" readonly>
+                            <textarea class = "form-control" id = "nombreProfesor" name = "nombreProfesor" rows = "1" disabled>{{$fac->nombre_profesor}}</textarea>
 
                             @foreach ($archivos as $arch)
                                 @if ($fac->id == $arch->facilidad_id)

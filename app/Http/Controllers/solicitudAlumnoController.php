@@ -364,7 +364,7 @@ class solicitudAlumnoController extends Controller
     public function show(Request $request, Solicitud $solicitud)
     {
         $listaEstudiantes = Estudiante::all();
-        $solicitud = Solicitud::all();
+        $solicitud = Solicitud::orderBy('updated_at','asc')->get();
         return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'));
     }
 
@@ -437,7 +437,7 @@ class solicitudAlumnoController extends Controller
                 $solicitudEditar->saveOrFail();
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();        //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
@@ -448,7 +448,7 @@ class solicitudAlumnoController extends Controller
                 $solicitudEditar->saveOrFail();
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();        //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
@@ -488,7 +488,7 @@ class solicitudAlumnoController extends Controller
                 $solicitudEditar->saveOrFail();
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();        //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
@@ -498,7 +498,7 @@ class solicitudAlumnoController extends Controller
                 $solicitudEditar->saveOrFail();
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();        //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
@@ -538,7 +538,7 @@ class solicitudAlumnoController extends Controller
                 $solicitudEditar->saveOrFail();
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();       //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
@@ -548,7 +548,7 @@ class solicitudAlumnoController extends Controller
                 $solicitudEditar->saveOrFail();
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();        //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
@@ -588,7 +588,7 @@ class solicitudAlumnoController extends Controller
                 $solicitudEditar->saveOrFail();
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();       //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
@@ -598,7 +598,7 @@ class solicitudAlumnoController extends Controller
                 $solicitudEditar->saveOrFail();
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();         //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
@@ -637,7 +637,7 @@ class solicitudAlumnoController extends Controller
                 $solicitudEditar->saveOrFail();
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();       //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
@@ -647,7 +647,7 @@ class solicitudAlumnoController extends Controller
                 $solicitudEditar->saveOrFail();
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();        //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
@@ -693,7 +693,18 @@ class solicitudAlumnoController extends Controller
                 $facilidadEditar->saveOrFail();
                 $solicitudEditar->saveOrFail();
                 $IDFacilidad = $facilidadEditar->id;
-                $archivoEditar = Archivo::where('facilidad_id',$IDFacilidad)->firstOrFail();
+
+                if($request->estado0 != null || $request->estado1 != null || $request->estado2 != null)
+                {
+                    //Este solo debería buscarse si existen archivos, sino se cae
+                    $archivoEditar = Archivo::where('facilidad_id',$IDFacilidad)->firstOrFail();
+                }
+
+                /*
+                El fallo aquí es que si el estado0 elimina el archivoEditar, el estado1 y el estado2
+                no podrán acceder o intentarán eliminarlo también
+                Asi que si le das eliminar a 2 o a 3 archivos se cae el sistema
+                */
                 if($request->estado0 != null)
                 {
                     if($request->estado0 == 1) // se editó archivo
@@ -721,24 +732,24 @@ class solicitudAlumnoController extends Controller
                     if($request->estado1 == 1) // se editó archivo
                     {
                         $nroIDArchivo  = $archivoEditar->id + 1;
-                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
-                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        $archivoEditar1 = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar1->nombre_archivo;
                         File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
 
                         $file1 = $request->file('file1');
                         $nombreArchivo1 = $file1->getClientOriginalName();
                         $file1->storeAs('public/archivos/', $nombreArchivo1);
 
-                        $archivoEditar->nombre_archivo = $nombreArchivo1;
-                        $archivoEditar->saveOrFail();
+                        $archivoEditar1->nombre_archivo = $nombreArchivo1;
+                        $archivoEditar1->saveOrFail();
                     }
                     if($request->estado1 == 2) // se eliminó archivo
                     {
                         $nroIDArchivo  = $archivoEditar->id + 1;
-                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
-                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        $archivoEditar1 = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar1->nombre_archivo;
                         File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
-                        $archivoEditar->delete();
+                        $archivoEditar1->delete();
                     }
                 }
                 if($request->estado2 != null)
@@ -746,29 +757,29 @@ class solicitudAlumnoController extends Controller
                     if($request->estado2 == 1) // se editó archivo
                     {
                         $nroIDArchivo  = $archivoEditar->id + 2;
-                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
-                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        $archivoEditar2 = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar2->nombre_archivo;
                         File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
 
                         $file2 = $request->file('file2');
                         $nombreArchivo2 = $file2->getClientOriginalName();
                         $file2->storeAs('public/archivos/', $nombreArchivo2);
 
-                        $archivoEditar->nombre_archivo = $nombreArchivo2;
-                        $archivoEditar->saveOrFail();
+                        $archivoEditar2->nombre_archivo = $nombreArchivo2;
+                        $archivoEditar2->saveOrFail();
                     }
                     if($request->estado2 == 2) // se eliminó archivo
                     {
                         $nroIDArchivo  = $archivoEditar->id + 2;
-                        $archivoEditar = Archivo::where('id',$nroIDArchivo)->firstOrFail();
-                        $nombreArchivoAntiguo = $archivoEditar->nombre_archivo;
+                        $archivoEditar2 = Archivo::where('id',$nroIDArchivo)->firstOrFail();
+                        $nombreArchivoAntiguo = $archivoEditar2->nombre_archivo;
                         File::delete(storage_path('app'.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR.'archivos'.DIRECTORY_SEPARATOR.$nombreArchivoAntiguo));
-                        $archivoEditar->delete();
+                        $archivoEditar2->delete();
                     }
                 }
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();       //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha actualizado la solicitud correctamente.');
             }
@@ -778,7 +789,7 @@ class solicitudAlumnoController extends Controller
                 $solicitudEditar->saveOrFail();
 
                 $listaEstudiantes = Estudiante::all(); //Datos que necesita la vista principal
-                $solicitud = Solicitud::all();         //Datos que necesita la vista principal
+                $solicitud = Solicitud::orderBy('updated_at','asc')->get();        //Datos que necesita la vista principal
 
                 return view('solicitudAlumno.vistaSolicitud', compact('solicitud','listaEstudiantes'))->with('successMsg','Se ha anulado la solicitud correctamente.');
             }
