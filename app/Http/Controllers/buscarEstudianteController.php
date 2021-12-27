@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Carrera;
 use App\Models\Solicitud;
 use App\Models\Estudiante;
 use Illuminate\Http\Request;
+use App\Models\JefedeCarrera;
 use App\Rules\buscarEstudiante;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class buscarEstudianteController extends Controller
@@ -41,6 +44,11 @@ class buscarEstudianteController extends Controller
         $user = DB::table('users')->get();
         $comprobarEstado= User::where('rut','=', $request->search)->value("rol");
         $comprobarUsuario = User::where('rut','=', $request->search)->value('rut');
+
+        $buscarEstudiante = User::where('rut','=', $request->search)->value('id');
+        $buscarCarreraEstudiante = Estudiante::where('id','=',$buscarEstudiante)->value('carrera_id');
+        $codigoCarerraEstudiante = Carrera:: where('id','=',$buscarCarreraEstudiante)->value('codigo');
+
         $rut = null;
         $nombre=null;
         $email = null;
@@ -48,9 +56,18 @@ class buscarEstudianteController extends Controller
         $error = 0;
         $comprobarCampo = $request->query('search');
 
+        $usuarioID= Auth::user()->id ;
+        $jefeDeCarreraID = JefedeCarrera::where('usuario_id',$usuarioID)->first()->id;
+        $carreraID = Carrera::where('jefe_carrera_id',$jefeDeCarreraID)->value('codigo');
+        //dd($carreraID);
         //dd($request->query('search'),$comprobarUsuario);
-
+        if($comprobarUsuario != null and  $codigoCarerraEstudiante != $carreraID  ){
+            $error=1;
+            return view('/buscarEstudiante',compact('solicitud','user','jefesdecarreras','listaEstudiantes','listaCarreras'))
+            ->with('rut',$rut)->with('nombre',$nombre)->with('carrera',$carrera)->with("email",$email)->with('error',$error);
+        }
         if($comprobarEstado == 2 or $comprobarEstado == 1 ){
+            $error=1;
             return view('/buscarEstudiante',compact('solicitud','user','jefesdecarreras','listaEstudiantes','listaCarreras'))
             ->with('rut',$rut)->with('nombre',$nombre)->with('carrera',$carrera)->with("email",$email)->with('error',$error);
         }
