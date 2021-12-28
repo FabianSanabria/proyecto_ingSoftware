@@ -17,7 +17,7 @@
 <div class="container">
     <div class="row mb-4">
         <div class="col col-2">
-
+            <a href="https://youtu.be/GX35EOo40VI">Tutorial de como Editar o Anular Solicitudes</a>
         </div>
         <div class="col col-7">
             <p class="text-center" style="font-size: x-large">Mis Solicitudes</p>

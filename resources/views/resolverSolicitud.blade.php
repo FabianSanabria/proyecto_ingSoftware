@@ -12,6 +12,9 @@
 @endif
 @if (Auth::user()->rol == 1)
 <div class="container">
+    <div class="col col-2">
+        <a href="https://youtu.be/4OMq65GuL90">Tutorial de como Resolver una solicitud Pendiente</a>
+    </div>
     <div class="row mb-3">
         <div class="col col-13">
             <p class="text-center" style="font-size: x-large">Gestión de solicitudes</p>
